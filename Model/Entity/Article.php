@@ -95,7 +95,7 @@ class Article implements ArticleInterface, RoutedItemInterface
     /**
      * @ORM\ManyToOne(targetEntity="ED\BlogBundle\Interfaces\Model\BlogUserInterface")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
-     * @var ArticleAuthorInteface
+     * @var BlogUserInterface
      */
     protected $author;
 

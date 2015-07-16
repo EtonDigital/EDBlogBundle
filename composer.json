@@ -1,5 +1,5 @@
 {
-  "name": "EtonDigital/blog-bundle",
+  "name": "ed/blog-bundle",
   "type": "symfony-bundle",
   "description": "Symfony EDBlogBundle",
   "keywords": ["Blog"],

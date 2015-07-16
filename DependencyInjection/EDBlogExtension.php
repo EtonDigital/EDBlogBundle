@@ -62,6 +62,11 @@ class EDBlogExtension extends Extension implements PrependExtensionInterface
                             )
                         )
                     )
+                ),
+                'dbal' => array(
+                    'types' => array(
+                        'json' => 'Sonata\Doctrine\Types\JsonType'
+                    )
                 )
             );
             foreach ($container->getExtensions() as $name => $extension) {

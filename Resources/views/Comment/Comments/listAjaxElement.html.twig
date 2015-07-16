@@ -1,0 +1,17 @@
+{% if comment.author is not defined %}
+    {% set comment = comment[0] %}
+{% endif %}
+<tr>
+    <td>{% if comment.author %}{{ comment.author.commenterDisplayName }}{% else %}{{ comment.name }}{% endif %}</td>
+    <td>{% if comment.author %}{{ comment.author.email }}{% else %}{{ comment.email }}{% endif %}</td>
+    <td>{% if comment.author %}<span class="label label-success"> Registered user</span>{% else %}<span class="label label-warning"> Public user</span>{% endif %}</td>
+    <td>{{ comment.comment | displayLinks | raw }}</td>
+    <td><a href="{{ path('ed_blog_admin_article_show', { 'slug' : comment.article.slug }) }}">{{ comment.article.title }}</a></td>
+    <td>{% if comment.status == constant('STATUS_PENDING', comment) %}<span class="label label-warning"> Waiting for approval</span>{% else %}<span class="label label-success"> Approved</span>{% endif %}</td>
+    <td>{{ comment.createdAt | blogDateTime }}</td>
+    <td>
+        {% if comment.status == constant('STATUS_PENDING', comment) %}<a href="{{ path('ed_blog_comment_edit_status', {'id': comment.id, 'status': constant('STATUS_ACTIVE', comment) }) }}" class="js-ajax-row-update"><i class="fa fa-check"></i>  Approve it</a>{% endif %}
+        <a href="{{ path('ed_blog_comment_edit', { 'id': comment.id }) }}"><i class="fa fa-pencil"></i> Edit</a>
+        <a href="#" class="js-delete-object" data-title="Remove comment" data-text="Are you sure you want to remove this comment?" data-href="{{ path('ed_blog_comment_delete', {'id': comment.id} ) }}" data-toggle="modal" data-target="#delete"><i class="fa fa-times"></i> Remove</a>
+    </td>
+</tr>

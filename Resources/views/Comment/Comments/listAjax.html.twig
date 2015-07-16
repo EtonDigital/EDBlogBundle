@@ -1,0 +1,28 @@
+{% from '@EDBlog/Global/Macro/tables.html.twig' import sortableTh  %}
+
+<div class="table-responsive margin--t">
+    {% if pagination|length %}
+        <table class="table horizontal  striped  vam">
+            <thead>
+            <tr>
+                {{ sortableTh('Display name', 'displayname', 'ed_blog_admin_comment_list', 'v2', orderBy, order) }}
+                {{ sortableTh('Email', 'email', 'ed_blog_admin_comment_list', 'v2', orderBy, order) }}
+                {{ sortableTh('Author status', 'author_status', 'ed_blog_admin_comment_list', 'v2', orderBy, order) }}
+                {{ sortableTh('Comment', 'comment', 'ed_blog_admin_comment_list', 'v2', orderBy, order) }}
+                {{ sortableTh('Article', 'article', 'ed_blog_admin_comment_list', 'v2', orderBy, order) }}
+                {{ sortableTh('Comment status', 'status', 'ed_blog_admin_comment_list', 'v2', orderBy, order) }}
+                {{ sortableTh('Commented at', 'createdAt', 'ed_blog_admin_comment_list', 'v2', orderBy, order) }}
+                <th class="v1">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for comment in pagination %}
+                    {% include "@EDBlog/Comment/Comments/listAjaxElement.html.twig" with { 'comment': comment} %}
+                {% endfor %}
+                {{ knp_pagination_render(pagination) }}
+            </tbody>
+        </table>
+    {% else %}
+        There are no available comments yet.
+    {% endif %}
+</div>

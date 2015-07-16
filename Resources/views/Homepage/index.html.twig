@@ -1,0 +1,60 @@
+{% extends 'EDBlogBundle:Layout:blog_admin_main.html.twig' %}
+
+{% block content %}
+  <div class="dashboard-content">
+    <h1 class="text--bold margin--halft">Dashboard</h1>
+    <p class="sub-heading aleft">Welcome to EDBlog admin panel</p>
+    <ul class="dashboard-sections">
+      <li class="dashboard__articles">
+        <a href="{{ path('ed_blog_admin_article_list') }}" class="sameheight">
+          <h3>Articles</h3>
+          <p>Add, edit or remove articles</p>
+        </a>
+      </li>
+      {% if is_granted('ROLE_BLOG_ADMIN') %}
+          <li class="dashboard__members">
+            <a href="{{ path('ed_blog_user_list') }}" class="sameheight">
+              <h3>Users</h3>
+              <p>Add or remove users, manage roles</p>
+            </a>
+          </li>
+          <li class="dashboard__categories">
+            <a href="{{ path('ed_blog_category_list') }}" class="sameheight">
+              <h3>Categories</h3>
+              <p>Add, edit or remove categories</p>
+            </a>
+          </li>
+          <li class="dashboard__tags">
+              <a href="{{ path('ed_blog_tag_list') }}" class="sameheight">
+                  <h3>Tags</h3>
+                  <p>Add, edit or remove tags</p>
+              </a>
+          </li>
+      {% endif %}
+      <li class="dashboard__comments">
+          <a href="{{ path('ed_blog_admin_comment_list') }}" class="sameheight">
+              <h3>Comments</h3>
+              <p>Add, edit or remove comments</p>
+          </a>
+      </li>
+      <li class="dashboard__media">
+        <a href="{{ path('ed_blog_admin_media_list') }}" class="sameheight">
+          <h3>Media Library</h3>
+          <p>Add or remove media files</p>
+        </a>
+      </li>
+      {% if is_granted('ROLE_BLOG_ADMIN') %}
+      <li class="dashboard__cogs">
+        <a href="{{ path('ed_blog_admin_settings_edit') }}" class="sameheight">
+            <h3>Settings</h3>
+            <p>Change blog settings</p>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+{% endblock content %}
+
+
+
+

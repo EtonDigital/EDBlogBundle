@@ -1,0 +1,33 @@
+{
+  "name": "Procurious",
+  "version": "1.0.0",
+  "description": "hello!",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dusan Stojanovic, dusan@etondigital.com",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/"
+  },
+  "devDependencies": {
+    "del": "^1.1.0",
+    "gulp": "^3.8.10",
+    "gulp-autoprefixer": "^2.0.0",
+    "gulp-bless": "^3.0.1",
+    "gulp-cache": "^0.2.4",
+    "gulp-compass": "^2.0.3",
+    "gulp-concat": "^2.4.2",
+    "gulp-csso": "^0.2.9",
+    "gulp-imagemin": "^2.0.0",
+    "gulp-jshint": "^1.9.0",
+    "gulp-livereload": "^3.0.2",
+    "gulp-notify": "^2.1.0",
+    "gulp-plumber": "^0.6.6",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^1.0.2",
+    "gulp-uncss": "^1.0.1"
+  }
+}

@@ -1,0 +1,43 @@
+//  Other helper classes
+//  ======================================================
+
+// Rotate
+.rotate90 {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+}
+
+// Togglers
+.js-toggler {
+  &.on {
+    i {
+      @extend .rotate90;
+    }
+  }
+}
+.toggled { display: none; }
+
+
+// no animation flicker in webkit
+%noflicker, .noflicker {
+  @include backface-visibility(hidden);
+  @include perspective(1000);
+  @include translateZ(0);
+}
+
+// shadowed box
+// used in message header, discussion header...
+.box-shadow {
+  @extend .ovh;
+  @extend .margin--reset;
+  @extend .por;
+  @include box-shadow(0 0 15px rgba(#000, .25));
+  background: #fff;
+}
+
+// Pointer
+.pointer {cursor: pointer !important;}
+.cursor-default {cursor: default !important;}

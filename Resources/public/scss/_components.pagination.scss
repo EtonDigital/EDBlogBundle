@@ -1,0 +1,106 @@
+// Pagination
+// ==========================================
+.pagination {
+  @include clearfix;
+  @extend .d--b;
+  @extend .center;
+  clear: both;
+  margin: 0 0 $base-line-height;
+  a,
+  a:link,
+  a:visited,
+  span {
+    @extend .d--ib;
+    @include border-radius(3px);
+    margin: 0;
+    margin-bottom: ceil($base-line-height/4);
+    padding: ceil($base-line-height/4) ceil($base-line-height*.5);
+    width: auto;
+    border: 1px solid transparent;
+    // color: $blue-light;
+    vertical-align: middle;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: normal !important;
+    // current item
+    &.pagination__current {
+      border: 1px solid $light-grey;
+      color: $dark-grey;
+      cursor: default;
+    }
+    &.pagination__pages {
+      background-color: transparent;
+      padding-left: 0;
+      border: 0;
+      &:hover {background-color: transparent;}
+    }
+    &:hover {
+      border: 1px solid $light-grey;
+      color: $dark-grey;
+    }
+  }
+  span {
+    &:hover {
+      color: inherit;
+      background: transparent none;
+      border-color: transparent;
+    }
+  }
+
+
+  // fix line height for icons
+  [class*="fa-"],
+  [class*="fileicon-"],
+  [class*="ion-"] {line-height: .8;}
+
+
+  // Pagination in tables
+  table & {
+    a,
+    a:link,
+    a:visited,
+    span {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      border: 1px solid #E0E3E5;
+      background: #E0E3E5;
+      color: $dark-grey;
+      &:hover {
+        background: $dark-grey;
+        border-color: $dark-grey;
+        color: #fff;
+      }
+      &.pagination__current {
+        border: 1px solid #E0E3E5;
+        background: transparent none;
+        color: $dark-grey;
+        cursor: default;
+      }
+    }
+  }
+  &--styled {
+    a,
+    a:link,
+    a:visited,
+    span {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      border: 1px solid #d0d3d5;
+      background: #d0d3d5;
+      color: $dark-grey;
+      &:hover {
+        background: $dark-grey;
+        border-color: $dark-grey;
+        color: #fff;
+      }
+      &.pagination__current {
+        border: 1px solid #d0d3d5;
+        background: transparent none;
+        color: $dark-grey;
+        cursor: default;
+      }
+    }
+  }
+
+}

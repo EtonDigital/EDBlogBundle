@@ -1,0 +1,22 @@
+//  Color classes
+//  ======================================================
+
+// BGs
+.bg--transp    {background: transparent none !important;}
+.bgblack--p02  {background: rgba(#000, .02) !important;}
+.bgblack--p05  {background: rgba(#000, .05) !important;}
+.bgblack--p10  {background: rgba(#000, .1) !important;}
+.bgwhite       {background: #fff !important;}
+.bg--lightgrey {background: $lightest-grey;}
+.bg--imgnone   {background-image: none !important;}
+
+// Text colors
+.white { color: white !important; }
+.black { color: black !important; }
+.dark-grey { color: $dark-grey !important; }
+.app-blue { color: $app-blue !important; }
+.app-grey { color: $app-grey !important; }
+.app-light-grey { color: $app-light-grey !important; }
+.c-grey { color: $c-grey !important; }
+.color-placeholder { color: $color-placeholder !important; }
+.text--blue-light {color: $blue-light !important;}

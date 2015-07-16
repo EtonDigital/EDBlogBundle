@@ -1,0 +1,18 @@
+//  Widths and borders
+//  ======================================================// 
+
+// widths in ems
+.width--1em {width: 1em; text-align: center;}
+
+// Img
+.img--auto {
+  width: auto;
+  height: auto;
+}
+
+// Borders
+.brdr--0 {border: 0 !important}
+//  rounded
+.rounded          {@include border-radius($border-radius);}
+// circle
+.circle           {@include border-radius(50%);}

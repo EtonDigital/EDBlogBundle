@@ -1,0 +1,103 @@
+table {
+  margin: 0;
+  width: 100%;
+  @include box-shadow(0 1px 1px rgba(#000, .1));
+  &.table {margin-bottom: 0;}
+  tr, th, td, caption {
+    padding: $base-line-height/3 $base-line-height/2;
+    border: 1px solid $light-grey;
+    background: #fff;
+  }
+  td {
+    height: 53px; /* For td height is like min-height, so this way we actually get min-height: 53px; */
+    vertical-align: top;
+  }
+  caption {
+    padding: 0 0 $base-line-height/3;
+    border: 0;
+    font-weight: bold;
+  }
+  th {
+    text-transform: uppercase;
+    font-weight: bold;
+    background:#F1F4F6;
+    font-size: 13px;
+    padding-top: $base-line-height/2 !important;
+    padding-bottom: $base-line-height/2 !important;
+  }
+  p, li {font-size: 1em;}
+
+  // striped
+  &.striped tbody tr:nth-child(even) {background-color: lighten($light-grey, 5%);}
+
+  // horizontal borders only
+  &.horizontal {
+    tr, th, td, caption {
+      padding: $base-line-height/3 0;
+      border-width: 0 0 1px;
+    }
+    caption {
+      padding: 0 0 $base-line-height/3;
+      border: 0;
+    }
+  }
+  // vertical align middle
+  &.vam {
+    td, th {vertical-align: middle;}
+  }
+
+  // combined horizontal and striped
+  &.horizontal.striped {
+    tr, th, td, caption {
+      padding: $base-line-height/3 $base-line-height/2;
+    }
+    caption {
+      padding: 0 0 $base-line-height/3;
+      border: 0;
+    }
+  }
+}
+
+// sorting
+th {
+  &.sort {
+    a {
+      position: relative;
+      padding-right: 18px;
+      &:after {
+        font-family: "FontAwesome";
+        font-size: 15px;
+        position: absolute;
+        top: -1px;
+        right: -0;
+      }
+    }
+    &--asc {
+      a {
+        &:after {
+          top: -2px;
+          content: "\f0d8";
+        }
+        &:hover {
+          &:after {
+            top: -1px;
+            content: "\f0d7";
+          }
+        }
+      }
+    }
+    &--desc {
+      a {
+        &:after {
+          content: "\f0d7";
+        }
+        &:hover {
+          &:after {
+            top: -2px;
+            content: "\f0d8";
+          }
+        }
+      }
+    }
+  }
+}

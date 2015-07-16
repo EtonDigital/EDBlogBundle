@@ -1,0 +1,19 @@
+<div class="modal fade" id="article_locked" tabindex="-1" role="dialog" aria-labelledby="removeLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        {#<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>#}
+        <h4 class="modal-title text--bold js-delete-object-title" id="myModalLabel">Article is locked</h4>
+      </div>
+      <form role="form">
+        <div class="modal-body">
+          <p class="js-modal-text">{% include '@EDBlog/Article/checkWritingLock.html.twig' %}</p>
+        </div>
+        <div class="modal-footer">
+          <a href="{{ path('ed_blog_admin_article_list') }}" class="btn btn-wide btn-default" type="button">Leave</a>
+          <a href="{{ path('ed_blog_article_takeover', { 'id': article.id }) }}" class="btn btn-wide btn-primary" type="button">Take over</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+//    Breakpoints Mixin
+//    THIS MIXIN WORKS ONLY WITH LATEST SASS BETA (at the moment: 06/10/13 01:37:34)
+//    usage: @include bp(tab) {...}
+//------------------------------------------------------------
+@mixin bp($point) {
+  // Small devices (tablets, 768px and up)
+  @if $point == tab {
+    @media only screen and (min-width: 768px)  { @content; }
+  }
+  // Medium devices (desktops, 992px and up)
+  @if $point == lap {
+    @media only screen and (min-width: 992px) { @content; }
+  }
+  // Large devices (large desktops, 1200px and up)
+  @if $point == desk {
+    @media only screen and (min-width: 1200px) { @content; }
+  }
+  // Larger devices (larger desktops, 1280px and up)
+  @if $point == deskplus {
+    @media only screen and (min-width: 1280px) { @content; }
+  }
+}
+
+//    vertical and horizontal alignment of absolutely positioned element inside relative element
+//    this method can cause elements to be blurry due to the element being placed on a 'half pixel'. A solution for this is to set its parent element to preserve-3d
+//    abs-alligned automatically gets width of 50% (centered, with 25% for both sides), so for particular cases this should be overrided
+//    usage: @include abs-parent;  *recommended
+//    usage: @include abs-aligned;
+//============================================================
+@mixin abs-parent {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+@mixin abs-aligned {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}

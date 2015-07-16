@@ -1,0 +1,32 @@
+{% extends 'EDBlogBundle:Layout:blog_admin_main.html.twig' %}
+
+{% block content %}
+    <div class="dashboard-content">
+        <h1 class="text--bold margin--halft margin--b">Create category</h1>
+        {{ form_errors(form) }}
+        <form method="post" action="{{ path('ed_blog_category_create') }}">
+            <div>
+                {{ form_label(form.term.title) }}
+                {{ form_widget(form.term.title) }}
+                {{ form_errors(form.term.title) }}
+            </div>
+            <div>
+                {{ form_label(form.term.slug) }}
+                {{ form_widget(form.term.slug) }}
+                {{ form_errors(form.term.slug) }}
+            </div>
+            <div>
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description) }}
+                {{ form_errors(form.description) }}
+            </div>
+            <div>
+                {{ form_label(form.parent) }}
+                {{ form_widget(form.parent, { 'attr': { 'data-category-url': path('ed_blog_category_all_pretty', { 'template' : 'limited' } ) } }) }}
+                {{ form_errors(form.parent) }}
+            </div>
+            {{ form_rest(form) }}
+        </form>
+    </div>
+{% endblock content %}
+

@@ -1,0 +1,24 @@
+{% extends 'EDBlogBundle:Layout:blog_admin_main.html.twig' %}
+{% form_theme form '@EDBlog/Global/forms.html.twig' %}
+
+{% block content %}
+    <div class="dashboard-content">
+        <h1 class="text--bold margin--halft margin--b">Import new blog user</h1>
+
+        <form action="{{ path('ed_blog_user_add') }}" method="post">
+            {{ form_errors(form) }}
+            <div>
+                {{ form_label(form.user) }}
+                {{ form_widget(form.user, {'attr': { 'data-source': path('ed_blog_user_search') }}) }}
+                {{ form_errors(form.user) }}
+            </div>
+            <div>
+                {{ form_label(form.adminRole) }}
+                {{ form_widget(form.adminRole) }}
+                {{ form_errors(form.adminRole) }}
+            </div>
+            {{ form_rest(form) }}
+        </form>
+    </div>
+{% endblock content %}
+

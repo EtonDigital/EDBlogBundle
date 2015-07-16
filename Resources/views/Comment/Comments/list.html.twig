@@ -1,0 +1,14 @@
+{% extends 'EDBlogBundle:Layout:blog_admin_main.html.twig' %}
+
+{% block content %}
+    <div class="dashboard-content">
+        <h1 class="text--bold margin--halft margin--b">Comments</h1>
+
+        {% if not is_granted('ACCESS_COMMENTS') %}
+            <p class="alert alert-info">Comments are currently disabled. To enable commenting visit <a href="{{ path('ed_blog_admin_settings_edit') }}#comments-settings">Settings</a> area.</p>
+        {% endif %}
+
+        {% include "@EDBlog/Comment/Comments/listAjax.html.twig" %}
+    </div>
+    {{ include('EDBlogBundle:Modals:remove_article.html.twig') }}
+{% endblock content %}

@@ -1,0 +1,54 @@
+// Other
+//  --------------
+
+p {
+  margin: 0 0 $base-line-height;
+  line-height: 1.5;
+  .center & {
+    text-align: center;
+  }
+  .aright & {
+    text-align: right;
+  }
+}
+
+hr {
+  clear: both;
+  overflow: hidden;
+  margin: ceil($base-line-height/2) 0;
+  height: 1px;
+  border: 0;
+  background-color: darken($light-grey, 10%);
+  &.offscreen {
+    margin-left: -3000px !important;
+    margin-right: -3000px !important;
+  }
+}
+
+// dark text link, used for Join link on login form
+a.text--dark {
+  &:hover {
+    border-bottom: 1px solid rgba(#000, .25);
+  }
+}
+
+// Simulate  <sup>*</sup>
+label.required:after {
+  content: '*';
+  font-size: 11px;
+  top: -5px;
+  left: 4px;
+  position: relative;
+}
+.no-after {
+  label.required:after {
+    content: '';
+  }
+  label {
+    display: block;
+  }
+  input {
+    float: left;
+    margin-right: 10px;
+  }
+}

@@ -1,0 +1,13 @@
+{% if(pagination|length) %}
+    <ul class="phototiles isotope js-media-content">
+      {% include "EDBlogBundle:Media:listAjaxElements.html.twig"%}
+    </ul>
+    <div class="pagination--styled">{{ knp_pagination_render(pagination) }}</div>
+{% else %}
+    {# Empty state #}
+    <ul class="phototiles isotope js-media-content">
+        <li>
+            <p>There is no media, please upload some media.</p>
+        </li>
+    </ul>
+{% endif %}

@@ -1,0 +1,69 @@
+//  Display and Visiability
+//  ======================================================// 
+
+.hide             {display: none !important;}
+.invisible        {visibility: hidden !important;}
+.destroy          {display: none !important; visibility: hidden !important;}
+
+// display
+.d--b    {display: block !important;}
+.d--i    {display: inline !important;}
+.d--ib   {display: inline-block !important;}
+.d--t    {display: table !important; width: 100% !important; table-layout: fixed !important;}
+.d--tc   {display: table-cell !important; vertical-align: middle !important;}
+.d--tr   {display: table-row !important;}
+// display responsive
+.d--ib--b {
+  display: inline-block;
+  @include bp(tab) {
+    display: block;
+  }
+}
+
+// muted
+.muted--total     {opacity: 0 !important;}
+.muted            {opacity: .6 !important;}
+.mutedmore        {opacity: .3 !important;}
+
+// Visibility
+.visible--tab {
+  display: none;
+  @include bp(tab) {display: block;}
+}
+.visible--lap {
+  display: none;
+  @include bp(lap) {display: block;}
+}
+.visible--desk {
+  display: none;
+  @include bp(desk) {display: block;}
+}
+.invisible--tab {
+  display: block;
+  @include bp(tab) {display: none;}
+}
+.invisible--lap {
+  display: block;
+  @include bp(lap) {display: none;}
+}
+.invisible--desk {
+  display: block;
+  @include bp(desk) {display: none;}
+}
+
+// overflow-hidden, overflow visible
+.ovh              {overflow: hidden !important;}
+.ovv              {overflow: visible !important;}
+.vh               {visibility: hidden !important;}
+.vv               {visibility: visible !important;}
+
+// Vertical align in table style
+.tabled {
+  display: table;
+  width: 100%;
+  height: 100%;
+  .table-cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}

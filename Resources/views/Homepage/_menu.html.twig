@@ -1,0 +1,20 @@
+<div class="dashboard-menu alltheway">
+  <a href="#" class="toggle--dashboard-menu"><i class="fa fa-reorder"></i> menu</a>
+  <nav>
+    <ul>
+      <li class="{% if currentPath == 'ed_blog_homepage_index' %}active{% endif %}"><a href="{{ path('ed_blog_homepage_index') }}"><i class="fa fa-th"></i> Dashboard</a></li>
+      <li class="{% if 'article' in currentPath %}active{% endif %}"><a href="{{ path('ed_blog_admin_article_list') }}"><i class="fa fa-file-text"></i> Articles</a></li>
+      {% if is_granted('ROLE_BLOG_ADMIN') %}
+        <li class="{% if currentPath == 'ed_blog_user_list' %}active{% endif %}"><a href="{{ path('ed_blog_user_list') }}"><i class="fa fa-user"></i> Users</a></li>
+        <li class="{% if currentPath == 'ed_blog_category_list' %}active{% endif %}"><a href="{{ path('ed_blog_category_list') }}"><i class="fa fa-list"></i> Categories</a></li>
+        <li class="{% if currentPath == 'ed_blog_tag_list' %}active{% endif %}"><a href="{{ path('ed_blog_tag_list') }}"><i class="fa fa-tags"></i> Tags</a></li>
+      {% endif %}
+      <li class="{% if currentPath == 'ed_blog_admin_comment_list' %}active{% endif %}"><a href="{{ path('ed_blog_admin_comment_list') }}"><i class="fa fa-comments"></i> Comments</a></li>
+      <li class="{% if currentPath == 'ed_blog_admin_media_list' %}active{% endif %}"><a href="{{ path('ed_blog_admin_media_list') }}"><i class="fa fa-photo"></i> Media library</a></li>
+      {% if is_granted('ROLE_BLOG_ADMIN') %}
+        <li class="{% if currentPath == 'ed_blog_admin_settings_edit' %}active{% endif %}"><a href="{{ path('ed_blog_admin_settings_edit') }}"><i class="fa fa-cogs"></i> Settings</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+  <p class="copyright">Powered by <br><span class="text--upper">Eton Digital</span> &copy; {{ "now"|date('Y') }} </p>
+</div>

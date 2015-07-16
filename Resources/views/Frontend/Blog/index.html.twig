@@ -1,0 +1,15 @@
+{% extends 'EDBlogBundle:Frontend/Layout:main.html.twig' %}
+
+{% block content %}
+	<div class="container margin--t">
+		<div class="row">
+			<div class="col-sm-push-9 col-sm-3 col-lg-push-8 col-lg-4">
+                {{ render(controller('EDBlogBundle:Frontend/Sidebar:blogList')) }}
+			</div>
+			<div class="col-sm-pull-3 col-sm-9 col-md-pull-1 col-md-7 col-lg-pull-2 col-lg-6">
+				{% include "EDBlogBundle:Frontend/Blog:blogBreadcrumb.html.twig" %}
+				{% include "EDBlogBundle:Frontend/Blog:indexAjax.html.twig" %}
+			</div>
+		</div>
+	</div>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% for item in pagination %}
+    {% set commentsCnt = commentsCount(item) %}
+	<div class="c-article">
+
+    <div class="text--30 text--bold black margin--halfb lh32"><a class="black" href="{{ path('app_blog_single_article', { 'slug': item.slug }) }}">{{ item.title }}</a></div>
+
+        <p class="text--mini app-grey">By <a href="{{ path('blogs_by_author', {'username': item.author.username}) }}">{{ item.author.profile.firstname }} {{ item.author.profile.lastname }}</a> on {{ item.publishedAt|blogDate}}
+            {% if (item.categories|length) %}
+                in {%  for category in item.categories %}
+                {{ loop.index0 ? ', ' }}<a href="{{ path('blogs_by_category', {'categorySlug': category.term.slug}) }}" >{{ category.term.title }}</a>
+                    {% endfor %}
+            {% endif %}
+            {% if ( is_granted('ACCESS_COMMENTS') and commentsCnt) %}
+                | <a class="black" href="{{ path('app_blog_single_article', { 'slug': item.slug }) }}#comments">{{  commentsCnt }} comment{{  (commentsCnt > 1) ? 's' }}</a>
+            {% endif  %}
+        </p>
+
+    <div class="c-article__full">{% media item.excerptPhoto, 'excerpt' with {'class': 'centered img--auto d--b'} %}</div>
+
+    <p class="margin--t">{{ item.excerptText|raw }}</p>
+
+	  <a class="app-blue text--bold text--upper" href="{{ path('app_blog_single_article', { 'slug': item.slug }) }}">Read more</a>
+
+  </div>
+{% endfor %}

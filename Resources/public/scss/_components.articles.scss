@@ -1,0 +1,22 @@
+.c-article {
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+  &:not(:first-child) { margin-top: 30px; }
+  &__full {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+}
+
+
+.img-up {
+  position: relative;
+  width: 88px;
+  height: 66px;
+  img {
+    max-height: 100%;
+    width: auto;
+    margin: 0 auto;
+  }
+}

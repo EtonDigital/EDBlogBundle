@@ -1,0 +1,203 @@
+{% extends 'EDBlogBundle:Layout:blog_admin_main.html.twig' %}
+{% form_theme form "@EDBlog/Global/forms.html.twig" %}
+
+{% block content %}
+  <div class="dashboard-content" {% if article is defined %}data-autosave="{{ path('ed_blog_article_autosave', {'slug': article.parent.slug}) }}" data-lock-href="{{ path('ed_blog_article_check_writing_lock', { 'id': article.parent.id }) }}"{% endif %}>
+    <h1 class="text--bold margin--halft margin--b">{% if(article is defined) %}Edit{% else %}Create{% endif %} article</h1>
+    <form method="post" action="#">
+      {{ form_errors(form) }}
+      {{ form_row(form.title) }}
+
+      <label class="d--b margin--doublet">Body text:</label>
+      <div class="btn btn-primary js-add-media" title="Insert media"><i class="fa fa-photo"></i> Insert media</div>
+      <div class="form-group margin--t">
+        {{ form_widget(form.content) }}
+      </div>
+        {{ form_errors(form.content) }}
+      
+      <div class="margin--doublet">
+            {{ form_row(form.excerpt) }}
+            <span class="help-block text--milli margin--notop">Excerpts are optional summaries of your content.</span>
+      </div>
+
+      <label class="d--b margin--doublet">Excerpt image:</label>
+      <div>Excerpt image will appear in the introduction to the article in the articles list.</div>
+      <div class="media">
+        <div class="img-up flleft margin--r js-excerpt-holder">
+        {% if(article is defined and article.excerptPhoto) %}
+            {% include "@EDBlog/Article/Excerpt/form_preview.html.twig" with {'media' : article.excerptPhoto} %}
+        {% else %}
+            <img class="media-object js-media-object" src="{{ asset('bundles/edblog/img/svg/image-placeholder.svg') }}" alt="EdBlog">
+            <a href="#" class="js-media-object-remove toggle--remove hastooltip hidden" data-href="#" title="" data-placement="bottom" data-original-title="Delete"><i class="fa fa-times"></i></a>
+        {% endif %}
+        </div>
+        <div class="media-body">
+            <div class="btn btn-primary btn-file js-pick-or-upload">
+                Choose image
+            </div>
+            {{ form_widget(form.excerptPhoto) }}
+          <span class="help-block text--milli margin--notop margin--halft margin--nobottom">File formats allowed: png, jpg, gif</span>
+        </div>
+      </div>
+
+      <div class="margin--doublet">
+        <label>Category:</label>            
+        <div class="dropdown keep-open wide color-focus d--b">
+          <div class="select-mask dropdown-toggler" type="button" onclick="void(0)"></div>
+          <select class="form-control form-control--lg color-placeholder" data-wording="Select category"><option class="muted--total" value=""></option></select>
+          <div class="dropdown-menu dropdown-toggled hidden">
+            {{ form_widget(form.categories, { 'attr': { 'data-category-url': path('ed_blog_category_all_pretty') } }) }}
+          </div>
+        </div>
+      </div>
+
+      <div class="margin--doublet">
+          <label>Tags:</label>
+          {{ form_widget(form.tags, { 'attr': { 'data-tag-url': path('ed_blog_tag_express_create') } }) }}
+          {{ form_errors(form.tags) }}
+        <span class="help-block text--milli margin--notop">Separate tags with commas</span>
+      </div>
+
+      {% if is_granted('SWITCH_ARTICLE_AUTHOR') %}
+          <div class="margin--doublet margin--doubleb">
+              {{ form_label(form.author) }}
+              {{ form_widget(form.author) }}
+              {{ form_errors(form.author) }}
+          </div>
+      {% endif %}
+
+        <div class="margin--doublet margin--doubleb" data-test="{{ form_widget(form.metaData.vars.prototype)|e }}" data-prototype='{% include "@EDBlog/Article/metadata__prototype.html.twig" %}'>
+            <label>Meta tags:</label>
+            {% for meta in form.metaData %}
+                <div class="row">
+                    <div class="form-group col-xs-3">
+                        {{ form_widget(meta.key) }}
+                    </div>
+                    <div class="form-group col-xs-8">
+                        {{ form_widget(meta.value) }}
+                    </div>
+                    <div class="form-group col-xs-1">
+                        <a href="#" class="margin--doublet margin--doubleb js-remove-prototype" data-element="{{ meta.vars.value.key }}"><i class="fa fa-trash"></i> Remove</a>
+                    </div>
+                </div>
+            {% endfor %}
+            <a id="add_meta" href="#" class="margin--doublet margin--doubleb  js-add-prototype"><i class="fa fa-plus"></i> Add new</a>
+            {{ form_widget(form.metaExtras) }}
+        </div>
+
+      {% if article is defined and is_granted('EDIT_PUBLISH_STATUS', article) %}
+        <div class="margin--doublet margin--doubleb">
+              {{ form_label(form.status) }}
+              {{ form_widget(form.status) }}
+              {{ form_errors(form.status) }}
+        </div>
+      {% endif %}
+
+          <div class="btns-line margin--tripleb clearfix">
+              {% if(article is defined) %}
+                  {% if(article.parent.status == constant('STATUS_DRAFTED', article)) %}
+                      {% if is_granted('PUBLISH_ARTICLE', article) %}
+                        {{ form_widget(form.publish) }}
+                      {% endif %}
+                      {{ form_widget(form.save) }}
+                  {% else %}
+                      {{ form_widget(form.update) }}
+                  {% endif %}
+
+              {% else %}
+                  {% if not app.user.hasRole('ROLE_BLOG_CONTRIBUTOR') %}
+                      {{ form_widget(form.publish) }}
+                  {% endif %}
+                  {{ form_widget(form.save_draft) }}
+              {% endif %}
+          </div>
+
+      {{ form_widget(form._token) }}
+    </form>
+  </div>
+  {% include 'EDBlogBundle:Modals:add_media.html.twig' %}
+  {% if article is defined %}
+    {% include 'EDBlogBundle:Modals:article_locked.html.twig' with {'user': lockedBy, 'article': article.parent} %}
+  {% endif %}
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var lockTimer;
+        var autosaveTimer;
+        $(document).ready(function() {
+            initializeWritingLock();
+            var $container = $('.isotope');
+            $container.imagesLoaded( function() {
+                $container.isotope();
+                //$('.phototiles__item').removeClass('no-opacity');
+            });
+            $('#article_tags').on('beforeItemAdd', function(event) {
+                var tag =  event.item;
+                var url = $(this).attr('data-tag-url');
+
+                $.post(url, {title: tag}).done(function(data){
+                    if(data.success === false)
+                    {
+                        console.error(data.message);
+                        event.cancel = true;
+                    }
+                });
+            });
+        });
+
+        {% if article is defined %}
+            function initializeWritingLock()
+            {
+                {# Check writing lock #}
+                {% if isLocked  %}
+                $('#article_locked').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                {% else %}
+                    lockTimer = setInterval(checkWritingLock, 15*1000);
+                    autosaveTimer = setInterval(autosaveArtical, 120000);
+                {% endif %}
+            }
+
+            function checkWritingLock()
+            {
+                var container = $('[data-lock-href]');
+                $.ajax(container.attr('data-lock-href')).done(function(data){
+                    if(data.success)
+                    {
+                        if(data.lock)
+                        {
+                            clearInterval(lockTimer);
+                            autosaveArtical();
+                            clearInterval(autosaveTimer);
+
+                            $('.js-modal-text').html(data.html);
+                            $('#article_locked').modal({
+                                backdrop: 'static',
+                                keyboard: false
+                            });
+                        }
+                    }
+                    else
+                    {
+                        console.warn(data.message);
+                    }
+                });
+            }
+
+            function autosaveArtical()
+            {
+                var container = $('[data-autosave]');
+
+                $.post(container.attr('data-autosave'),
+                    {
+                        'title': $('#article_title').val(),
+                        'content': tinyMCE.activeEditor.getContent()
+                    });
+            }
+        {% endif %}
+    </script>
+{% endblock %}

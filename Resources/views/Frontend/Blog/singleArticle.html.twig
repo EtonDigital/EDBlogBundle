@@ -1,0 +1,55 @@
+{% extends "EDBlogBundle:Frontend/Layout:main.html.twig" %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block metaTags %}
+    {% for meta in article.metaData  %}
+        {% if meta.key!='writing_locked' %}
+        <meta name="{{ meta.key|lower }}" content="{{ meta.value }}">
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 table-rework">
+        <div class="text--30 text--bold black margin--tx4 margin--halfb lh32">{{ article.title }}</div>
+
+        <p class="text--mini app-grey">By <a href="{{ path('blogs_by_author', {'username': article.author.username}) }}">{{ article.author.profile.firstname }} {{ article.author.profile.lastname }}</a> on {{ article.publishedAt|blogDate}}
+          {% if (article.categories|length) %}
+          in {%  for category in article.categories %}
+               {{ loop.index0 ? ', ' }}<a href="{{ path('blogs_by_category', {'categorySlug': category.term.slug}) }}" >{{ category.term.title }}</a>
+             {% endfor %}
+          {% endif %}
+          {% if ( is_granted('ACCESS_COMMENTS') and commentsCnt) %}
+            | <a href="#comments">{{  commentsCnt }}</a> comment{{  (commentsCnt > 1) ? 's' }}
+          {% endif  %}
+        </p>
+
+        {% if (article.tags|length) %}
+          <p class="text--mini app-grey"><i class="fa fa-tags"></i>
+          {% for tag in article.tags %}
+            <a href="{{ path('blogs_by_tag', {'tagSlug': tag.term.slug}) }}">{{ tag.term.title }}</a>{% if not loop.last %}, {% endif %}
+          {% endfor %}
+          </p>
+        {% endif  %}
+
+        <p>{{ article.content|raw }}</p>
+      </div>
+    </div>
+
+    {% include 'EDBlogBundle:Comment:list.html.twig' %}
+
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $(document).ready(function() {
+      wrapTable();
+    });
+   </script>
+{% endblock %}

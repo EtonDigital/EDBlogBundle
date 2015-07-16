@@ -1,0 +1,9 @@
+<div class="col-sm-3 margin--t">
+  <div class="text--bold c-grey">{% if comment.author %}{{ comment.author }}{% else %}{{ comment.name }}{% endif %}</div>
+  <div class="text--milli app-grey margin--b">{{ comment.createdAt|date("m/d/Y") }}</div>
+</div>
+<div class="col-sm-9 margin--t">
+  {{ comment.comment }}
+</div>
+<div class="col-sm-12 text--20 text--bold margin--t"><hr class="margin--nobottom">
+</div>

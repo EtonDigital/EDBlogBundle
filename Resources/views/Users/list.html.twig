@@ -1,0 +1,64 @@
+{% extends 'EDBlogBundle:Layout:blog_admin_main.html.twig' %}
+{% from '@EDBlog/Global/Macro/tables.html.twig' import sortableTh  %}
+
+{% block content %}
+    <div class="dashboard-content">
+
+        <div class="table-responsive margin--t">
+            <h1 class="text--bold margin--halft margin--b">Users</h1>
+            <a class="btn btn-md btn-primary" href="{{ path('ed_blog_user_add') }}">Import new blog user</a>
+
+            <div class="table-responsive margin--t">
+                <table class="table horizontal  striped  vam  js-roundtable-members">
+                    <thead>
+                    <tr>
+                        {{ sortableTh('Username', 'username', 'ed_blog_user_list', 'v1', orderBy, order) }}
+                        {{ sortableTh('Name', 'name', 'ed_blog_user_list', 'v1', orderBy, order) }}
+                        {{ sortableTh('E-mail', 'email', 'ed_blog_user_list', 'v1', orderBy, order) }}
+                        {{ sortableTh('Role', 'role', 'ed_blog_user_list', 'v1', orderBy, order) }}
+                        {{ sortableTh('Posts', 'posts', 'ed_blog_user_list', 'v1', orderBy, order) }}
+                        <th class="v1">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                   {% for user in pagination %}
+                      {%  if user.username is not defined %}
+                          {% set user = user[0] %}
+                      {% endif %}
+                      <tr>
+                          <td>
+                              {{ user.username }}
+                          </td>
+                          <td>
+                              {{ user.profile.firstName }} {{ user.profile.lastName }}
+                          </td>
+                          <td>
+                              {{ user.email }}
+                          </td>
+                          <td>
+                              {% include 'EDBlogBundle:Users:blog_privileges.html.twig' with { 'user' : user } %}
+                          </td>
+                          <td>
+                              {{  numberOfPublishedPosts(user) }}
+                          </td>
+                          <td>
+                              <a href="{{ path('ed_blog_user_edit', {'username': user.username}) }}" class=""><i class="fa fa-pencil"></i> Edit</a>
+                              <a href="#" class="js-delete-object" data-title="Revoke access" data-text="Are you sure you want to revoke access to the blog admin panel for the selected user?" data-href="{{ path('ed_blog_user_revoke', {'username': user.username} ) }}" data-toggle="modal" data-target="#delete"><i class="fa fa-times"></i> Revoke</a>
+                          </td>
+
+                      </tr>
+                  {% endfor %}
+                    <tr>
+                        <td colspan="6">
+                            {{ knp_pagination_render(pagination) }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {{ include('EDBlogBundle:Modals:remove_article.html.twig') }}
+{% endblock content %}
+

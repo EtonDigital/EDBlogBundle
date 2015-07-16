@@ -1,0 +1,17 @@
+// Headings
+//  --------------
+#{headings()} {
+    @extend .por;
+    margin: 0 0 $base-line-height;
+    letter-spacing: -.05em;
+    font-weight: normal;
+    font-family: $sans;
+    line-height: 1.2;
+    line-height: normal;
+}
+h1 {font-size: 2.3em;}
+h2 {font-size: 2.2em;}
+h3 {font-size: 1.8em;}
+h4 {font-size: 1.5em;}
+h5 {font-size: 1.2em;}
+h6 {font-size: 1em;}

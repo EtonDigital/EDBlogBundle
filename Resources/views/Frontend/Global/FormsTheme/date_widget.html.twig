@@ -1,0 +1,15 @@
+{% block date_widget %}
+    {% spaceless %}
+        {% if widget == 'single_text' %}
+            {{ block('form_widget_simple') }}
+        {% else %}
+            {% set attr = attr|merge({'class': attr.class|default('inline')}) %}
+            {{ date_pattern|replace({
+                '{{ year }}':  form_widget(form.year, {'attr': {'class': attr.widget_class|default('') ~ ' form-control  form-control--sm  mrg--l/2'}}),
+                '{{ month }}': form_widget(form.month, {'attr': {'class': attr.widget_class|default('') ~ ' form-control  form-control--sm'}}),
+                '{{ day }}':   form_widget(form.day, {'attr': {'class': attr.widget_class|default('') ~ ' form-control  form-control--sm  mrg--l/2'}}),
+            })|raw }}
+            {{ block('help') }}
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}

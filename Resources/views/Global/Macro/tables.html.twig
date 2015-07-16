@@ -1,0 +1,9 @@
+{% macro sortableColumn(label, input, pathName, orderBy, order) %}
+    <a href="{{ path( pathName, { 'orderby': input, 'order': (orderBy == input and order == 'desc') ? 'asc' : 'desc' }) }}">{{ label }}</a>
+{% endmacro %}
+
+{% macro sortableTh(label, input, pathName, thClass, orderBy, order) %}
+    <th class= "{{ thClass }} {{ getSortedOrderClass(orderBy, order, input)|raw }}">
+        <a href="{{ path( pathName, { 'orderby': input, 'order': (orderBy == input and order == 'desc') ? 'asc' : 'desc' }) }}">{{ label }}</a>
+    </th>
+{% endmacro %}

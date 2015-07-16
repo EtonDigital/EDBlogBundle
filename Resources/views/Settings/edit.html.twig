@@ -1,0 +1,54 @@
+{% extends 'EDBlogBundle:Layout:blog_admin_main.html.twig' %}
+{%  form_theme form '@EDBlog/Global/forms.html.twig' %}
+
+{% block content %}
+    <div class="dashboard-content">
+        <h1 class="text--bold margin--halft margin--b">Edit Settings</h1>
+
+        <form method="post" action="#">
+            {{ form_errors(form) }}
+            <h3 id="comments-settings">Comments</h3>
+            <div>
+                {{ form_label(form.comments_enabled) }}
+                {{ form_widget(form.comments_enabled) }}
+                {{ form_errors(form.comments_enabled) }}
+            </div>
+            <div>
+                {{ form_label(form.comments_visible_public) }}
+                {{ form_widget(form.comments_visible_public) }}
+                {{ form_errors(form.comments_visible_public) }}
+            </div>
+            <div>
+                {{ form_label(form.comments_display_order) }}
+                {{ form_widget(form.comments_display_order) }}
+                {{ form_errors(form.comments_display_order) }}
+            </div>
+            <div>
+                {{ form_label(form.commenter_access_level) }}
+                {{ form_widget(form.commenter_access_level) }}
+                {{ form_errors(form.commenter_access_level) }}
+            </div>
+            <div>
+                {{ form_label(form.comments_manual_approving) }}
+                {{ form_widget(form.comments_manual_approving) }}
+                {{ form_errors(form.comments_manual_approving) }}
+            </div>
+            <h3 id="comments-settings">General settings</h3>
+            <div>
+                {{ form_label(form.date_format) }}
+                {{ form_widget(form.date_format) }}
+                {{ form_errors(form.date_format) }}
+                {{ form_widget(form.custom_date_format, { 'attr' : { 'class' : 'js-datetime-field', 'data-href' :  path('ed_blog_admin_settings_show_format')  } }) }}
+                {{ form_label(form.custom_date_format) }}
+            </div>
+            <div>
+                {{ form_label(form.time_format) }}
+                {{ form_widget(form.time_format) }}
+                {{ form_errors(form.time_format) }}
+                {{ form_widget(form.custom_time_format, { 'attr' : { 'class' : 'js-datetime-field', 'data-href' :  path('ed_blog_admin_settings_show_format') } }) }}
+                {{ form_label(form.custom_time_format) }}
+            </div>
+            {{ form_rest(form) }}
+        </form>
+    </div>
+{% endblock content %}

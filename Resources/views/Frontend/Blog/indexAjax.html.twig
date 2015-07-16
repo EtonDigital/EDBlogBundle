@@ -1,0 +1,12 @@
+{% if pagination|length %}
+	<div class="js-media-content js-noisotope">
+	    {% include 'EDBlogBundle:Frontend/Blog:indexAjaxElements.html.twig' %}
+	</div>
+	{{ knp_pagination_render(pagination) }}
+{% else %}
+   {%  if (app.request.attributes.get('_route') == 'app_blog_index') %}
+	   There are no articles yet!
+   {% else %}
+	   There are no articles within this criteria.
+   {% endif %}
+{% endif %}

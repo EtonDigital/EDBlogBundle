@@ -1,0 +1,26 @@
+{% extends 'EDBlogBundle:Layout:blog_admin_main.html.twig' %}
+{% form_theme form '@EDBlog/Global/forms.html.twig' %}
+
+{% block content %}
+    <div class="dashboard-content">
+        <h1 class="text--bold margin--halft margin--b">Import new blog user</h1>
+
+        <form action="{{ path('ed_blog_user_edit', { 'username' : user.username}) }}" method="post">
+            {{ form_errors(form) }}
+
+            <div>
+                <div>
+                    <label>Blog user:</label>
+                    <div class="form-control form-control--lg margin--b form-control-static">{{ user.commenterDisplayName }}</div>
+                </div>
+            </div>
+            <div>
+                {{ form_label(form.role) }}
+                {{ form_widget(form.role) }}
+                {{ form_errors(form.role) }}
+            </div>
+            {{ form_rest(form) }}
+        </form>
+    </div>
+{% endblock content %}
+

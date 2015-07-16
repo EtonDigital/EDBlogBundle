@@ -1,0 +1,35 @@
+{% extends 'EDBlogBundle:Frontend/Layout:base.html.twig' %}
+
+{% set currentPath = app.request.attributes.get('_route') %}
+
+{% block favicon %}
+  {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+{% endblock %}
+
+{% block body %}
+  {{ parent() }}
+
+  <div class="wrap wrap--app {% block wrapclass %}{% endblock wrapclass %}">
+    {% block header %}
+      {{ parent() }}
+      {% include 'EDBlogBundle:Frontend/Layout:header.html.twig' %}
+    {% endblock header %}
+
+    {% block content %}{% endblock %}
+    <div id="push" class="hidden-xs"></div>
+  </div>
+
+  {% block footer %}
+    {{ parent() }}
+    {% include('EDBlogBundle:Frontend/Layout:_footer.html.twig') %}
+  {% endblock footer %}
+
+{% endblock %} {# endblock body #}
+
+{% block javascripts %}
+  {{ parent() }}
+{% endblock %}

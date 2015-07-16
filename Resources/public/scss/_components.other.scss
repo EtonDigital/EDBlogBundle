@@ -1,0 +1,24 @@
+// Used for insert media
+.b-upload {
+  cursor: pointer;
+  background: $blue-btn;
+  border: solid 1px #539bc6;
+  color: white;
+  padding: 10px 0 15px;
+  margin-bottom: 30px;
+  transition-property: background;
+  transition-duration: 0.3s;
+  &:hover {
+    background: #55ade3;
+  }
+  .fa-camera {
+    position: relative;
+    top: 4px;
+  }
+  .wording div {
+    text-align: center;
+    @include bp(tab) {
+        text-align: left;
+    }
+  }
+}

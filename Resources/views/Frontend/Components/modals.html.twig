@@ -1,0 +1,206 @@
+<div aria-hidden="false" aria-labelledby="suggest" role="dialog" tabindex="-1" id="suggest-user" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="modalSuggestion" class="modal-title">Introduce people from your Network to Michael</h4>
+            </div>
+            <div class="tinyscroll" data-height="380px" data-alwaysvisible="true">
+                <div class="modal-body padding--no">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div aria-hidden="false" aria-labelledby="reportLabel" role="dialog" tabindex="-1" id="delete_modal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="myModalLabel" class="modal-title">Delete question</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this?</p>
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" type="button">Delete</a>
+                <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div aria-hidden="false" aria-labelledby="messageModalLabel" role="dialog" tabindex="-1" class="modal fade in" id="messageModal" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="myModalLabel" class="modal-title">Send message</h4>
+            </div>
+            <div class="modal-body-content">
+
+            </div>
+            <!--<div class="modal-footer">
+              <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+            </div>-->
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div aria-hidden="false" aria-labelledby="reportModalLabel" role="dialog" tabindex="-1" class="modal fade in" id="reportModal" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="repModalLabel" class="modal-title">Report</h4>
+            </div>
+            <div class="modal-body-content">
+
+            </div>
+            {#<div class="modal-footer">
+              <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+            </div>#}
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div aria-hidden="false" aria-labelledby="successModalLabel" role="dialog" tabindex="-1" class="modal fade in" id="successModal" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="repModalLabel" class="modal-title">Success</h4>
+            </div>
+            <div class="modal-body">
+                <p>You have successfully updated your profile.</p>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div aria-hidden="false" aria-labelledby="leaveLabel" role="dialog" tabindex="-1" id="upload-document" class="modal fade in">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+        <h4 class="modal-title">Add document</h4>
+      </div>
+    <div>
+      <form data-group-document-upload="" role="form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="" class="">Title <sup>*</sup></label>
+            <input type="text" placeholder="Enter the document title" class="form-control">
+            <span class="margin--halft text--milli d--b muted">0 of 60 characters</span>
+          </div>
+          <div class="form-group">
+            <label for="" class="">Description <sup>*</sup></label>
+            <textarea placeholder="Enter a short description" class="form-control"></textarea>
+            <span class="margin--halft text--milli d--b muted">0 of 140 characters</span>
+          </div>
+          <div class="form-group">
+            <div class="btn btn-primary btn-file">
+              Choose file
+              <input type="file" title="No file choosen" class="form-control">
+            </div>
+            <span class="text--milli d--b muted margin--halft">Maximum size: 20MB</span>
+            <span class="text--milli d--b muted">File formats allowed: jpg, jpeg, png, gif, pdf, doc, docx, xls, xlsx</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="button">Add document</button>
+          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+        </div>
+      </form>
+    </div>
+    </div>
+  </div>
+</div>              
+<div aria-hidden="false" aria-labelledby="leaveLabel" role="dialog" tabindex="-1" id="message-all" class="modal fade in">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+        <h4 class="modal-title">Message all members</h4>
+      </div>
+      <form role="form">
+        <div class="modal-body  margin--reset">
+          <div class="form-group">
+            <label for="">To:</label>
+            <p>[Group name] members</p>
+          </div>
+          <div class="form-group">
+            <label for="" class="">Message <sup>*</sup></label>
+            <textarea rows="5" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="submit">Send</button>
+          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% if not app.user %}
+<div class="modal fade" id="join" tabindex="-1" role="dialog" aria-labelledby="reportLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <form role="form">
+                <div class="modal-body">
+                    <h1 class="center  text--upper  margin--nobottom">Get involved</h1>
+                    <p class="center  muted  text--h5">to browse the rest of Procurious</p>
+                    <div class="this-or-this">
+                        <div class="this-or-this__this  bg--transp">
+                            <a href="{{  path('fos_user_registration_register') }}" class="btn  btn-primary  btn-lg  btn-block">Join now</a>
+                        </div>
+                        <div class="this-or-this__or"> or </div>
+                        <div class="this-or-this__this  bg--transp">
+                            <a href="{{ path('fos_user_security_login') }}" class="btn  btn-grey  btn-lg  btn-block">Login</a>
+                        </div>
+                    </div>
+                    <p class="center  muted  text--h5">Procurious is the online business network for a new generation of procurement professionals.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% else %}
+    <div class="modal fade js-universal-delete-modal" id="remove-photo" tabindex="-1" role="dialog" aria-labelledby="reportLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Remove photo</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-message">Are you sure you want to remove the photo?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary js-remove-eventphoto">Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="add-photo-desc" tabindex="-1" role="dialog" aria-labelledby="reportLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="add-resource" tabindex="-1" role="dialog" aria-labelledby="reportLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        </div>
+    </div>
+{% endif %}

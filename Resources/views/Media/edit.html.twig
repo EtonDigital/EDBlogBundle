@@ -1,0 +1,137 @@
+{% extends 'EDBlogBundle:Layout:blog_admin_main.html.twig' %}
+
+{% block content %}
+    <div class="dashboard-content">
+
+
+        <div class="col-xs-8">
+            <h1 class="text--bold margin--halft margin--b">Edit Photo</h1>
+            <div class="alert alert-warning hide js-crop-error"></div>
+            <div class="alert alert-warning hide js-crop-info"></div>
+            {% include '@EDBlog/Media/cropPanel.html.twig' %}
+        </div>
+        <div class="col-xs-4">
+            <h1 class="text--bold margin--halft margin--b">Edit Info</h1>
+            {% include '@EDBlog/Media/editForm.html.twig' %}
+        </div>
+
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            initMediaEditForm();
+            $(document).on('click', '.js-crop-cancel', function(){
+                $.Jcrop('.js-jcrop').destroy();
+                $('.jcrop-holder').remove();
+                $('.js-crop-tools').show();
+                $('.js-crop-action-btn').addClass('hide');
+
+                return false;
+            });
+        });
+
+        $(document).on('click', '.js-trigger-crop', function(){
+            $('.js-crop-tools').hide();
+            initCrop();
+        });
+
+        $(document).on('submit', 'form[name="cropMedia"]', function(){
+            if( parseInt( $('#w').val() ) > 0 )
+            {
+                $.post($(this).attr('action'), $(this).serialize(), function(data)
+                {
+                    showCropError(false);
+                    if(data.success)
+                    {
+                        if(data.redirectUrl)
+                        {
+                            showInfoMessage(data.message)
+                            window.location = data.redirectUrl;
+                        }
+
+                        $('.js-has-crop-media').replaceWith(data.html);
+                        initCrop();
+                        $('.js-jcrop').attr('src', $('.js-jcrop').attr('src')+'?' + Math.random())
+                    }
+                    else
+                    {
+                        showCropError(data.message);
+                    }
+                });
+            }
+            return false;
+        });
+
+        function updateCoords(c)
+        {
+            $('#x').val(c.x);
+            $('#y').val(c.y);
+            $('#w').val(c.w);
+            $('#h').val(c.h);
+            $('#box-width').val($('.js-jcrop').attr('width'));
+        };
+
+        function initCrop()
+        {
+            $('.js-jcrop').Jcrop({
+                onSelect: function(e){
+                    updateCoords(e);
+                    if($('#crop_image').hasClass('hide')) {
+                        $('.js-crop-action-btn').removeClass('hide');
+                    }
+                },
+                setSelect: getDimensions($('.js-jcrop'))
+
+            });
+        }
+
+        function showCropError(message)
+        {
+            if(message === false)
+            {
+                $('.js-crop-error').html('');
+                if(!$('.js-crop-error').hasClass('hide'))
+                    $('.js-crop-error').addClass('hide');
+            }
+            else
+            {
+                $('.js-crop-error').html(message);
+                $('.js-crop-error').removeClass('hide');
+            }
+        }
+
+        function showInfoMessage(message)
+        {
+            $('.js-crop-info').html(message);
+            $('.js-crop-info').removeClass('hide');
+        }
+
+        function initMediaEditForm()
+        {
+            $(document).on('submit', '.js-crop-info-form', function(){
+                var form = $(this);
+                $.post( form.attr('action'), form.serialize(), function(data){
+                    if(data.success)
+                    {
+                        form.replaceWith(data.html);
+                    }
+
+                });
+
+                return false;
+            });
+        }
+
+        function getDimensions(obj){
+            return [
+                Math.round($(obj).width() / 4),
+                Math.round($(obj).height()/4),
+                Math.round($(obj).width()/2),
+                Math.round($(obj).height()/2)
+            ];
+        }
+    </script>
+{% endblock %}

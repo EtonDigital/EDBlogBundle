@@ -1,0 +1,35 @@
+.c-sidebar {
+  margin-top: 15px;
+  &:not(:first-child) { margin-top: 37px; }
+  &__title {
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #93a0a8;
+    margin-bottom: 15px;
+  }
+  &__list {
+    a:not(.btn) {
+      display: block;
+      color: $app-blue;
+      margin-bottom: 6px;
+      margin-left: 15px;
+      &.leader {
+        font-size: 15px;
+        font-weight: bold;
+        margin-left: 0;
+      }
+      &.hover, &.active {
+        color: black;
+      }
+    }
+    &__el1 {
+      margin-bottom: 8px;
+      margin-right: 5px;
+      float: left;
+      @include bp(tab) {
+        float: none;
+      }
+    }
+  }
+}

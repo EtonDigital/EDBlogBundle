@@ -1,0 +1,119 @@
+/***************************    Media library   ****************************************/
+
+@media (min-width: 480px) and (max-width: 768px) { 
+  .phototiles {
+    &__item {
+      width: 50% !important;
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1600px) { 
+  .phototiles {
+    &__item {
+      width: 25% !important;
+    }
+  }
+}
+
+.phototiles {
+  overflow: hidden;
+  margin: 0 -30px 0 0;
+  padding: 0;
+  list-style: none;
+  &__item {
+    overflow: hidden;
+    float: left;
+    margin: 0;
+    width: 100%;
+    padding: 0 30px 30px 0;
+    -webkit-transition-property: opacity;
+    -moz-transition-property: opacity;
+    -o-transition-property: opacity;
+    transition-property: opacity;
+    -webkit-transition-duration: 500ms;
+    -moz-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+
+    img {
+      @extend %noflicker;
+      @include transition(.9s);
+      // Since we do not have crop 3...
+      max-height: 100%;
+      height: auto;
+      width: auto;
+      margin: 0 auto;
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%,-50%) !important;
+      -moz-transform: translate(-50%,-50%) !important;
+      -ms-transform: translate(-50%,-50%) !important;
+      transform: translate(-50%,-50%) !important;
+    }
+
+    &:hover {
+      img {
+      -webkit-transform: translate(-50%,-50%) scale(1.05) !important;
+      -moz-transform: translate(-50%,-50%) scale(1.05) !important;
+      -ms-transform: translate(-50%,-50%) scale(1.05) !important;
+      transform: translate(-50%,-50%) scale(1.05) !important;}
+    }
+
+    @include bp(tab) {
+      width: 33.33%;
+    }
+    @include bp(desk) {
+      width: 16.66%;
+    }
+  }
+  &__iteminner {
+    padding-top: 70%; // Defines aspect ratio
+    overflow: hidden;
+    position: relative;
+    border: solid 1px $light-grey;
+    background: $lightest-grey;
+    .border-el {
+      display: none;
+      position: absolute;
+      z-index: 9;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border: solid 3px $blue-btn;
+    }
+    &.selected {
+      border: solid 1px $blue-btn;
+      .phototiles__itemabs {
+        img {
+          -webkit-transform: translate(-50%,-50%) scale(1) !important;
+          -moz-transform: translate(-50%,-50%) scale(1) !important;
+          -ms-transform: translate(-50%,-50%) scale(1) !important;
+          transform: translate(-50%,-50%) scale(1) !important;
+        }
+      }
+      .toggle--remove {display: none;}
+      .toggle--selected {display: block;}
+      .border-el {
+        display: block;
+      }
+    }
+  }
+  &__itemabs {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+  .form-control {
+    margin-top: 1px;
+  }
+  textarea {
+    resize: none;
+    padding: 6px 10px 12px !important;
+  }
+}

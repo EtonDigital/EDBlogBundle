@@ -1,0 +1,54 @@
+// Override Tinymce style
+.mce-container, .mce-container-body, .mce-menu {
+  background: #f1f4f6 !important;
+  border-color: #bcc2c6 !important;
+  @include border-radius(0 !important);
+  .mce-btn {
+    border: 0 !important;
+    box-shadow: none !important; 
+    &:hover {
+      background: none !important;
+    }
+    button {
+      background: #f1f4f6 !important;
+      opacity: 1 !important;
+      border: solid 1px transparent !important;
+      @include border-radius(3px !important);
+      &:hover {
+        border: solid 1px #bcc2c6 !important;
+      }
+      i {
+        text-shadow: none !important;
+      }
+    }
+    &.mce-active {
+      button {
+        border: solid 1px #bcc2c6 !important;
+      }
+    }
+  }
+  .mce-menu-item {
+    &:hover {
+      background: #6fbae7;
+      color: white;
+    }
+  }
+}
+.mce-panel {
+  background-image: none !important;
+}
+.mce-foot {
+    .mce-btn.mce-primary.mce-first {
+        button {
+            background: $blue-btn !important;
+            color: white;
+            @include border-radius(2px !important);
+            padding: 9px 13px;
+            border: 0 !important;
+            font-size: 13px;
+            font-weight: bold;
+            text-shadow: none !important;
+            text-transform: uppercase;
+        }
+    }
+}

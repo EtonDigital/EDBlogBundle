@@ -1,0 +1,16 @@
+{% if level is not defined %}
+    {% set level = 0 %}
+{% endif %}
+<tr>
+    <td>{{ taxonomy|categoryLevelSlash }}</td>
+    <td>{{ taxonomy.term.slug }}</td>
+    <td>{{ taxonomy.description }}</td>
+    <td>{{ taxonomy.count | default('0') }}</td>
+    <td>{% if taxonomy.parent %}{{ taxonomy.parent.term.title }}{% endif %}</td>
+    <td>
+        <a href="#" class="js-delete-object" data-title="Remove category" data-text="Are you sure you want to remove this category?" data-href="{{ path('ed_blog_category_delete', {'slug': taxonomy.term.slug} ) }}" data-toggle="modal" data-target="#delete"><i class="fa fa-times"></i> Remove</a>
+        <a href="{{ path('ed_blog_category_edit', {'slug': taxonomy.term.slug}) }}" class="js-edit-{{ taxonomy.term.slug }}"><i class="fa fa-pencil"></i> Edit</a>
+    </td>
+</tr>
+
+{% include "@EDBlog/Taxonomy/Category/children.html.twig" %}

@@ -1,0 +1,20 @@
+{% if level is not defined %}
+    {% set level = 0 %}
+{% else %}
+    {% set level = level +1 %}
+{% endif %}
+
+{#{% for category in categories %}
+    <input id="article_categories_{{ category.id }}" class="category-level-input-{{ level }}" name="article[categories][]" value="{{ category.id }}" type="checkbox" {% if category.id in selected %}checked="checked"{% endif %}>
+    <label class="category-level-label-{{ level }}" for="article_categories_{{ category.id }}">{{ category.term.title }}</label>
+    {% include "@EDBlog/Taxonomy/Category/pretty.html.twig" with { 'categories': category.children} %}
+{% endfor %}#}
+
+{% for category in categories %}
+    {% if level < 4 %}
+        <option {% if category.id in selected %}selected="selected"{% endif %} value="{{ category.id }}">{{ category|categoryLevelSlash }}</option>
+
+        {% include "@EDBlog/Taxonomy/Category/pretty_limited.html.twig" with { 'categories': category.children} %}
+    {% endif  %}
+
+{% endfor %}

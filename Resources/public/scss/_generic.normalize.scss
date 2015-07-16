@@ -1,0 +1,32 @@
+html {
+    background-color: $brand-color;
+    &.log-in {background-color: $brand-color;}
+}
+body {
+    background: transparent none;
+    color: $dark-grey;
+    text-align: left;
+    font-family: $sans;
+}
+
+// Sticky footer
+@include bp(tab) {
+    html, body {
+        height: 100%;
+    }
+    .wrap {
+        &--app {
+            min-height: 100%;
+            /* equal to footer height */
+            margin-bottom: -73px; /* 43 + 30 */
+        }
+    }
+    .wrap:after {
+        content: "";
+        display: block;
+    }
+}
+
+select {
+  padding-left: 6px !important;
+}

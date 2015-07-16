@@ -1,0 +1,38 @@
+{% if (categories|length) %}
+  <div class="c-sidebar">
+    <div class="c-sidebar__title">Categories</div>
+    <div class="c-sidebar__list">
+      {% for category in categories %}
+        <div class="margin--halfb d--ib--b"><a href="{{ path('blogs_by_category', {'categorySlug': category.term.slug}) }}" class="btn btn-primarywhite">{{ category.term.title }}</a></div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+{{ render (controller('EDBlogBundle:Backend/Tag:topNtags',{ 'number' : 5 } )  )  }}
+
+{% if (archive|length) %}
+  <div class="c-sidebar">
+    <div class="c-sidebar__title">Archive</div>
+    <div class="c-sidebar__list">
+      {% set currentYear = 0 %}
+      {% for archiveRow in archive %}
+        {% if (currentYear==archiveRow.year) %}
+          <a href="{{ path('blogs_archive', {'yearMonth': archiveRow.year~'-'~archiveRow.month}) }}" class="">{{ getMonth(archiveRow.month) }} ({{ archiveRow.num }})</a>
+        {% else %}
+          {% set currentYear=archiveRow.year %}
+          {%  if (not loop.first) %}
+            </div></div>
+          {% endif %}
+          <div class="c-sidebar__el">
+          <a href="#" class="leader js-toggler"><i class="fa fa-caret-right margin--halfr"></i>{{ archiveRow.year }}</a>
+          <div class="toggled">
+          <a href="{{ path('blogs_archive', {'yearMonth': archiveRow.year~'-'~archiveRow.month}) }}" class="">{{ getMonth(archiveRow.month) }} ({{ archiveRow.num }})</a>
+        {% endif %}
+        {%  if (loop.last) %}
+          </div></div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

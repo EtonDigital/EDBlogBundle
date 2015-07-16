@@ -1,0 +1,38 @@
+<div class="modal [ modal--full muted--total ] fade js-modal-add-media">
+  <div class="modal-dialog  modal-dialog--movable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Insert media</h4>
+      </div>
+      <div class="modal-body">
+        <div class="text--bold dark-grey margin--b">Upload photo from your computer or select from media library and click Insert</div>
+        {{ render(controller('EDBlogBundle:Backend/Article:mediaList')) }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default flright js-close-insert-modal" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary flright js-insert-media" title="Upload" value="Insert">
+        {% include 'EDBlogBundle:Article:upload_form.html.twig' %}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal [ modal--full muted--total ] fade js-modal-add-excerpt-media">
+    <div class="modal-dialog  modal-dialog--movable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Insert media</h4>
+            </div>
+            <div class="modal-body">
+                <div class="text--bold dark-grey margin--b">Upload photo from your computer or select from media library and click Insert</div>
+                {{ render(controller('EDBlogBundle:Backend/Article:mediaList',{ 'excerpt': true})) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default flright js-close-insert-modal" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary flright js-insert-media" title="Upload" value="Insert">
+                {{ form_widget(form_excerpt_media.media, {'attr': { 'data-href': path('ed_blog_admin_article_upload', { 'excerpt' : true }) }}) }}
+            </div>
+        </div>
+    </div>
+</div>

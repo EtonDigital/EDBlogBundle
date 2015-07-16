@@ -1,0 +1,14 @@
+{% for media in pagination %}
+  <li class="phototiles__item [ gl muted--total ]">
+  	<div class="phototiles__iteminner">
+    	<div class="phototiles__itemabs">
+	      <a href='#' class='js-add-media-editor' data-content='{% media media, "big" %}' data-val="{{ media.id }}" data-content='{% include "@EDBlog/Article/Excerpt/form_preview.html.twig" %}'>
+	          {% media media, 'lib' %}
+	      </a>
+	      <div class="border-el"></div>
+        <a href="#" class="toggle--selected hastooltip" title="" data-placement="right" data-original-title="Selected"><i class="fa fa-check"></i></a>
+	    </div>
+    </div>
+      {{ render(controller('EDBlogBundle:Backend/Media:editInfo', { 'id': media.id })) }}
+  </li>
+{% endfor %}

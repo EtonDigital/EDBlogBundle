@@ -1,0 +1,47 @@
+//  =Additional reset styles and html elements defaults
+//  ===================================================
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {text-align: left;}
+textarea {resize: vertical;}
+code {
+  line-height: 1;
+  font-family: Monaco, Consolas, "Bitstream Vera Sans Mono", "Andale Mono", "DejaVu Sans Mono", "Lucida Console", monospace;
+  font-size: 0.9em;
+}
+
+//  --------------
+img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  border: 0;
+  vertical-align: middle;
+  font-style: italic;
+}
+
+// Fix for stretched svg files in IE
+// img[src*=".svg"] {
+//   width: 100%; 
+// }
+
+figure > img {display: block;}
+//  --------------
+textarea:active,
+textarea:focus {
+  cursor: text;
+  outline: none;
+}
+
+abbr[title],dfn[title] {cursor: help;}
+u,ins {text-decoration: none;}
+
+div {
+  word-break: break-word;
+  word-wrap: break-word;
+}

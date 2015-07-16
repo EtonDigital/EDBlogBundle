@@ -1,0 +1,20 @@
+{% if (criteria is defined) %}
+    <div>
+        <p><a href="{{ path('app_blog_index') }}">Blog</a> /
+            {% if (criteria.type == 'category') %}
+                {{ criteria.type }}:
+                {%  set categories = categoriesFromFirstLevel(criteria.value)  %}
+                {% for category in categories %}
+                    <a href="{{ path ('blogs_by_category',{ 'categorySlug' : category.Term.slug}) }}">{{ category.Term.title }}</a> /
+                {% endfor %}
+                {{ criteria.value.Term.title}}  {{  criteria.value.description ? '('~criteria.value.description~')' }}
+            {% elseif (criteria.type == 'tag') %}
+                {{ criteria.type }}: {{ criteria.value.Term.title}}
+            {% elseif (criteria.type == 'author') %}
+                {{ criteria.type }}: {{ criteria.value.profile.firstname}} {{ criteria.value.profile.lastname}}
+            {% elseif (criteria.type == 'archive') %}
+                {{ criteria.type }}: {{ criteria.value.year }} {{ getMonth(criteria.value.month)}}
+            {% endif  %}
+        </p>
+    </div>
+{% endif %}

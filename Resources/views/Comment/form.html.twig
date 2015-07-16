@@ -1,0 +1,42 @@
+{% if is_granted('ACCESS_COMMENTS_LIST') and is_granted('CREATE_COMMENT') %}
+    <div id="comment-form" class="row margin--doublet">
+        <div class="col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 black text--16 text--bold margin--b">Leave your comment
+        </div>
+        <div class="col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 black">
+            <form class="js-comment-form js-single-submit" method="post" action="{{ path('ed_blog_admin_comment_create', { 'slug' : article.slug }) }}">
+                {{ form_errors(form) }}
+                {% if not app.user %}
+                    <div>
+                        {{ form_label(form.name) }}
+                        {{ form_widget(form.name) }}
+                        {{ form_errors(form.name) }}
+                    </div>
+                    <div>
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email) }}
+                        {{ form_errors(form.email) }}
+                    </div>
+                    <div class="hide">
+                        {{ form_label(form.username) }}
+                        {{ form_widget(form.username) }}
+                        {{ form_errors(form.username) }}
+                    </div>
+                {% else %}
+                    <div>
+                        <label>Display Name:</label>
+                        <div class="form-control form-control--lg margin--b form-control-static">{{ app.user.commenterDisplayName }}</div>
+                    </div>
+                {% endif %}
+                <div>
+                    {{ form_label(form.comment) }}
+                    {{ form_widget(form.comment) }}
+                    {{ form_errors(form.comment) }}
+                </div>
+                {{ form_row(form.save) }}
+                {{ form_rest(form) }}
+            </form>
+        </div>
+    </div>
+{% elseif is_granted('ACCESS_COMMENTS_LIST') %}
+    {% include "@EDBlog/Comment/loginToCreateComments.html.twig" %}
+{% endif %}

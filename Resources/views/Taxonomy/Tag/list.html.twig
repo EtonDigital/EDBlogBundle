@@ -1,0 +1,12 @@
+{% extends 'EDBlogBundle:Layout:blog_admin_main.html.twig' %}
+
+{% block content %}
+  <div class="dashboard-content">
+    <h1 class="text--bold margin--halft margin--b">Tags</h1>
+    <a href="{{ path('ed_blog_tag_create') }}" class="btn btn-md btn-primary">Create new tag</a>
+
+    {% include "@EDBlog/Taxonomy/Tag/listAjax.html.twig" %}
+
+  </div>
+  {{ include('EDBlogBundle:Modals:remove_article.html.twig') }}
+{% endblock content %}

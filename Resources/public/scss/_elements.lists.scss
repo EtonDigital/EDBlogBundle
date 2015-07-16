@@ -1,0 +1,33 @@
+// Lists
+//  --------------
+ul, ol, dl {
+    margin: 0 0 $base-line-height;
+    padding: 0;
+}
+ul {list-style: disc outside;}
+ol {list-style: decimal outside;}
+ul ul, ul ol, ol ul, ol ol {
+    margin: 0;
+}
+li, dd {
+    margin-left: $base-line-height;
+    line-height: 1.5;
+    &[class*="col-"] {
+        list-style: none;
+        margin-left: 0;
+    }
+}
+li ul, li ol {font-size: 1em;}
+nav {
+    ul, ol {list-style: none outside;}
+}
+nav li {
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+dt {
+    font-weight: bold;
+    margin-top: $base-line-height/2;
+    &:first-child {margin-top: 0;}
+}

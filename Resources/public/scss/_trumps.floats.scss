@@ -1,0 +1,21 @@
+//  Floats
+//  ======================================================// 
+
+.clear            {clear: both !important;}
+.flleft           {float: left !important;}
+.flright          {float: right !important;}
+.flright--responsive-mob {
+  @include bp(tab) {
+    float: right !important;
+  }
+}
+
+// clearfix
+.clearfix         {@include clearfix;}
+// clearfix overflow visible
+.cfov {
+  &:before,
+  &:after {content: " "; display: table;}
+  &:after {clear: both;}
+  & {*zoom: 1;}
+}

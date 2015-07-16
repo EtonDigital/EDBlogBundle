@@ -1,0 +1,5 @@
+{% set level = level + 1 %}
+
+{% for taxon in taxonomy.children %}
+    {% include "@EDBlog/Taxonomy/Category/listAjaxElement.html.twig" with { 'taxonomy': taxon, 'level' : level } %}
+{% endfor %}

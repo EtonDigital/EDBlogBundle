@@ -1,0 +1,55 @@
+{% extends "@EDBlog/Layout/blog_admin_main.html.twig" %}
+
+{% block content %}
+  <div class="dashboard-content">
+    <div class="dashboard-content__container">
+
+      <div class="row">
+        <div class="col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 table-rework">
+          <div class="margin--doublet lh32">
+            <a title="Edit" class="btn btn-info" href="{{ path('ed_blog_admin_article_edit', { 'slug' : article.slug }) }}">Edit</a>
+            <div class="text--30 text--bold black lh30 margin--halft margin--halfb">{{ article.title }}</div>
+          </div>
+
+          <p class="text--mini app-grey">By <a href="#">{{ article.author.profile.firstname }} {{ article.author.profile.lastname }}</a> on {{ article.publishedAt|blogDate}}
+            {% if (article.categories|length) %}
+                in {%  for category in article.categories %}
+                    {{ loop.index0 ? ', ' }}<a href="{{ path('ed_blog_category_edit', { 'slug': category.term.slug }) }}" >{{ category.term.title }}</a>
+                   {% endfor %}
+            {% endif %}
+            {#| X comments #}
+
+            {% if (article.tags|length) %}
+                <p class="text--mini app-grey"><i class="fa fa-tags"></i>
+                    {% for tag in article.tags %}
+                        <a href="{{ path('ed_blog_tag_edit', { 'slug': tag.term.slug}) }}">{{ tag.term.title }}</a>
+                    {% endfor %}
+                </p>
+            {% endif  %}
+          </p>
+          {#
+          <p class="text--18 app-light-grey text--thin">{{ article.excerpt }}</p>
+
+          <p>
+            {% media article.excerptPhoto, 'excerpt' with {'class': 'centered img--auto d--b'} %}
+            <span class="d--b margin--halft app-grey text--mini text--italic">This should be optional text related to excerpt photo</span>
+          </p>
+           #}
+          <p>{{ article.content|raw }}</p>
+        </div>
+      </div>
+
+      {% include 'EDBlogBundle:Comment:list.html.twig' %}
+
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    $(document).ready(function() {
+      wrapTable();
+    });
+   </script>
+{% endblock %}

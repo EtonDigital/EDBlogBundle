@@ -1,0 +1,56 @@
+{% extends 'EDBlogBundle:Layout:blog_admin_main.html.twig' %}
+
+{% from '@EDBlog/Global/Macro/tables.html.twig' import sortableTh  %}
+
+{% block content %}
+  <div class="dashboard-content">
+    <h1 class="text--bold margin--halft margin--b">Articles</h1>
+    <a href="{{ path('ed_blog_admin_article_create') }}" class="btn btn-md btn-primary">Create new article</a>
+
+    <div class="table-responsive margin--t">
+      <table class="table horizontal  striped  vam  js-roundtable-members">
+        <thead>
+          <tr>
+              {{ sortableTh('Title', 'title', 'ed_blog_admin_article_list', 'v2', orderBy, order) }}
+              {{ sortableTh('Author', 'author', 'ed_blog_admin_article_list', 'v2', orderBy, order) }}
+              {{ sortableTh('Status', 'status', 'ed_blog_admin_article_list', 'v1', orderBy, order) }}
+              {{ sortableTh('Date', 'date', 'ed_blog_admin_article_list', 'v1', orderBy, order) }}
+              <th class="v1">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for article in pagination %}
+            <tr>
+              <td><a href="{{ path('ed_blog_admin_article_edit', { 'slug' : article.slug  }) }}">{{ article.title }}</a></td>
+              <td>{{ article.author.profile.firstName }} {{ article.author.profile.lastName }} {# {% autoescape false %}{{ article.excerpt }}{% endautoescape %} #}</td>
+              <td>
+                  {% if(article.status == constant('STATUS_PUBLISHED', article)) %}
+                      {{article.publishedAt |date('d M Y H:i:s')}}
+                  {% endif %}
+                  <br>
+                  <span class="label {% if article.status == 'published' %}label-success{% else %}label-warning{% endif %}">{{ article.status }}</span>
+              </td>
+              <td>{{ article.modifiedAt|date('d M Y H:i:s')}}</td>
+              <td>
+                <a href="{{ path('ed_blog_admin_article_show', { 'slug' : article.slug }) }}"><i class="fa fa-eye"></i> Preview</a>
+                  {% if is_granted('EDIT_ARTICLE', article) %}
+                    <a href="{{ path('ed_blog_admin_article_edit', { 'slug' : article.slug }) }}"><i class="fa fa-pencil"></i> Edit</a>
+                    <a href="#delete" data-title="Delete article" data-text="Are you sure you want to delete this article?" data-href="{{ path('ed_blog_admin_article_delete', { 'slug' : article.slug }) }}" data-toggle="modal" class="js-delete-object" title="" data-placement="left" data-original-title="Delete"><i class="fa fa-times"></i> Remove</a>
+                  {% endif %}
+                </td>
+            </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="5">
+                {{ knp_pagination_render(pagination) }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>      
+
+  </div>
+
+  {{ include('EDBlogBundle:Modals:remove_article.html.twig') }}
+{% endblock content %}

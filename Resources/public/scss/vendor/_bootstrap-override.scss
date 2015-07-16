@@ -1,0 +1,426 @@
+// forms
+// -------------------------------------------
+[role="form"] {
+    // @extend .margin--reset;
+    @extend .cfov;
+}
+.form-control {
+    @include box-shadow(none !important);
+    padding: 4.5px 10px; // (stupid 30px height in chrome win8)
+    height: auto;
+    border-color: $blue-greyish;
+    font-size: 14px;
+    border-radius: 0;
+    &:focus {
+        border-color: #999;
+    }
+    // Larger (used in login signup)
+    &.form-control--lg {
+        padding: 12px 10px;
+    }
+    &[disabled] {
+        background-color: #fff;
+        opacity: .6;
+    }
+    &[readonly] {
+        background-color: #fff;
+        cursor: text;
+    }
+    // with search icon
+    &.with-search-icon {
+        background-image: image-url('bg-input-search.png');
+        background-position: 98% 50%;
+        background-repeat: no-repeat;
+    }
+    // no border
+    &.no-border {
+        border: 1px solid transparent;
+    }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+input.fill {
+    margin: 0 3px;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid $dark-grey;
+    color: lighten($dark-grey, 20%);
+    font-size: 14px;
+    line-height: 1;
+    &:focus {
+        outline: 0;
+        border-bottom: 1px solid lighten($dark-grey, 20%);
+    }
+}
+// Large form
+.form--lg {
+    .form-control {
+        padding: 10px;
+    }
+    .btn {
+        padding: 14px 25px 13px;
+    }
+}
+
+// Placeholders
+.form-control:-moz-placeholder {
+    color: #999999;
+    font-size: 14px;
+}
+.form-control::-moz-placeholder {
+    color: #999999;
+    font-size: 14px;
+    opacity: 1;
+}
+.form-control:-ms-input-placeholder {
+    color: #999999;
+    font-size: 14px;
+}
+.form-control::-webkit-input-placeholder {
+    color: #999999;
+    font-size: 14px;
+}
+textarea {
+    line-height: normal !important;
+    resize: vertical;
+    overflow: auto;
+}
+button, input[type="submit"] {
+    @extend .noflicker;
+    @include transition(0.1s);
+    &:active,
+    &:focus {
+        outline: none !important;
+    }
+}
+.help-block {
+    @extend .text--mini;
+}
+//  Styling select for chrome and safari
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    select.form-control {
+        cursor: pointer;
+        -webkit-appearance: none;
+        padding-right: 30px !important;
+        background-image: image-url('bg-select.png');
+        background-position: 100% 50%;
+        background-repeat: no-repeat;
+    }
+}
+
+
+// Modal
+// -------------------------------------------
+.modal-backdrop {
+    z-index: 9999999;
+}
+.modal {
+    z-index: 10000000;
+    &--full {
+        padding-left: 0 !important;
+        .modal-dialog {
+            width: 96%;
+            margin-left: auto;
+            margin-right: auto;
+            .modal-body {
+                overflow: auto;
+                border-bottom: solid 1px $light-grey;
+                margin-bottom: 10px;
+            }
+        }
+        .dashboard-content {
+            padding: 0 !important;
+            max-width: 2000px;
+            ul {
+              margin-right: -15px;
+              @include bp(lap) {
+                margin-right: -30px;
+              }
+              .phototiles__iteminner {
+                cursor: pointer;
+              }
+            }
+        }
+    }
+}
+.modal-dialog--movable {
+    transition: margin 0.5s !important;
+}
+.modal-content {
+    background: $lightest-grey;
+    border: 0;
+    border-radius: 0;
+}
+.modal-header {
+    @extend .margin--reset;
+    @extend .por;
+    padding: 5px 15px;
+    border: 0;
+    background: #363c40;
+    color: #f5f5f5;
+    .close {
+        @extend .poa;
+        @extend .text--bold;
+        top: 10px;
+        right: 12px;
+        z-index: 100;
+        color: #fff;
+        opacity: 1;
+        cursor: pointer;
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+.modal-footer {
+    border: 0;
+    margin: 0;
+    padding-top: 0;
+}
+.modal-body.modal-body--plr0 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+// forms in modal
+.modal .form-group:last-child {
+    margin-bottom: 0;
+}
+
+
+// Buttons
+// -------------------------------------------
+.btn {
+    @extend .rounded;
+    @extend .text--upper;
+    @extend .text--bold;
+    @extend .lh1;
+    margin-bottom: 1px;
+    padding: 9px 13px;
+    border: 0;
+    font-size: $base-font-size;
+    strong {
+        font-size: ceil($base-font-size*1.5);
+    }
+    &:last-child {
+        margin-bottom: 1px !important;
+    }
+    .media__body > &:last-child,
+    .flag__body  > &:last-child {
+        margin-bottom: 1px !important;
+    }
+    .roundtable &,
+    .dashboard-content & {
+        @include box-shadow(none);
+        margin-bottom: 0 !important;
+    }
+}
+.btn-sm {
+    padding: 6px 13px;
+}
+// no box shadow
+.btn-noshadow {
+    @include box-shadow(none);
+    &:active {
+        @include box-shadow(none);
+    }
+}
+
+.btn-group {
+    margin-bottom: em(8);
+    &.btn-group--widest {width: 100%;}
+    &:last-child {margin-bottom: 0;}
+}
+// deafult
+.btn-default {
+    @include box-shadow(none);
+    background: transparent none;
+    &:hover {
+        background: transparent none;
+    }
+    &:active {
+        @include box-shadow(none);
+        outline: 0;
+        background-image: none;
+    }
+}
+
+// with normal letters
+.btn-normal {
+    font-weight: normal !important;
+    text-transform: none !important;
+    color: $blue-light;
+    &:hover {
+        color: $dark-grey;
+    }
+}
+
+// primary
+.btn-primary {
+    background-color: $blue-btn;
+    color: white;
+    // roundtable area
+    .roundtable &,
+    .dashboard-content & {
+        background: $blue-btn;
+        color: #fff;
+        &:active,
+        &:focus,
+        &:hover {
+            background: lighten($blue-btn, 6%);
+            color: #fff;
+        }
+    }
+    // END - roundtable area
+    &:hover {
+        background-color: darken($blue-btn, 6%);
+        color: white;
+    }
+}
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+    color: white;
+    background-color: darken($blue-btn, 8%);
+    border-color: $blue-btn;
+}
+
+// primary white
+.btn-primarywhite {
+    background-color: white;
+    color: $app-blue;
+    text-transform: none !important;
+    font-weight: 400 !important;
+    &:hover {
+        background-color: white;
+        color: black;
+    }
+}
+
+/* Bordered */
+// primary blue
+.btn-b-blue {
+    background-color: #c4d9e6;
+    color: #44728d;
+    -webkit-box-shadow: inset 0 0 1px #1b90d4 !important;
+    -moz-box-shadow: inset 0 0 1px #1b90d4 !important;
+    -ms-box-shadow: inset 0 0 1px #1b90d4 !important;
+    box-shadow: inset 0 0 1px #1b90d4 !important;
+    &:hover {
+        background-color: darken(#c4d9e6, 15%);
+        color: #44728d;
+    }
+}
+
+// disabled
+.btn-disabled {
+    color: #abafb2;
+    background: #d1d1d1;
+    &:hover {
+        color: #abafb2;
+        background: #d1d1d1;
+    }
+}
+
+
+
+// wide
+.btn-wide {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
+.btn-wide--xl {
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+}
+
+// btn large
+.btn-lg {
+    padding: 18px;
+    @include bp(tab) {
+        padding: 18px 60px;
+    }
+}
+
+// btn large
+.btn-xlg {
+    padding: 18px;
+    font-size: 16px;
+    @include bp(tab) {
+        padding: 18px 75px;
+    }
+}
+
+// btn md
+.btn-md {
+    padding: 16px 22px;
+}
+
+// Buttons in line, on small resolution placed one above other with correct margins
+.btns-line {
+  .btn {
+    width: 100%;
+    @include bp(tab) {
+      width: auto;
+    }
+  }
+  .btn:not(.first-in-line) {
+    margin-top: 15px;
+    @include bp(tab) {
+      margin-top: inherit;
+    }
+  }
+}
+
+
+// Popovers
+// ------------------------------
+.popover {
+    @include box-shadow(none);
+}
+
+// Tooltips
+// ------------------------------
+.tooltip {
+    @extend .text--nowrap;
+    @extend .text--normal;
+}
+
+
+// Tables
+// ------------------------------
+th {
+    &.v0 { min-width: 100px; }
+    &.v1 { min-width: 140px; }
+    &.v2 { min-width: 200px; }
+}
+td {
+    vertical-align: middle !important;
+    a {
+        display: block;
+    }
+}
+
+
+// Select and option
+option {
+    color: #555555;
+}
+
+.alert-danger {
+  color: #fff;
+  background-color: #f38282;
+  border: 0;
+  @include border-radius(0);
+  padding: 10px;
+  ul {
+    list-style-type: none;  
+    li {
+        text-align: center;
+    }
+  }
+}

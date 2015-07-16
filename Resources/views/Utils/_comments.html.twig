@@ -1,0 +1,14 @@
+<div class="c-dis row margin--tx4"> 
+  <div class="col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 black text--20 text--bold">Comments
+  </div>
+  <div class="col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 black text--20 text--bold"><hr class="margin--nobottom">
+  </div>
+
+  <div class="col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+    <div class="row c-dis__el">
+      {% for comment in comments %}
+        {% include 'EDBlogBundle:Utils:_comment.html.twig' with {'comment': comment} %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+// Footer
+#push {
+    height: 73px; /* 43 + 30 */
+}
+.footer {
+    border-top: solid 1px $light-grey;
+    padding: 12px;
+    height: 43px;
+    z-index: 1;
+    position: relative;
+    margin-top: 30px;
+}

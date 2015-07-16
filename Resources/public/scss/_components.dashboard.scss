@@ -1,0 +1,198 @@
+// Dashboard
+// ---------------------------------------------
+
+// Roundedtable dashboard
+.dashboard-menu {
+    position: relative;
+    background: #5c676e;
+    color: #fff;
+    @include bp(lap) {
+        float: left;
+        width: 220px;
+    }
+    .copyright {
+        position: absolute;
+        @extend .visible--lap;
+        opacity: .3;
+        @extend .text--micro;
+        margin: 0;
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+    }
+}
+.dashboard-menu__logo {
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 13px;
+    line-height: 1;
+    color: #A2A9AE;
+    background: #fff;
+    padding: 15px;
+    border: 2px dashed #b0b2b4;
+    a {
+        @extend .text--normal;
+        letter-spacing: normal;
+        text-transform: none !important;
+        font-size: 12px;
+        display: block;
+        padding-top: 5px;
+    }
+}
+.dashboard-content {
+    padding: 0 15px 15px;
+    max-width: 1685px;
+    @include bp(lap) {
+        overflow: hidden;
+        padding: 0 30px 30px;
+    }
+    &__container {
+        max-width: 1170px;
+        margin: 0 auto;
+    }
+}
+
+// Dashboard menu
+.toggle--dashboard-menu {
+    @extend .text--upper;
+    @extend .text--bold;
+    display: block;
+    padding: 10px 15px;
+    color: #fff;
+    &:hover {
+        background: rgba(#000,.05);
+        color: #fff;
+    }
+    @include bp(lap) {
+        display: none;
+    }
+}
+.dashboard-menu nav {
+  display: none;
+  @include bp(lap) {
+    display: block;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+  }
+  li {
+    @extend .d--b;
+    border-bottom: 1px solid #4c555b;
+  }
+  [class*="fa-"],
+  [class*="fileicon-"],
+  [class*="ion-"] {
+    @include transition(.4s);
+    min-width: 20px;
+  }
+  a {
+    @extend .d--b;
+    color: #fff;
+    padding: 10px 15px 10px 11px;
+    font-style: 14px;
+    border-left: 4px solid transparent;
+  }
+  a:hover {
+    background: rgba(#000,.05);
+  }
+  li.active a {
+    background: #4c555b;
+    border-color: #82c5ed;
+    font-weight: bold;
+  }
+}
+
+// Sections
+.dashboard-sections {
+  list-style: none;
+  overflow: visible;
+  @include bp(lap) {
+    margin: 0 -30px -30px 0;
+    li {
+      float: left;
+      width: 50%;
+      padding: 0 30px 30px 0
+    }
+  }
+  @include bp(desk) {
+    li {
+      width: 33.33%;
+    }
+  }
+  li {
+    margin: 0 0 15px;
+    @include bp(lap) {
+      margin: 0;
+    }
+  }
+  a {
+    @include box-shadow(0 1px 1px rgba(#000,.1));
+    @extend .margin--reset;
+    @extend .d--b;
+    @extend .por;
+    @extend .ovh;
+    padding: 40px 15px; @include bp(lap) {padding: 40px 10px 40px 30px;}
+    background: #fff;
+    color: $dark-grey;
+    border-top: 4px solid transparent;
+    border-color: $blog-blue  !important;
+    h2, h3, h4 {
+      @extend .text--upper;
+      font-style: 24px;
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+    &:hover {
+      @include box-shadow(0 0 15px rgba(#000,.3));
+    }
+  }
+
+  .dashboard__articles,
+  .dashboard__members,
+  .dashboard__categories,
+  .dashboard__tags,
+  .dashboard__comments,
+  .dashboard__media,
+  .dashboard__cogs, {
+    a {
+      border-color: $blog-blue;
+      &:hover {&:after {color: $blog-blue;}}
+    }
+    a:after {
+      content: "\f060";
+      font-family: "FontAwesome";
+      font-size: 100px;
+      position: absolute;
+      bottom: -36px;
+      right: -25px;
+      z-index: 0;
+      opacity: .1;
+    }
+    a:hover {&:after {opacity: .3;}}
+  }
+  .dashboard__articles a {
+    &:after {content: "\f15c"; right: -16px;}
+  }
+  .dashboard__members a {
+    &:after {content: "\f007";}
+  }
+  .dashboard__categories a {
+    &:after {content: "\f03a";}
+  }
+  .dashboard__tags a {
+    &:after {content: "\f02c"; right: -35px;}
+  }
+  .dashboard__comments a {
+    &:after {content: "\f086"; right: -30px;}
+  }
+  .dashboard__media a {
+    &:after {content: "\f03e";}
+  }
+  .dashboard__cogs a {
+    &:after {content: "\f085";}
+  }
+}
+

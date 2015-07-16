@@ -1,0 +1,22 @@
+// Login form
+.login-form {
+  @include bp(lap) {
+    width: 420px;
+    margin: auto;
+  }
+  .form-control {
+    font-size: 14px;
+  }
+  .form-control:-moz-placeholder {
+    font-size: 14px;
+  }
+  .form-control::-moz-placeholder {
+    font-size: 14px;
+  }
+  .form-control:-ms-input-placeholder {
+    font-size: 14px;
+  }
+  .form-control::-webkit-input-placeholder {
+    font-size: 14px;
+  }
+}

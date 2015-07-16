@@ -1,0 +1,37 @@
+//    Sizes
+//============================================================
+
+$base-font-size    : 13px;
+$base-line-height  : 20px;
+$line-height-ratio : $base-line-height / $base-font-size;
+$gutter            : 30px;
+$border-radius     : 2px;
+
+//  UI color scheme
+//============================================================
+//  Brand color
+$brand-color       : #e0e3e5;
+
+//  UI colors
+$dark-grey         : #333;
+$light-grey        : #d0d3d5;
+$lightest-grey     : #f5f5f7;
+
+//EDBlog style
+$blog-blue         : #51a0d0;
+$blog-bg-grey      : #4a4b4b;
+$app-blue          : #36a9ed;
+$app-grey          : #727679;
+$app-light-grey    : #737373;
+$c-grey            : #191919;
+$color-placeholder : #969696;
+
+//  Usual Colors
+$blue              : #3289cd;
+$blue-light        : #85A1B3;
+$blue-greyish      : #B9C3CA;
+$blue-btn          : #6fbae7;
+
+//    Font stacks
+//============================================================
+$sans              : "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;

@@ -1,0 +1,15 @@
+<div class="js-has-crop-media">
+    <div class="js-crop-tools">
+        <a class="btn js-trigger-crop" href="#"><i class="fa fa-crop"></i> Crop</a>
+    </div>
+    {% media media, 'crop' with {'class': 'js-jcrop'} %}
+    <form name="cropMedia" method="post" action="{{ path('ed_blog_admin_media_crop', { 'id': media.id }) }}">
+        <input id="x" type="hidden" name="x" value="">
+        <input id="y" type="hidden" name="y" value="">
+        <input id="w" type="hidden" name="w" value="">
+        <input id="h" type="hidden" name="h" value="">
+        <input id="box-width" type="hidden" name="box-width" value="">
+        <a class="btn btn-info hide js-crop-action-btn js-crop-cancel"> Cancel</a>
+        <button id="crop_image" class="btn btn-info hide js-crop-action-btn"> Apply</button>
+    </form>
+</div>

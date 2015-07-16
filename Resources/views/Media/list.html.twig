@@ -1,0 +1,30 @@
+{% extends 'EDBlogBundle:Layout:blog_admin_main.html.twig' %}
+
+{% block content %}
+    <div class="dashboard-content">
+        <h1 class="text--bold margin--halft margin--b">Media library</h1>
+        <div class="b-upload js-add-media js-trigger-upload-medias">
+            <div class="tabled">
+                <div class="table-cell center">
+                    <i class="fa fa-camera text--kilo d--ib margin--r"></i>
+                    <div class="wording d--ib">
+                        <div class="text--bold ">Upload photos from computer</div>
+                        <div class="text--milli ">File formats allowed: png, jpg, gif</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include "EDBlogBundle:Media:listAjax.html.twig"%}
+    </div>
+    {% include 'EDBlogBundle:Modals:remove_article.html.twig' %}
+    {% include 'EDBlogBundle:Article:upload_form.html.twig' with { 'form_media' : form_media, 'mediaLibrary': true } %}
+{% endblock content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+      $(document).ready(function() {
+        refreshIsotope();
+      });
+    </script>
+{% endblock %}

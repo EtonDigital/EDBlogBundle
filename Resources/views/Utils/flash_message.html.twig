@@ -1,0 +1,42 @@
+{% for flashMessage in app.session.flashbag.get('notice-success') %}
+<div class="container js-notice js-controller">
+  <div class="flash-notice flash-notice--success">
+    <i class="pull-right icon-x" onclick="$('.flash-notice').css('display', 'none')"></i>
+    <div class="message-holder">
+      {{ flashMessage }}
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('notice-error') %}
+<div class="container js-notice js-controller">
+  <div class="flash-notice flash-notice--error">
+    <i class="pull-right icon-x" onclick="$('.flash-notice').css('display', 'none')"></i>
+    <div class="message-holder">
+      {{ flashMessage }}
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('notice-info') %}
+<div class="container js-notice js-controller">
+  <div class="flash-notice flash-notice--info">
+    <i class="pull-right icon-x" onclick="$('.flash-notice').css('display', 'none')"></i>
+    <div class="message-holder">
+      {{ flashMessage }}
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<!-- for js flash  -->
+<div class="container js-notice hidden">
+  <div class="flash-notice">
+    <i class="pull-right icon-x" onclick="$('.flash-notice').css('display', 'none')"></i>
+    <div class="message-holder">
+
+    </div>
+  </div>
+</div>

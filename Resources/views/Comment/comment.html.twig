@@ -1,0 +1,22 @@
+{% if (comment.status == constant('STATUS_ACTIVE', comment)) or (app.user and comment.author == app.user) or (not app.user and isMyComment(comment)) %}
+    <div class="col-sm-3 margin--t">
+        <div class="text--bold c-grey">
+            {% if comment.author %}
+                {{ comment.author.commenterDisplayName }}
+            {% else %}
+                {{ comment.name }}
+            {% endif %}
+        </div>
+        <div class="text--milli app-grey margin--b">{{ comment.createdAt|blogDate }} at {{ comment.createdAt|blogTime }}</div>
+    </div>
+    <div class="col-sm-9 margin--t">
+        {% if comment.status == constant('STATUS_PENDING', comment)  %}
+            {% if (app.user and comment.author == app.user) or (not app.user and isMyComment(comment)) %}
+                <div class="d--b margin--b"><span class="label label-info"> Your comment is awaiting moderation.</span></div>
+            {% endif %}
+        {% endif %}
+        {{ comment.comment |displayLinks|raw }}
+    </div>
+    <div class="col-sm-12 text--20 text--bold margin--t"><hr class="margin--nobottom">
+    </div>
+{% endif %}

@@ -1,0 +1,69 @@
+// When there's just big logo (some simple pages)
+.header--simple {
+    padding: 0;
+    background-color: transparent;
+    text-align: center;
+}
+
+// Roundtable dashboard header
+.header--dashboard {
+    overflow: hidden;
+    background: #000;
+    padding: 8px 15px;
+    a {
+        @extend .text--mini;
+        line-height: 25px;
+        &:hover {color: #fff;}
+    }
+}
+
+// EdBlog application header
+.header--app {
+    overflow: hidden;
+    background: white;
+    padding: 8px 15px;
+    border-bottom: solid 1px #cccfd1;
+    a {
+        font-size: 13px;
+        text-transform: uppercase;
+        line-height: 25px;
+        color: $app-blue;
+        font-weight: bold;
+        @include bp(tab) {
+          margin-left: 20px;
+        }
+        &:hover, &.on, &.active {color: #000;}
+    }
+    img {
+      width: 84px;
+      height: 28px;
+    }
+    &.small-res {
+      padding: 0;
+      a {
+        display: block;
+        padding: 8px 15px;
+        border-top: solid 1px #cccfd1;
+      }
+    }
+}
+
+// Logo
+.logo {
+    display: inline-block;
+    margin: 12px 0 14px 15px;
+    float: left;
+    // for login/register pages:
+    .header--simple & {
+        float: none;
+        margin: 64px 0 20px;
+    }
+    // Roundtable admin dashboard logo
+    .header--dashboard &, .header--app & {
+        margin: 0;
+        color: white;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 13px;
+    }
+}

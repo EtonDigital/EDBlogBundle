@@ -1,0 +1,12 @@
+{% extends 'EDBlogBundle:Layout:blog_admin_main.html.twig' %}
+
+{% block content %}
+  <div class="dashboard-content">
+    <h1 class="text--bold margin--halft margin--b">Categories</h1>
+    <a href="{{ path('ed_blog_category_create') }}" class="btn btn-md btn-primary">Create new category</a>
+
+    {% include "@EDBlog/Taxonomy/Category/listAjax.html.twig" %}
+
+  </div>
+  {{ include('EDBlogBundle:Modals:remove_article.html.twig') }}
+{% endblock content %}

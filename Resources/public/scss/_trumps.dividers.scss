@@ -1,0 +1,51 @@
+//  Dividers
+//  ======================================================// 
+
+//  Margins
+.centered         {margin: 0 auto !important;}
+.margin--no       {margin: 0 !important}
+.margin--notop    {margin-top: 0 !important;}
+.margin--nobottom {margin-bottom: 0 !important;}
+.margin--b        {margin-bottom: 15px !important;}
+.margin--halfb    {margin-bottom: 8px !important;}
+.margin--halft    {margin-top: 8px !important;}
+.margin--t        {margin-top: 15px !important;}
+.margin--doublet  {margin-top: 30px !important;}
+.margin--triplet  {margin-top: 45px !important;}
+.margin--tx4      {margin-top: 60px !important;}
+.margin--tx5      {margin-top: 75px !important;}
+.margin--doubleb,
+.margin--bx2      {margin-bottom: 30px !important;}
+.margin--tripleb  {margin-bottom: 45px !important;}
+.margin--l        {margin-left: 10px !important;}
+.margin--halfll   {margin-left: 5px !important;}
+.margin--r        {margin-right: 10px !important;}
+.margin--halfr    {margin-right: 5px !important;}
+// reset top and bottom marin
+.margin--reset    {
+  & > :first-child{margin-top: 0 !important;}
+  & > :last-child {margin-bottom: 0 !important;}
+}
+
+//  Paddings
+.padding--t                 {padding-top: $base-line-height !important;}
+.padding--b                 {padding-bottom: $base-line-height !important;}
+.padding--top2x             {padding-top: $base-line-height*2 !important;}
+.padding--bot2x             {padding-bottom: $base-line-height*2 !important}
+.padding--top3x             {padding-top: $base-line-height*3 !important;}
+.padding--bot3x             {padding-bottom: $base-line-height*3 !important}
+.padding--top4x             {padding-top: $base-line-height*4 !important;}
+.padding--bot4x             {padding-bottom: $base-line-height*4 !important}
+.padding--vert              {padding-top: $base-line-height*1.4 !important; padding-bottom: $base-line-height*1.4 !important;}
+.padding--vert2x            {padding-top: $base-line-height*2 !important; padding-bottom: $base-line-height*2 !important;}
+.padding--notop             {padding-top: 0 !important;}
+.padding--nobottom          {padding-bottom: 0 !important;}
+.padding--halft             {padding-top: $base-line-height/2 !important;}
+.padding--halfb             {padding-bottom: $base-line-height/2 !important;}
+.padding--no                {padding: 0 !important;}
+.padding--nol, .padding--l0 {padding-left: 0 !important;}
+.padding--nor, .padding--r0 {padding-right: 0 !important;}
+.padding--15px              {padding: 15px !important;}
+.padding--r5px              {padding-right: 5px !important;}
+.padding--l15px             {padding-left: 15px !important;}
+.padding--r15px             {padding-right: 15px !important;}

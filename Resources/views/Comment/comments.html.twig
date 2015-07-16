@@ -1,0 +1,23 @@
+<div class="c-dis row margin--tx4">
+    <div class="col-sm-6 col-md-offset-1 col-md-5 col-lg-offset-2 col-lg-4 black text--20 text--bold">Comments
+    </div>
+    {% if is_granted('ACCESS_COMMENTS_LIST') and is_granted('CREATE_COMMENT') %}
+        <div class="col-sm-6 col-md-5 col-lg-4 black text--mini margin--halft aright--responsive">
+            <a href="#comment-form">Leave comment</a>
+        </div>
+    {% endif %}
+    <div class="col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 black text--20 text--bold"><hr class="margin--nobottom">
+    </div>
+
+    {% if not is_granted('ACCESS_COMMENTS_LIST') %}
+        {% include "@EDBlog/Comment/loginToListComments.html.twig" %}
+    {% else %}
+    <div class="col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+        <div class="row c-dis__el">
+            {% for comment in comments %}
+                {% include 'EDBlogBundle:Comment:comment.html.twig' with {'comment': comment} %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>

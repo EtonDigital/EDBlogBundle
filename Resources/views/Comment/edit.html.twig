@@ -1,0 +1,30 @@
+{% extends 'EDBlogBundle:Layout:blog_admin_main.html.twig' %}
+{% form_theme form '@EDBlog/Global/forms.html.twig' %}
+
+{% block content %}
+    <div class="dashboard-content">
+        <h1 class="text--bold margin--halft margin--b">Edit Comment</h1>
+
+        <form method="post" action="#">
+            {{ form_errors(form) }}
+            {% if not comment.author %}
+            <div>
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name) }}
+                {{ form_errors(form.name) }}
+            </div>
+            {% endif %}
+            <div>
+                {{ form_label(form.comment) }}
+                {{ form_widget(form.comment) }}
+                {{ form_errors(form.comment) }}
+            </div>
+            <div>
+                {{ form_label(form.status) }}
+                {{ form_widget(form.status) }}
+                {{ form_errors(form.status) }}
+            </div>
+            {{ form_rest(form) }}
+        </form>
+    </div>
+{% endblock content %}

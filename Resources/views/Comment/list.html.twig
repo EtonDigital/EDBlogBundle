@@ -1,0 +1,6 @@
+{% if is_granted('ACCESS_COMMENTS') %}
+    <div class="js-comments-content" id="comments">
+        {% include 'EDBlogBundle:Comment:comments.html.twig' %}
+        {% include 'EDBlogBundle:Comment:form.html.twig' %}
+    </div>
+{% endif %}

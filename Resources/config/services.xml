@@ -1,0 +1,161 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Blog Twig extension -->
+        <service id="ed_blog_twig.ed_blog_extension" class="ED\BlogBundle\Twig\EDBlogExtension">
+            <argument type="service" id="doctrine" />
+            <argument type="service" id="app_repository_user"/>
+            <argument type="service" id="app_repository_article"/>
+            <argument type="service" id="session" />
+            <argument type="service" id="blog_settings"/>
+            <argument>%blog_comment_class%</argument>
+            <argument id="ed_blog.handler.blog_user_handler" type="service" />
+            <tag name="twig.extension" />
+        </service>
+
+        <!-- Handlers -->
+        <service id="ed_blog.paginator" class="ED\BlogBundle\Handler\Pagination">
+            <argument type="service" id="knp_paginator"/>
+            <argument type="service" id="templating"/>
+        </service>
+        <service id="ed_media_handler" class="ED\BlogBundle\Handler\MediaHandler">
+            <argument type="service" id="session"/>
+        </service>
+        <service id="blog_settings" class="ED\BlogBundle\Handler\SettingsHandler">
+            <argument type="service" id="doctrine" />
+            <argument>%blog_settings_class%</argument>
+        </service>
+        <service id="ed_blog.handler.blog_user_handler" class="ED\BlogBundle\Handler\BlogUserHandler" >
+        </service>
+        <service id="ed_blog.handler.article_handler" class="ED\BlogBundle\Handler\ArticleHandler" >
+            <argument type="service" id="doctrine"/>
+            <argument>%article_meta_class%</argument>
+        </service>
+
+        <!-- Permission maps-->
+        <service id="ed_blog.acl.permission_map" class="ED\BlogBundle\Security\ACL\PermissionMap">
+        </service>
+        <service id="ed_blog.acl.article_permission_map" class="ED\BlogBundle\Security\ACL\ArticlePermissionMap">
+        </service>
+
+        <!-- Voters -->
+        <service id="ed_blog.authorization_voter.admin_voter" class="ED\BlogBundle\Security\Authorization\Voter\AdminVoter">
+            <argument type="service" id="ed_blog.acl.permission_map" />
+            <tag name="security.voter" />
+        </service>
+        <service id="ed_blog.authorization_voter.blog_voter" class="ED\BlogBundle\Security\Authorization\Voter\BlogVoter">
+            <argument type="service" id="ed_blog.acl.permission_map" />
+            <argument type="service" id="blog_settings" />
+            <tag name="security.voter" />
+        </service>
+        <service id="ed_blog.authorization_voter.article_voter" class="ED\BlogBundle\Security\Authorization\Voter\ArticleVoter">
+            <argument type="service" id="ed_blog.acl.article_permission_map" />
+            <tag name="security.voter" />
+        </service>
+
+        <!-- Object Generator -->
+        <service id="taxonomy_generator" class="ED\BlogBundle\Handler\ObjectGenerator">
+            <argument>%blog_taxonomy_class%</argument>
+            <argument>%article_meta_class%</argument>
+        </service>
+        <service id="term_generator" class="ED\BlogBundle\Handler\ObjectGenerator">
+            <argument>%blog_term_class%</argument>
+            <argument>%article_meta_class%</argument>
+        </service>
+        <service id="article_generator" class="ED\BlogBundle\Handler\ObjectGenerator">
+            <argument>%article_class%</argument>
+            <argument>%article_meta_class%</argument>
+        </service>
+        <service id="comment_generator" class="ED\BlogBundle\Handler\ObjectGenerator">
+            <argument>%blog_comment_class%</argument>
+            <argument>%article_meta_class%</argument>
+        </service>
+
+
+        <!-- Blog Repository services -->
+        <service id="app_repository_article" class="Doctrine\ORM\EntityRepository" factory-service="doctrine.orm.default_entity_manager" factory-method="getRepository">
+            <argument>%article_class%</argument>
+        </service>
+        <service id="app_repository_taxonomy" class="Doctrine\ORM\EntityRepository" factory-service="doctrine.orm.default_entity_manager" factory-method="getRepository">
+            <argument>%blog_taxonomy_class%</argument>
+        </service>
+        <service id="app_repository_comment" class="Doctrine\ORM\EntityRepository" factory-service="doctrine.orm.default_entity_manager" factory-method="getRepository">
+            <argument>%blog_comment_class%</argument>
+        </service>
+        <service id="app_repository_user" class="Doctrine\ORM\EntityRepository" factory-service="doctrine.orm.default_entity_manager" factory-method="getRepository">
+            <argument>%user_model_class%</argument>
+        </service>
+
+        <!-- Blog Forms -->
+        <service id="blog_article_form_type" class="ED\BlogBundle\Forms\ArticleType">
+            <argument>%article_class%</argument>
+            <argument>%user_model_class%</argument>
+            <argument type="service" id="doctrine"/>
+            <argument type="service" id="security.authorization_checker"/>
+            <tag name="form.type" alias="article" />
+        </service>
+        <service id="blog_taxonomy_form_type" class="ED\BlogBundle\Forms\TaxonomyType">
+            <argument>%blog_taxonomy_class%</argument>
+            <tag name="form.type" alias="edtaxonomy" />
+        </service>
+        <service id="blog_tag_form_type" class="ED\BlogBundle\Forms\TagType">
+            <argument>%blog_taxonomy_class%</argument>
+            <tag name="form.type" alias="edtag" />
+        </service>
+        <service id="blog_term_form_type" class="ED\BlogBundle\Forms\TermType">
+            <argument>%blog_term_class%</argument>
+            <tag name="form.type" alias="edterm" />
+        </service>
+        <service id="blog_comment_form_type" class="ED\BlogBundle\Forms\CommentType">
+            <argument>%blog_comment_class%</argument>
+            <tag name="form.type" alias="edcomment" />
+        </service>
+        <service id="blog_comment_moderate_form_type" class="ED\BlogBundle\Forms\CommentModerateType">
+            <argument>%blog_comment_class%</argument>
+            <tag name="form.type" alias="ed_blog_comment" />
+        </service>
+        <service id="blog_import_user_type" class="ED\BlogBundle\Forms\ImportUserType">
+            <argument>%user_model_class%</argument>
+            <argument type="service" id="doctrine"/>
+            <argument type="service" id="ed_blog.handler.blog_user_handler"/>
+            <tag name="form.type" alias="edblog_user_import" />
+        </service>
+        <service id="blog_user_type" class="ED\BlogBundle\Forms\BlogUserType">
+            <argument type="service" id="ed_blog.handler.blog_user_handler" />
+            <tag name="form.type" alias="edblog_user" />
+        </service>
+        <service id="blog_article_meta_type" class="ED\BlogBundle\Forms\ArticleMetaType">
+            <argument>%article_meta_class%</argument>
+            <tag name="form.type" alias="article_meta" />
+        </service>
+
+        <!-- Event Listeners -->
+        <service id="ed.listener.article" class="ED\BlogBundle\Listener\ArticleEventListener">
+            <argument type="service" id="doctrine" />
+            <argument type="service" id="session" />
+            <argument type="service" id="app_repository_taxonomy" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+        <service id="ed.listener.comment" class="ED\BlogBundle\Listener\CommentEventListener">
+            <argument type="service" id="session" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+        <service id="ed.listener.media_library" class="ED\BlogBundle\Listener\MediaLibraryListener">
+            <argument type="service" id="doctrine" />
+            <argument type="service" id="sonata.media.manager.gallery" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <!-- ED Parameter Converters -->
+        <service id="abstract_converter" class="ED\BlogBundle\Converter\AbstractConverter">
+            <argument>%ed_blog.resolve_target_entities.config%</argument>
+            <argument type="service" id="doctrine"/>
+            <tag name="request.param_converter" priority="-2" converter="abstract_converter" />
+        </service>
+    </services>
+
+</container>

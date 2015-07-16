@@ -1,0 +1,37 @@
+// Toggles
+// used everywhere
+.toggle--close {
+  position: absolute;
+  top: 5px;
+  right: 9px;
+  color: #999;
+  &:hover {color: #333;}
+}
+// EB 
+.toggle--remove {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: $blog-bg-grey;
+  color: white;
+  border-radius: 100%;
+  line-height: 20px;
+  text-align: center;
+  top: 3px;
+  right: 3px;
+  &:hover, &:active, &:focus {color: white;}
+}
+.toggle--selected {
+  display: none;
+  z-index: 10;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: $blue-btn;
+  color: white;
+  line-height: 25px;
+  text-align: center;
+  top: -2px;
+  left: -2px;
+  &:hover, &:active, &:focus {color: white;}
+}

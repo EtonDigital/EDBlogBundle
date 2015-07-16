@@ -1,0 +1,25 @@
+{% from '@EDBlog/Global/Macro/tables.html.twig' import sortableTh  %}
+
+<div class="table-responsive margin--t">
+    {% if pagination|length %}
+    <table class="table horizontal  striped  vam  js-roundtable-members">
+        <thead>
+        <tr>
+            {{ sortableTh('Title', 'title', 'ed_blog_tag_list', 'v2', orderBy, order) }}
+            {{ sortableTh('Slug', 'slug', 'ed_blog_tag_list', 'v0', orderBy, order) }}
+            {{ sortableTh('Description', 'description', 'ed_blog_tag_list', 'v2', orderBy, order) }}
+            {{ sortableTh('Articles Count', 'count', 'ed_blog_tag_list', 'v1', orderBy, order) }}
+            <th class="v1">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for taxonomy in pagination %}
+                {% include "@EDBlog/Taxonomy/Tag/listAjaxElement.html.twig" with { 'taxonomy': taxonomy} %}
+            {% endfor %}
+            {{ knp_pagination_render(pagination) }}
+        </tbody>
+    </table>
+    {% else %}
+        There are no available categories yet.
+    {% endif %}
+</div>

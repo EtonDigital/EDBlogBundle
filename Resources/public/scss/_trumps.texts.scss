@@ -1,0 +1,70 @@
+//  Text classes
+//  ======================================================// 
+.text--dark       {color: $dark-grey !important;}
+.text--blue,
+.text--action     {color: $blue !important;}
+.text--bluegrey   {color: $blue-light !important;}
+.text--white      {color: #fff !important;}
+.text--highlight  {background: #ff6 !important; padding: 0 2px !important;}
+.text--upper      {text-transform: uppercase !important;}
+.text--lower      {text-transform: lowercase !important;}
+.text--ttnone     {text-transform: none !important;}
+.text--sans       {font-family: $sans !important;}
+.text--italic     {font-style: italic !important;}
+.text--nowrap     {white-space: nowrap !important;}
+.text--thinnest   {font-weight: 200 !important}
+.text--thin       {font-weight: 300 !important}
+.text--normal     {font-weight: 400 !important}
+.text--thick      {font-weight: 600 !important}
+.text--bold       {font-weight: 700 !important}
+.text--bolder     {font-weight: 800 !important}
+.text--boldest    {font-weight: 900 !important}
+
+.text--lsp        {letter-spacing: .2em !important;}
+.text--lspn       {letter-spacing: normal !important;}
+
+// text sizes
+.text--giga       {font-size: 96px !important;}
+.text--mega       {font-size: 72px !important;}
+.text--megasm     {font-size: 60px !important;}
+.text--kilo       {font-size: 48px !important;}
+.text--64         {font-size: 64px !important;}
+.text--32         {font-size: 32px !important;}
+.text--30         {font-size: 30px !important;}
+.text--20         {font-size: 20px !important;}
+.text--18         {font-size: 18px !important;}
+.text--16         {font-size: 16px !important;}
+.text--15         {font-size: 15px !important;}
+.text--14         {font-size: 14px !important;}
+
+.text--h0         {font-size: 2.8em !important;}
+.text--h1         {font-size: 2.3em !important;}
+.text--h2         {font-size: 2.2em !important;}
+.text--h3         {font-size: 1.8em !important;}
+.text--h4         {font-size: 1.5em !important;}
+.text--h5         {font-size: 1.2em !important;}
+.text--h6         {font-size: 1em !important;}
+
+.text--default    {font-size: $base-font-size !important;}
+.text--mini       {font-size: 13px !important;}
+.text--milli      {font-size: 12px !important;}
+.text--11         {font-size: 11px !important;}
+.text--micro      {font-size: 10px !important;}
+
+// spec
+.text--nobreak    {word-break: normal !important;}
+.word-break {
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+// Alignment
+.center           {text-align: center !important;}
+.aleft            {text-align: left !important;}
+.aright           {text-align: right !important;}
+.aright--responsive {
+  text-align: left !important;
+  @include bp(lap) {
+    text-align: right !important;
+  }
+}

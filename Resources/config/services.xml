@@ -94,6 +94,7 @@
         <service id="blog_article_form_type" class="ED\BlogBundle\Forms\ArticleType">
             <argument>%article_class%</argument>
             <argument>%user_model_class%</argument>
+            <argument>%blog_taxonomy_class%</argument>
             <argument type="service" id="doctrine"/>
             <argument type="service" id="security.authorization_checker"/>
             <tag name="form.type" alias="article" />

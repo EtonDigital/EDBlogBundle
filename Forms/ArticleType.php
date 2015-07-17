@@ -25,13 +25,13 @@ class ArticleType extends AbstractType
     protected $authorizationChecker;
     protected $taxonomyClass;
 
-    function __construct($dataClass, $userClass, $entityManager, AuthorizationChecker $authorizationChecker, $taxonomyClass)
+    function __construct($dataClass, $userClass, $taxonomyClass, $entityManager, AuthorizationChecker $authorizationChecker)
     {
         $this->dataClass = $dataClass;
         $this->entityManager = $entityManager;
         $this->userClass = $userClass;
-        $this->authorizationChecker = $authorizationChecker;
         $this->taxonomyClass = $taxonomyClass;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

@@ -28,6 +28,14 @@ class BlogUserType extends AbstractType
     {
 
            $builder
+               ->add('blogDisplayName', 'text', array(
+                   'label' => 'Display Name:',
+                   'data' => isset($options['data']['blogDisplayName']) ? $options['data']['blogDisplayName'] : null,
+                   'attr' => array(
+                       'class' => 'form-control form-control--lg margin--b',
+                       'placeholder' => 'Enter blog user name'
+                   )
+               ))
                ->add('role', 'choice', array(
                 'label' => 'Roles?',
                 'expanded' => true,

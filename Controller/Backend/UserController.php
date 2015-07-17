@@ -109,7 +109,10 @@ class UserController extends DefaultController
             throw new NotFoundHttpException("Sorry, user not found");
         }
 
-        $form = $this->createForm('edblog_user', array( 'role' => $this->getDefaultBlogRole($user)));
+        $form = $this->createForm('edblog_user', array(
+            'role' => $this->getDefaultBlogRole($user),
+            'blogDisplayName' => $user->getBlogDisplayName()
+        ));
 
         if($request->isMethod('post'))
         {
@@ -119,6 +122,7 @@ class UserController extends DefaultController
             {
                 $this->get('ed_blog.handler.blog_user_handler')->revokeBlogRoles($user);
                 $user
+                    ->setBlogDisplayName( $form['blogDisplayName']->getData() )
                     ->addRole('ROLE_BLOG_USER')
                     ->addRole( $form['role']->getData() );
 

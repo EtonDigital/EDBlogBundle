@@ -7,12 +7,10 @@
 
         <form action="{{ path('ed_blog_user_edit', { 'username' : user.username}) }}" method="post">
             {{ form_errors(form) }}
-
             <div>
-                <div>
-                    <label>Blog user:</label>
-                    <div class="form-control form-control--lg margin--b form-control-static">{{ user.commenterDisplayName }}</div>
-                </div>
+                {{ form_label(form.blogDisplayName) }}
+                {{ form_widget(form.blogDisplayName) }}
+                {{ form_errors(form.blogDisplayName) }}
             </div>
             <div>
                 {{ form_label(form.role) }}

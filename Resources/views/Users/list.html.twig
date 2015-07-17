@@ -13,7 +13,7 @@
                     <thead>
                     <tr>
                         {{ sortableTh('Username', 'username', 'ed_blog_user_list', 'v1', orderBy, order) }}
-                        {{ sortableTh('Name', 'name', 'ed_blog_user_list', 'v1', orderBy, order) }}
+                        {{ sortableTh('Name', 'blogDisplayName', 'ed_blog_user_list', 'v1', orderBy, order) }}
                         {{ sortableTh('E-mail', 'email', 'ed_blog_user_list', 'v1', orderBy, order) }}
                         {{ sortableTh('Role', 'role', 'ed_blog_user_list', 'v1', orderBy, order) }}
                         {{ sortableTh('Posts', 'posts', 'ed_blog_user_list', 'v1', orderBy, order) }}
@@ -31,7 +31,7 @@
                               {{ user.username }}
                           </td>
                           <td>
-                              {{ user.profile.firstName }} {{ user.profile.lastName }}
+                              {{ user.blogDisplayName }}
                           </td>
                           <td>
                               {{ user.email }}

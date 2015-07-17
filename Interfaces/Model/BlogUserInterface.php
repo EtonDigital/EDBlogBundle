@@ -11,5 +11,5 @@ namespace ED\BlogBundle\Interfaces\Model;
 
 interface BlogUserInterface
 {
-    public function getArticleAuthor();
+    public function getBlogDisplayName();
 }

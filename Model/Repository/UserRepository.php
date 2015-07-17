@@ -42,13 +42,6 @@ class UserRepository extends EntityRepository implements BlogUserRepositoryInter
         if($orderBy && $order)
         {
             switch ($orderBy) {
-                case 'name':
-                    $query
-                        ->innerJoin('u.profile', 'p')
-                        ->orderBy('p.firstName', $order)
-                        ->addOrderBy('p.lastName', $order);
-
-                    break;
                 case 'role':
                     $query
                         ->addSelect('

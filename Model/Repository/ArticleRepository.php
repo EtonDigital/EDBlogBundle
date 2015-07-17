@@ -168,8 +168,9 @@ class ArticleRepository extends EntityRepository implements ArticleRepositoryInt
 
     public function getYearsMonthsOfArticles()
     {
+        $tableName = $this->getClassMetadata()->table['name'];
         $sql = "SELECT YEAR(published_at) as year, MONTH(published_at) as month, COUNT(*) as num
-                FROM ed_article
+                FROM $tableName
                 WHERE status = 'published'
                 GROUP BY YEAR(published_at), MONTH(published_at)
                 ORDER BY year DESC, month DESC";

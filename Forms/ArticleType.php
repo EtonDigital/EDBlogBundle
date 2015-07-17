@@ -137,7 +137,7 @@ class ArticleType extends AbstractType
                     'attr' => array(
                         "class" => "form-control form-control--lg margin--halfb",
                     ),
-                    'data' => $object->getParent()->getStatus()
+                    'data' => $object->getParent() ? $object->getParent()->getStatus() : Article::STATUS_DRAFTED
                 ));
         }
 

@@ -32,18 +32,24 @@ class ArticleVoter implements VoterInterface
 
     public function supportsClass($class)
     {
-        if($class && $class)
+        try
         {
-            $classNameArray = explode('\\', $class);
-            $className = $classNameArray[ count($classNameArray)-1 ];
+            $testObject = new $class();
 
-            if( $className == 'Article')
+            if ($testObject instanceof ArticleInterface)
             {
                 return true;
             }
+            else
+            {
+                return false;
+            }
+        }
+        catch(\Exception $e)
+        {
+            return false;
         }
 
-        return false;
     }
 
     public function vote(TokenInterface $token, $object, array $attributes)
@@ -107,7 +113,11 @@ class ArticleVoter implements VoterInterface
             {
                 $testObject = $object->getParent() ? $object->getParent() : $object;
 
-                if($testObject->getStatus() != Article::STATUS_PUBLISHED || $user->hasRole('ROLE_BLOG_CONTRIBUTOR'))
+                if($user->hasRole('ROLE_BLOG_CONTRIBUTOR'))
+                {
+                    return self::ACCESS_DENIED;
+                }
+                elseif( $testObject && $testObject->getStatus() == Article::STATUS_PUBLISHED )
                 {
                     return self::ACCESS_DENIED;
                 }

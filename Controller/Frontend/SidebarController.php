@@ -8,9 +8,12 @@ class SidebarController extends Controller
 {
     public function blogListAction()
     {
-          $categories=$this->getDoctrine()->getManager()->getRepository('AppBundle:Taxonomy')->getAllParentCategories();
-          $archiveYearsMonths=$this->getDoctrine()->getManager()->getRepository('AppBundle:Article')->getYearsMonthsOfArticles();
+          $categories = $this->get('app_repository_taxonomy')->getAllParentCategories();
+          $archiveYearsMonths = $this->get('app_repository_article')->getYearsMonthsOfArticles();
 
-          return $this->render('EDBlogBundle:Frontend/Blog:blog_sidebar.html.twig', array( 'categories' => $categories,'archive' => $archiveYearsMonths ));
+          return $this->render('EDBlogBundle:Frontend/Blog:blog_sidebar.html.twig', array(
+              'categories' => $categories,
+              'archive' => $archiveYearsMonths
+          ));
     }
 }

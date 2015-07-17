@@ -23,19 +23,21 @@ class ArticleType extends AbstractType
     protected $userClass;
     protected $entityManager;
     protected $authorizationChecker;
+    protected $taxonomyClass;
 
-    function __construct($dataClass, $userClass, $entityManager, AuthorizationChecker $authorizationChecker)
+    function __construct($dataClass, $userClass, $entityManager, AuthorizationChecker $authorizationChecker, $taxonomyClass)
     {
         $this->dataClass = $dataClass;
         $this->entityManager = $entityManager;
         $this->userClass = $userClass;
         $this->authorizationChecker = $authorizationChecker;
+        $this->taxonomyClass = $taxonomyClass;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $object = $builder->getData();
-        $tagTransformer = new TagsToTextTransformer($this->entityManager->getManager());
+        $tagTransformer = new TagsToTextTransformer($this->entityManager->getManager(), $this->taxonomyClass);
         $photoTransformer = new PhotoToIdTransformer($this->entityManager->getManager());
 
         $builder
@@ -74,7 +76,7 @@ class ArticleType extends AbstractType
                     )
                 ))
             ->add('categories', 'entity', array(
-                'class' => 'AppBundle:Taxonomy',
+                'class' => $this->taxonomyClass,
                 'required' => false,
                 'expanded' => true,
                 'multiple' => true,

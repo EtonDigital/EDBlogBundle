@@ -14,18 +14,17 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
- * @TODO Transformer should not be dependant from AppBundle:Taxonomy
- *
  * Class TagsToTextTransformer
- * @package AppBundle\Transformers
  */
 class TagsToTextTransformer implements DataTransformerInterface
 {
     private $om;
+    private $taxonomyClass;
 
-    function __construct(ObjectManager $om)
+    function __construct(ObjectManager $om, $taxonomyClass)
     {
         $this->om = $om;
+        $this->taxonomyClass = $taxonomyClass;
     }
 
 
@@ -107,7 +106,7 @@ class TagsToTextTransformer implements DataTransformerInterface
         {
             $tagArray = explode(',', $value);
 
-            $tags = $this->om->getRepository('AppBundle:Taxonomy')->getTagByTitles($tagArray);
+            $tags = $this->om->getRepository($this->taxonomyClass)->getTagByTitles($tagArray);
 
             $collection = new ArrayCollection($tags);
 

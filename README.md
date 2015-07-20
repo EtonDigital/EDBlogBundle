@@ -42,3 +42,29 @@ If you already don't have composer installed, you can get it using:
 Then you can require following packages:
      
     $ composer require friendsofsymfony/user-bundle:"~2.0@dev" eko/feedbundle:dev-master ed/blog-bundle:dev-master@dev
+
+Activate newly required bundles in AppKernel.php similar to this example:
+
+    //app/Kernel.php
+    class AppKernel extends Kernel
+    {
+        public function registerBundles()
+        {
+            $bundles = array(
+                // ...
+                new FOS\UserBundle\FOSUserBundle(),	
+                new ED\BlogBundle\EDBlogBundle(),
+                new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+                new Sonata\CoreBundle\SonataCoreBundle(),
+                new Sonata\MediaBundle\SonataMediaBundle(),
+                new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+                new JMS\SerializerBundle\JMSSerializerBundle(),
+                new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+                new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+                new Eko\FeedBundle\EkoFeedBundle(),
+                //new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(), //will be generated later	
+            );
+
+            // ...
+        }
+    }

@@ -15,7 +15,7 @@ class BlogUserHandler
     public function getBlogRolesArray()
     {
         return array(
-            'ROLE_BLOG_ADMINISTRATOR' => 'Administrator',
+            'ROLE_BLOG_ADMIN' => 'Administrator',
             'ROLE_BLOG_EDITOR' => 'Editor',
             'ROLE_BLOG_AUTHOR' => 'Author',
             'ROLE_BLOG_CONTRIBUTOR' => 'Contributor'
@@ -28,7 +28,7 @@ class BlogUserHandler
 
         if($user->hasRole('ROLE_BLOG_ADMIN'))
         {
-            return 'ROLE_BLOG_ADMINISTRATOR';
+            return 'ROLE_BLOG_ADMIN';
         }
         elseif($user->hasRole('ROLE_BLOG_EDITOR'))
         {

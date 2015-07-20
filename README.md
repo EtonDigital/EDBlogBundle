@@ -133,8 +133,9 @@ Step 3: Creating blog related entities from provided model
 
 To be able to use EDBlog features you must implement certain entities somewhere inside your application. It will be very easy, only thing that you should do is to create relevant classes and extend our prepared models.
 
-3.1 Article entity:
-Create your article entity similar to this example:
+3.1 Article entity
+
+Create your Article entity similar to this example:
      
             //src/Acme/DemoBundle/Entity/Article.php
             namespace Acme\Bundle\DemoBundle\Entity; 
@@ -152,8 +153,9 @@ Create your article entity similar to this example:
             {
             }
         
-3.2 ArticleMeta entity:
-Create your article entity similar to this example:
+3.2 ArticleMeta entity
+
+Create your ArticleMeta entity similar to this example:
         
             //src/Acme/DemoBundle/Entity/ArticleMeta.php
             namespace Acme\Bundle\DemoBundle\Entity; 
@@ -169,3 +171,23 @@ Create your article entity similar to this example:
             class ArticleMeta extends BaseArticleMeta implements ArticleMetaInterface
             {
             }
+            
+3.3 Comment entity
+
+Create your Comment entity similar to this example:
+            
+            //src/Acme/DemoBundle/Entity/Comment.php
+            namespace Acme\Bundle\DemoBundle\Entity; 
+            
+            use ED\BlogBundle\Interfaces\Model\CommentInterface;
+            use ED\BlogBundle\Model\Entity\Comment as BaseComment;
+            use Doctrine\ORM\Mapping as ORM;
+
+            /**
+             * @ORM\Table(name="acme_demo_comment")
+             * @ORM\HasLifecycleCallbacks
+             * @ORM\Entity(repositoryClass="ED\BlogBundle\Model\Repository\CommentRepository")
+             */
+            class Comment extends BaseComment implements CommentInterface
+            {
+            }            

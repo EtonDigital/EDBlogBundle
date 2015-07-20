@@ -127,3 +127,47 @@ Finally we should create local directory for media storage:
     $ mkdir web/uploads
     $ mkdir web/uploads/media
     $ sudo chmod -R 0777 web/uploads
+    
+Step 3: Creating blog related entities from provided model
+==========================================================
+
+To be able to use EDBlog features you must implement certain entities somewhere inside your application. It will be very easy, only thing that you should do is to create relevant classes and extend our prepared models.
+
+ 3.1 Article entity:
+ 
+    Create your article entity similar to this example:
+     
+        //src/Acme/DemoBundle/Entity/Article.php
+        namespace Acme\Bundle\DemoBundle\Entity; 
+        
+        use ED\BlogBundle\Interfaces\Model\ArticleInterface;
+        use ED\BlogBundle\Model\Entity\Article as BaseArticle;
+        use Doctrine\ORM\Mapping as ORM;
+    
+        /**
+         * @ORM\Table(name="acme_demo_article")
+         * @ORM\HasLifecycleCallbacks
+         * @ORM\Entity(repositoryClass="ED\BlogBundle\Model\Repository\ArticleRepository")
+         */
+        class Article extends BaseArticle implements ArticleInterface
+        {
+        }
+        
+ 3.2 ArticleMeta entity:
+ 
+    Create your article entity similar to this example:
+        
+        //src/Acme/DemoBundle/Entity/ArticleMeta.php
+        namespace Acme\Bundle\DemoBundle\Entity; 
+        
+        use ED\BlogBundle\Interfaces\Model\ArticleMetaInterface;
+        use ED\BlogBundle\Model\Entity\ArticleMeta as BaseArticleMeta;
+        use Doctrine\ORM\Mapping as ORM;
+
+        /**
+         * @ORM\Table(name="acme_demo_article_meta")
+         * @ORM\Entity()
+         */
+        class ArticleMeta extends BaseArticleMeta implements ArticleMetaInterface
+        {
+        }

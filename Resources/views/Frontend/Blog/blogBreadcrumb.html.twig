@@ -11,7 +11,7 @@
             {% elseif (criteria.type == 'tag') %}
                 {{ criteria.type }}: {{ criteria.value.Term.title}}
             {% elseif (criteria.type == 'author') %}
-                {{ criteria.type }}: {{ criteria.value.profile.firstname}} {{ criteria.value.profile.lastname}}
+                {{ criteria.type }}: {{ criteria.value.blogDisplayName}}
             {% elseif (criteria.type == 'archive') %}
                 {{ criteria.type }}: {{ criteria.value.year }} {{ getMonth(criteria.value.month)}}
             {% endif  %}

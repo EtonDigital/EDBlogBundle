@@ -17,7 +17,7 @@
       <div class="col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 table-rework">
         <div class="text--30 text--bold black margin--tx4 margin--halfb lh32">{{ article.title }}</div>
 
-        <p class="text--mini app-grey">By <a href="{{ path('blogs_by_author', {'username': article.author.username}) }}">{{ article.author.profile.firstname }} {{ article.author.profile.lastname }}</a> on {{ article.publishedAt|blogDate}}
+        <p class="text--mini app-grey">By <a href="{{ path('blogs_by_author', {'username': article.author.username}) }}">{{ article.author.blogDisplayName }}</a> on {{ article.publishedAt|blogDate}}
           {% if (article.categories|length) %}
           in {%  for category in article.categories %}
                {{ loop.index0 ? ', ' }}<a href="{{ path('blogs_by_category', {'categorySlug': category.term.slug}) }}" >{{ category.term.title }}</a>

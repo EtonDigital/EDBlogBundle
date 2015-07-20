@@ -11,7 +11,7 @@
             <div class="text--30 text--bold black lh30 margin--halft margin--halfb">{{ article.title }}</div>
           </div>
 
-          <p class="text--mini app-grey">By <a href="#">{{ article.author.profile.firstname }} {{ article.author.profile.lastname }}</a> on {{ article.publishedAt|blogDate}}
+          <p class="text--mini app-grey">By <a href="#">{{ article.author.blogDisplayName }}</a> on {{ article.publishedAt|blogDate}}
             {% if (article.categories|length) %}
                 in {%  for category in article.categories %}
                     {{ loop.index0 ? ', ' }}<a href="{{ path('ed_blog_category_edit', { 'slug': category.term.slug }) }}" >{{ category.term.title }}</a>
@@ -27,14 +27,6 @@
                 </p>
             {% endif  %}
           </p>
-          {#
-          <p class="text--18 app-light-grey text--thin">{{ article.excerpt }}</p>
-
-          <p>
-            {% media article.excerptPhoto, 'excerpt' with {'class': 'centered img--auto d--b'} %}
-            <span class="d--b margin--halft app-grey text--mini text--italic">This should be optional text related to excerpt photo</span>
-          </p>
-           #}
           <p>{{ article.content|raw }}</p>
         </div>
       </div>

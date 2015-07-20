@@ -27,8 +27,14 @@ Installation:
 -------------
 
 Installation process includes following steps:
- 1. Composer vendors installation and activation in Symfony2 kernel
+ 1. Composer vendors installation and activation
  2. SonataMediaBundle installation and configuration
  3. Creating blog related entities from provided model
  4. Rutes configuration
  5. Assetic configuration
+ 
+Step 1: Composer vendors installation and activation
+====================================================
+.. code-block:: bash
+
+    $ composer require friendsofsymfony/user-bundle:"~2.0@dev" eko/feedbundle:dev-master ed/blog-bundle:dev-master@dev

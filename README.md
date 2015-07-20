@@ -35,6 +35,10 @@ Installation process includes following steps:
  
 Step 1: Composer vendors installation and activation
 ====================================================
-.. code-block:: bash
+If you already don't have composer installed, you can get it using:
 
+    $ wget http://getcomposer.org/composer.phar
+
+Then you can require following packages:
+     
     $ composer require friendsofsymfony/user-bundle:"~2.0@dev" eko/feedbundle:dev-master ed/blog-bundle:dev-master@dev

@@ -156,8 +156,10 @@ Create your Article entity similar to this example:
 3.2 ArticleMeta entity
 
 Create your ArticleMeta entity similar to this example:
-        
+            
+            <?php        
             //src/Acme/DemoBundle/Entity/ArticleMeta.php
+            
             namespace Acme\Bundle\DemoBundle\Entity; 
             
             use ED\BlogBundle\Interfaces\Model\ArticleMetaInterface;
@@ -175,7 +177,9 @@ Create your ArticleMeta entity similar to this example:
 3.3 Comment entity
 
 Create your Comment entity similar to this example:
-        
+
+.. code-block:: php
+
             <?php
             //src/Acme/DemoBundle/Entity/Comment.php
             

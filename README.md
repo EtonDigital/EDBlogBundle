@@ -121,3 +121,9 @@ Add following configuration to your config.yml:
         local:
             directory:  %kernel.root_dir%/../web/uploads/media
             create:     false
+            
+Finally we should create local directory for media storage:
+
+    $ mkdir web/uploads
+    $ mkdir web/uploads/media
+    $ sudo chmod -R 0777 web/uploads

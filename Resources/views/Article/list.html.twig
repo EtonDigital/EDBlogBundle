@@ -24,7 +24,7 @@
           {% for article in pagination %}
             <tr>
               <td><a href="{{ path('ed_blog_admin_article_edit', { 'slug' : article.slug  }) }}">{{ article.title }}</a></td>
-              <td>{{ article.author.profile.firstName }} {{ article.author.profile.lastName }} {# {% autoescape false %}{{ article.excerpt }}{% endautoescape %} #}</td>
+              <td>{{ article.author.blogDisplayName }}</td>
               <td>
                   {% if(article.status == constant('STATUS_PUBLISHED', article)) %}
                       {{article.publishedAt |date('d M Y H:i:s')}}

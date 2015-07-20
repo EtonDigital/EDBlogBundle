@@ -69,13 +69,7 @@ class EDBlogExtension extends Extension implements PrependExtensionInterface
                     )
                 )
             );
-            foreach ($container->getExtensions() as $name => $extension) {
-                switch ($name) {
-                    case 'doctrine':
-                        $container->prependExtensionConfig($name, $forInsertion);
-                        break;
-                }
-            }
+
             $container->setParameter('user_model_class', $config['entities']['user_model_class']);
             $container->setParameter('article_class', $config['entities']['article_class']);
             $container->setParameter('blog_comment_class', $config['entities']['blog_comment_class']);
@@ -85,6 +79,36 @@ class EDBlogExtension extends Extension implements PrependExtensionInterface
             $container->setParameter('blog_term_class', $config['entities']['blog_term_class']);
             $container->setParameter('ed_blog.resolve_target_entities.config', $edTargetEntities);
 
+        }
+
+        if(isset($bundles['StofDoctrineExtensionBundle'])) {
+            $configs = $container->getExtensionConfig($this->getAlias());
+            $config = $this->processConfiguration(new Configuration(), $configs);
+
+            $stofConfigInsertation = array(
+                'orm' => array(
+                    'default' => array(
+                        'sluggable' => true
+                    )
+                )
+            );
+
+        }
+
+
+        foreach ($container->getExtensions() as $name => $extension) {
+            switch ($name) {
+                case 'doctrine':
+                    if(isset($forInsertion)) {
+                        $container->prependExtensionConfig($name, $forInsertion);
+                    }
+                    break;
+                case 'stof_doctrine_extensions':
+                    if(isset($stofConfigInsertation)){
+                        $container->prependExtensionConfig($name, $stofConfigInsertation);
+                    }
+                    break;
+            }
         }
     }
 

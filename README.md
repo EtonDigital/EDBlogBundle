@@ -27,8 +27,8 @@ Installation:
 -------------
 
 Installation process includes following steps:
-1. Composer vendors installation and activation in Symfony2 kernel
-2. SonataMediaBundle installation and configuration
-3. Creating blog related entities from provided model
-4. Rutes configuration
-5. Assetic configuration
+ 1. Composer vendors installation and activation in Symfony2 kernel
+ 2. SonataMediaBundle installation and configuration
+ 3. Creating blog related entities from provided model
+ 4. Rutes configuration
+ 5. Assetic configuration

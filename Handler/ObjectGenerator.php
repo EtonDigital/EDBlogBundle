@@ -138,7 +138,7 @@ class ObjectGenerator
             //add new metaData
             foreach($src->getMetaData() as $srcMeta)
             {
-                if($destination->hasMetaData($srcMeta) === false)
+                if($destination->hasMetaData($srcMeta) === false && $srcMeta->getKey()!= 'writing_locked')
                 {
                     $destMeta = $destination->getMetaByKey($srcMeta->getKey() );
 

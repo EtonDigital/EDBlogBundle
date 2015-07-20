@@ -76,7 +76,7 @@ Next, we will install and configure media management core. Please generate Appli
     
     $ php app/console sonata:easy-extends:generate --dest=src SonataMediaBundle
     
-Now you can include ApplicationSonataMediaBundle in AppKernel by uncommenting or adding this line:
+Now you can include ApplicationSonataMediaBundle in ``app/AppKernel.php`` by uncommenting or adding this line:
 
     //app/Kernel.php
     class AppKernel extends Kernel
@@ -175,7 +175,9 @@ Create your ArticleMeta entity similar to this example:
 3.3 Comment entity
 
 Create your Comment entity similar to this example:
-            php
+        
+        .. code-block:: php
+        
             //src/Acme/DemoBundle/Entity/Comment.php
             
             namespace Acme\Bundle\DemoBundle\Entity; 

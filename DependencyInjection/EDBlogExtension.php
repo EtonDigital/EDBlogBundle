@@ -81,7 +81,7 @@ class EDBlogExtension extends Extension implements PrependExtensionInterface
 
         }
 
-        if(isset($bundles['StofDoctrineExtensionBundle'])) {
+        if(isset($bundles['StofDoctrineExtensionsBundle'])) {
             $configs = $container->getExtensionConfig($this->getAlias());
             $config = $this->processConfiguration(new Configuration(), $configs);
 

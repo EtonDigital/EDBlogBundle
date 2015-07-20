@@ -133,7 +133,7 @@ Step 3: Creating blog related entities from provided model
 
 To be able to use EDBlog features you must implement certain entities somewhere inside your application. It will be very easy, only thing that you should do is to create relevant classes and extend our prepared models.
 
- 3.1 Article entity:
+    3.1 Article entity:
  
     Create your article entity similar to this example:
      
@@ -153,7 +153,7 @@ To be able to use EDBlog features you must implement certain entities somewhere 
         {
         }
         
- 3.2 ArticleMeta entity:
+    3.2 ArticleMeta entity:
  
     Create your article entity similar to this example:
         

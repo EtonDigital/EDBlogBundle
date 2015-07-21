@@ -103,7 +103,7 @@ class AppKernel extends Kernel
 Add following configuration to your config.yml:
 
 ```yml
-//app/config/config.yml
+ # app/config/config.yml
 
 sonata_media:
     default_context: default
@@ -166,6 +166,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Article extends BaseArticle implements ArticleInterface
 {
 }
+```
         
 ###3.2 ArticleMeta entity
 

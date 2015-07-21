@@ -33,6 +33,7 @@ Installation process includes following steps:
  4. EDBlogBundle configuration
  5. Rutes configuration
  6. Assetic configuration
+ 7. Finish
  
 Step 1: Composer vendors installation and activation
 ====================================================
@@ -313,7 +314,10 @@ class Term extends BaseTerm implements BlogTermInterface
 ###3.7 User entity
 
 To be able to use EDBlogBundle your User entity should implement two interfaces: BlogUserInterface and ArticleCommenterInterface. Modify your User entity something similar to the following example.
-__Note.__  Find more about FOSUser integration on https://github.com/FriendsOfSymfony/FOSUserBundle/blob/1.2.0/Resources/doc/index.md
+
+**Note:**  
+
+> Find more about FOSUser integration on https://github.com/FriendsOfSymfony/FOSUserBundle/blob/1.2.0/Resources/doc/index.md
 
 ```php
 <?php
@@ -375,7 +379,7 @@ class AppUserRepository extends BaseUserRepository implements BlogUserRepository
 Step 4: EDBlogBundle configuration
 =================================
 
-Now when your entities are ready, you can configure EDBlogBundle in your ``app/config/config.yml``. Please add `ed_blog` to your configuration while targeting previously created entities, something similar to following example:
+Now when your entities are ready, you can configure EDBlogBundle in your ``app/config/config.yml``. Please add `ed_blog` to your configuration while targeting previously created entities, something similar to the following example:
 
 ```yml
  # app/config/config.yml
@@ -423,3 +427,44 @@ ed_blog:
     type:     annotation
     prefix:   /blog/admin/
 ```
+Step 6: Assetic configuration
+=============================
+
+Add EDBlogBundle to your Assetic configuration similar to:
+
+```yml
+# app/config/config.yml
+
+#...
+assetic:
+    # ...
+    bundles:    [ EDBlogBundle ]
+```
+
+Step 7: Finish
+==============
+
+Now you are ready to finish your EDBlogBundle installation:
+
+    $ php app/console as:in --symlink
+    $ php app/console as:du --env=prod
+    $ php app/console doc:sc:update --force
+    
+Before you can access Blog administration area you should assign an Blog Administartor. In order to this you should assign two roles to your future blog administrator ``ROLE_BLOG_USER`` and ``ROLE_BLOG_ADMIN``. You can do it easily by modify your registration controller or from terminal by running
+ 
+    $ php app/console fos:user:promote
+
+**Note:** 
+
+> Every blog user must have role ``ROLE_BLOG_USER`` assigned. Beside this one and according to permission level they should have one of following:
+> * ROLE_BLOG_ADMIN - Administrators can see/access/modify: Articles, Users, Categories, Tags, Comments, Media library, Settings
+> * ROLE_BLOG_EDITOR - Editors can see/access: Articles, Comments, Media library
+> * ROLE_BLOG_AUTHOR - Authors can see/access: Articles, Media library, can publish and manage their own posts
+> * ROLE_BLOG_CONTRIBUTOR - Contributors can see/access: Articles, Media library, can write and manage their own posts but cannot publish them
+
+Now you can login as a blog administrator and visit `/blog/admin`. Please save your initial blog settings first on `/blog/admin/settings/edit`.
+
+Congratulation! Your EDBlogBundle is ready. 
+
+Please tell us what you think. Enjoy using EDBlogBundle and don't forget to contribute!
+

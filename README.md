@@ -45,29 +45,33 @@ Then you can require following packages:
 
 Activate newly required bundles in AppKernel.php similar to this example:
 
-    //app/Kernel.php
-    class AppKernel extends Kernel
-    {
-        public function registerBundles()
-        {
-            $bundles = array(
-                // ...
-                new FOS\UserBundle\FOSUserBundle(),	
-                new ED\BlogBundle\EDBlogBundle(),
-                new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-                new Sonata\CoreBundle\SonataCoreBundle(),
-                new Sonata\MediaBundle\SonataMediaBundle(),
-                new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
-                new JMS\SerializerBundle\JMSSerializerBundle(),
-                new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-                new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-                new Eko\FeedBundle\EkoFeedBundle(),
-                //new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(), //will be generated later	
-            );
+```php
+<?php
+//app/Kernel.php
 
+class AppKernel extends Kernel
+{
+    public function registerBundles()
+    {
+        $bundles = array(
             // ...
-        }
+            new FOS\UserBundle\FOSUserBundle(),	
+            new ED\BlogBundle\EDBlogBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Sonata\CoreBundle\SonataCoreBundle(),
+            new Sonata\MediaBundle\SonataMediaBundle(),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Eko\FeedBundle\EkoFeedBundle(),
+            //new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(), //will be generated later	
+        );
+
+        // ...
     }
+}
+```
     
 Step 2: SonataMediaBundle installation and configuration
 ========================================================
@@ -78,49 +82,56 @@ Next, we will install and configure media management core. Please generate Appli
     
 Now you can include ApplicationSonataMediaBundle in ``app/AppKernel.php`` by uncommenting or adding this line:
 
-    //app/Kernel.php
-    class AppKernel extends Kernel
+```php
+<?php
+//app/Kernel.php
+
+//...
+class AppKernel extends Kernel
+{
+    public function registerBundles()
     {
-        public function registerBundles()
-        {
-            $bundles = array(
-                // ...
-		        new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),	
-		    );
-            
+        $bundles = array(
             // ...
-        }
+            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),	
+        );
+        
+        // ...
     }
-    
+}
+```    
 Add following configuration to your config.yml:
 
-    //app/config/config.yml
-    sonata_media:
-        default_context: default
-        db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
-        contexts:
-        default:  # the default context is mandatory
-            providers:
-            - sonata.media.provider.dailymotion
-            - sonata.media.provider.youtube
-            - sonata.media.provider.image
-            - sonata.media.provider.file
+```yml
+//app/config/config.yml
 
-            formats:
-            crop:  { width: 600 , quality: 80}
-            small: { width: 100 , quality: 70}
-            big:   { width: 500 , quality: 70}
-            lib:   { width: 350 , height: 250 , quality: 70}
-            excerpt:   { width: 780 , height: 500 , quality: 70}
+sonata_media:
+    default_context: default
+    db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+    contexts:
+    default:  # the default context is mandatory
+        providers:
+        - sonata.media.provider.dailymotion
+        - sonata.media.provider.youtube
+        - sonata.media.provider.image
+        - sonata.media.provider.file
 
-        cdn:
-        server:
-            path: /uploads/media # http://media.sonata-project.org/
+        formats:
+        crop:  { width: 600 , quality: 80}
+        small: { width: 100 , quality: 70}
+        big:   { width: 500 , quality: 70}
+        lib:   { width: 350 , height: 250 , quality: 70}
+        excerpt:   { width: 780 , height: 500 , quality: 70}
 
-        filesystem:
-        local:
-            directory:  %kernel.root_dir%/../web/uploads/media
-            create:     false
+    cdn:
+    server:
+        path: /uploads/media # http://media.sonata-project.org/
+
+    filesystem:
+    local:
+        directory:  %kernel.root_dir%/../web/uploads/media
+        create:     false
+```    
             
 Finally we should create local directory for media storage:
 
@@ -133,67 +144,72 @@ Step 3: Creating blog related entities from provided model
 
 To be able to use EDBlog features you must implement certain entities somewhere inside your application. It will be very easy, only thing that you should do is to create relevant classes and extend our prepared models.
 
-3.1 Article entity
+###3.1 Article entity
 
 Create your Article entity similar to this example:
-     
-            //src/Acme/DemoBundle/Entity/Article.php
-            namespace Acme\Bundle\DemoBundle\Entity; 
-            
-            use ED\BlogBundle\Interfaces\Model\ArticleInterface;
-            use ED\BlogBundle\Model\Entity\Article as BaseArticle;
-            use Doctrine\ORM\Mapping as ORM;
+ 
+```php
+<?php     
+//src/Acme/DemoBundle/Entity/Article.php
+
+namespace Acme\Bundle\DemoBundle\Entity; 
+
+use ED\BlogBundle\Interfaces\Model\ArticleInterface;
+use ED\BlogBundle\Model\Entity\Article as BaseArticle;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Table(name="acme_demo_article")
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="ED\BlogBundle\Model\Repository\ArticleRepository")
+ */
+class Article extends BaseArticle implements ArticleInterface
+{
+}
         
-            /**
-             * @ORM\Table(name="acme_demo_article")
-             * @ORM\HasLifecycleCallbacks
-             * @ORM\Entity(repositoryClass="ED\BlogBundle\Model\Repository\ArticleRepository")
-             */
-            class Article extends BaseArticle implements ArticleInterface
-            {
-            }
-        
-3.2 ArticleMeta entity
+###3.2 ArticleMeta entity
 
 Create your ArticleMeta entity similar to this example:
+  
+```php            
+<?php        
+//src/Acme/DemoBundle/Entity/ArticleMeta.php
+
+namespace Acme\Bundle\DemoBundle\Entity; 
+
+use ED\BlogBundle\Interfaces\Model\ArticleMetaInterface;
+use ED\BlogBundle\Model\Entity\ArticleMeta as BaseArticleMeta;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Table(name="acme_demo_article_meta")
+ * @ORM\Entity()
+ */
+class ArticleMeta extends BaseArticleMeta implements ArticleMetaInterface
+{
+}
+```
             
-            <?php        
-            //src/Acme/DemoBundle/Entity/ArticleMeta.php
-            
-            namespace Acme\Bundle\DemoBundle\Entity; 
-            
-            use ED\BlogBundle\Interfaces\Model\ArticleMetaInterface;
-            use ED\BlogBundle\Model\Entity\ArticleMeta as BaseArticleMeta;
-            use Doctrine\ORM\Mapping as ORM;
-    
-            /**
-             * @ORM\Table(name="acme_demo_article_meta")
-             * @ORM\Entity()
-             */
-            class ArticleMeta extends BaseArticleMeta implements ArticleMetaInterface
-            {
-            }
-            
-3.3 Comment entity
+###3.3 Comment entity
 
 Create your Comment entity similar to this example:
 
 ```php
-            <?php
-            //src/Acme/DemoBundle/Entity/Comment.php
-            
-            namespace Acme\Bundle\DemoBundle\Entity; 
-            
-            use ED\BlogBundle\Interfaces\Model\CommentInterface;
-            use ED\BlogBundle\Model\Entity\Comment as BaseComment;
-            use Doctrine\ORM\Mapping as ORM;
+<?php
+//src/Acme/DemoBundle/Entity/Comment.php
 
-            /**
-             * @ORM\Table(name="acme_demo_comment")
-             * @ORM\HasLifecycleCallbacks
-             * @ORM\Entity(repositoryClass="ED\BlogBundle\Model\Repository\CommentRepository")
-             */
-            class Comment extends BaseComment implements CommentInterface
-            {
-            }            
+namespace Acme\Bundle\DemoBundle\Entity; 
+
+use ED\BlogBundle\Interfaces\Model\CommentInterface;
+use ED\BlogBundle\Model\Entity\Comment as BaseComment;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Table(name="acme_demo_comment")
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="ED\BlogBundle\Model\Repository\CommentRepository")
+ */
+class Comment extends BaseComment implements CommentInterface
+{
+}            
 ```

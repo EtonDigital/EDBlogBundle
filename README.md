@@ -466,10 +466,10 @@ Before you can access Blog administration area you should promote a Blog Adminis
 **Note:** 
 
 > Every blog user must have role ``ROLE_BLOG_USER`` assigned. Beside this one and according to permission level they should have one of following:
-> * ROLE_BLOG_ADMIN - Administrators can see/access/modify: Articles, Users, Categories, Tags, Comments, Media library, Settings
-> * ROLE_BLOG_EDITOR - Editors can see/access: Articles, Comments, Media library
-> * ROLE_BLOG_AUTHOR - Authors can see/access: Articles, Media library, can publish and manage their own posts
-> * ROLE_BLOG_CONTRIBUTOR - Contributors can see/access: Articles, Media library, can write and manage their own posts but cannot publish them
+> * **ROLE_BLOG_ADMIN** - Administrators can see/access/modify: Articles, Users, Categories, Tags, Comments, Media library, Settings
+> * **ROLE_BLOG_EDITOR** - Editors can see/access: Articles, Comments, Media library
+> * **ROLE_BLOG_AUTHOR** - Authors can see/access: Articles, Media library, can publish and manage their own posts
+> * **ROLE_BLOG_CONTRIBUTOR** - Contributors can see/access: Articles, Media library, can write and manage their own posts but cannot publish them
 
 Now you can login as a blog administrator and visit `/blog/admin`. Please save your initial blog settings first on `/blog/admin/settings/edit`.
 

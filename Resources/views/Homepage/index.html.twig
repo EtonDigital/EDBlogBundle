@@ -31,13 +31,14 @@
               </a>
           </li>
       {% endif %}
-
+      {% if is_granted('ADMINISTRATE_COMMENTS') %}
       <li class="dashboard__comments">
           <a href="{{ path('ed_blog_admin_comment_list') }}" class="sameheight">
               <h3>Comments</h3>
               <p>Add, edit or remove comments</p>
           </a>
       </li>
+      {% endif %}
       <li class="dashboard__media">
         <a href="{{ path('ed_blog_admin_media_list') }}" class="sameheight">
           <h3>Media Library</h3>

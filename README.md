@@ -30,8 +30,9 @@ Installation process includes following steps:
  1. Composer vendors installation and activation
  2. SonataMediaBundle installation and configuration
  3. Creating blog related entities from provided model
- 4. Rutes configuration
- 5. Assetic configuration
+ 4. EDBlogBundle configuration
+ 5. Rutes configuration
+ 6. Assetic configuration
  
 Step 1: Composer vendors installation and activation
 ====================================================
@@ -213,4 +214,212 @@ use Doctrine\ORM\Mapping as ORM;
 class Comment extends BaseComment implements CommentInterface
 {
 }            
+```
+
+###3.4 Settings entity
+
+Create your Settings entity similar to this example:
+
+```php
+<?php
+//src/Acme/DemoBundle/Entity/Settings.php
+
+namespace Acme\Bundle\DemoBundle\Entity; 
+
+use ED\BlogBundle\Interfaces\Model\BlogSettingsInterface;
+use ED\BlogBundle\Model\Entity\BlogSettings as BaseSettings;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Table(name="acme_demo_settings")
+ * @ORM\Entity(repositoryClass="ED\BlogBundle\Model\Repository\BlogSettingsRepository")
+ */
+class Settings extends BaseSettings implements BlogSettingsInterface
+{
+}
+```
+
+###3.5 Taxonomy entity
+
+Create your Taxonomy entity similar to this example:
+
+```php
+<?php
+//src/Acme/DemoBundle/Entity/Taxonomy.php
+
+namespace Acme\Bundle\DemoBundle\Entity; 
+
+use ED\BlogBundle\Interfaces\Model\BlogTaxonomyInterface;
+use ED\BlogBundle\Model\Entity\Taxonomy as BaseTaxonomy;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Table(name="acme_demo_taxonomy")
+ * @ORM\Entity(repositoryClass="ED\BlogBundle\Model\Repository\TaxonomyRepository")
+ */
+class Taxonomy extends BaseTaxonomy implements BlogTaxonomyInterface
+{
+}
+```
+
+###3.5 TaxonomyRelation entity
+
+Create your TaxonomyRelation entity similar to this example:
+
+```php
+<?php
+//src/Acme/DemoBundle/Entity/TaxonomyRelation.php
+
+namespace Acme\Bundle\DemoBundle\Entity; 
+
+use ED\BlogBundle\Interfaces\Model\TaxonomyRelationInterface;
+use ED\BlogBundle\Model\Entity\TaxonomyRelation as BaseTaxonomyRelation;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Table(name="acme_demo_taxonomy_relation")
+ * @ORM\Entity()
+ */
+class TaxonomyRelation extends BaseTaxonomyRelation implements TaxonomyRelationInterface
+{
+}
+```
+
+###3.6 Term entity
+
+Create your Term entity similar to this example:
+
+```php
+<?php
+//src/Acme/DemoBundle/Entity/Term.php
+
+namespace Acme\Bundle\DemoBundle\Entity; 
+
+use ED\BlogBundle\Interfaces\Model\BlogTermInterface;
+use ED\BlogBundle\Model\Entity\Term as BaseTerm;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Table(name="acme_demo_term")
+ * @ORM\Entity()
+ * @UniqueEntity("slug")
+ */
+class Term extends BaseTerm implements BlogTermInterface
+{
+}
+```
+
+###3.7 User entity
+
+To be able to use EDBlogBundle your User entity should implement two interfaces: BlogUserInterface and ArticleCommenterInterface. Modify your User entity something similar to the following example.
+__Note.__  Find more about FOSUser integration on https://github.com/FriendsOfSymfony/FOSUserBundle/blob/1.2.0/Resources/doc/index.md
+
+```php
+<?php
+//src/AppBundle/Entity/User
+
+namespace Acme\Bundle\DemoBundle\Entity; 
+
+use ED\BlogBundle\Interfaces\Model\BlogUserInterface;
+use ED\BlogBundle\Interfaces\Model\ArticleCommenterInterface;
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ */
+class User extends BaseUser implements BlogUserInterface, ArticleCommenterInterface
+{
+    /**
+     * Required by BlogUserInterface
+     *
+     * @ORM\Column(name="blog_display_name", type="string")
+     */
+    protected $blogDisplayName;
+
+    public function getBlogDisplayName()
+    {
+        return $this->blogDisplayName;
+    }
+    
+    public function setBlogDisplayName($blogDisplayName)
+    {
+        $this->blogDisplayName = $blogDisplayName;
+    
+        return $this;
+    }
+}
+```
+
+###3.8 User Repository
+
+Your User repository class should implement BlogUserRepositoryInterface. We prepared ``ED\BlogBundle\Model\Repository\UserRepository`` that you can use as a start point. Modify your UserRepository class something similar to:
+
+```php
+<?php
+//src/AppBundle/Repository/UserRepository
+
+namespace AppBundle\Repository; 
+
+use ED\BlogBundle\Interfaces\Repository\BlogUserRepositoryInterface;
+use ED\BlogBundle\Model\Repository\UserRepository as BaseUserRepository;
+
+class AppUserRepository extends BaseUserRepository implements BlogUserRepositoryInterface
+{
+}
+```
+
+Step 4: EDBlogBundle configuration
+=================================
+
+Now when your entities are ready, you can configure EDBlogBundle in your ``app/config/config.yml``. Please add `ed_blog` to your configuration while targeting previously created entities, something similar to following example:
+
+```yml
+ # app/config/config.yml
+ 
+# ...
+ed_blog:
+    entities:
+        user_model_class: AppBundle\Entity\User
+        article_class: Acme\Bundle\DemoBundle\Entity\Article
+        article_meta_class: Acme\Bundle\DemoBundle\Entity\ArticleMeta
+        blog_term_class: Acme\Bundle\DemoBundle\Entity\Term
+        blog_taxonomy_class: Acme\Bundle\DemoBundle\Entity\Taxonomy
+        blog_taxonomy_relation_class: Acme\Bundle\DemoBundle\Entity\TaxonomyRelation
+        blog_comment_class: Acme\Bundle\DemoBundle\Entity\Comment
+        blog_settings_class: Acme\Bundle\DemoBundle\Entity\Settings
+```
+
+Step 5: Rutes configuration
+===========================
+
+Enable EDBlogBundle and SonataMediaBundle rutes by adding following code to your ``app/config/routing.yml``:
+
+```yml
+ # app/config/routing.yml
+ 
+gallery:
+    resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
+    prefix: /media/gallery
+
+media:
+    resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
+    prefix: /media
+
+ed_blog_admin_feed:
+    path:      /feed/{type}
+    defaults:  { _controller: EDBlogBundle:Feed:feed }
+
+ed_blog_frontend:
+    resource: "@EDBlogBundle/Controller/Frontend/"
+    type:     annotation
+    prefix:   /
+
+ed_blog:
+    resource: "@EDBlogBundle/Controller/Backend/"
+    type:     annotation
+    prefix:   /blog/admin/
 ```

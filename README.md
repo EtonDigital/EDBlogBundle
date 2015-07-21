@@ -54,11 +54,11 @@ Then you can require following packages:
      
     $ composer require friendsofsymfony/user-bundle:"~2.0@dev" eko/feedbundle:dev-master ed/blog-bundle:dev-master@dev
 
-Activate newly required bundles in AppKernel.php similar to this example:
+Activate newly required bundles in `app/AppKernel.php` similar to this example:
 
 ```php
 <?php
-//app/Kernel.php
+//app/AppKernel.php
 
 class AppKernel extends Kernel
 {

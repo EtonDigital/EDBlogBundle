@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="dashboard-content">
-        <h1 class="text--bold margin--halft margin--b">Import new blog user</h1>
+        <h1 class="text--bold margin--halft margin--b">Edit blog user</h1>
 
         <form action="{{ path('ed_blog_user_edit', { 'username' : user.username}) }}" method="post">
             {{ form_errors(form) }}

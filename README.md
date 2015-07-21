@@ -13,6 +13,7 @@ Features:
 * Tags
 * Articles with multiple revisions, writing locks, autosave...
 * Media gallery
+* RSS feed
 
 License:
 --------

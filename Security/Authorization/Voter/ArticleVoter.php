@@ -117,7 +117,7 @@ class ArticleVoter implements VoterInterface
                 {
                     return self::ACCESS_DENIED;
                 }
-                elseif( $testObject && $testObject->getStatus() == Article::STATUS_PUBLISHED )
+                elseif( $testObject && $testObject->getStatus() != Article::STATUS_PUBLISHED )
                 {
                     return self::ACCESS_DENIED;
                 }

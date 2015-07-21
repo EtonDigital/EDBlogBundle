@@ -8,6 +8,7 @@
 
 namespace ED\BlogBundle\Controller\Backend;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use ED\BlogBundle\Event\CommentEvent;
 use ED\BlogBundle\Events\EDBlogEvents;
 use ED\BlogBundle\Handler\Pagination;
@@ -83,6 +84,7 @@ class CommentController extends DefaultController
 
     /**
      * @Route("/comment/list", name="ed_blog_admin_comment_list")
+     * @Security("has_role('ADMINISTRATE_COMMENTS')")
      */
     public function listAction(Request $request)
     {
@@ -136,6 +138,7 @@ class CommentController extends DefaultController
     /**
      * @Route("/comment/{id}/status/{status}", name="ed_blog_comment_edit_status", requirements={"status": "0|1"})
      * @ParamConverter("comment", class="ED\BlogBundle\Interfaces\Model\CommentInterface", converter="abstract_converter")
+     * @Security("has_role('ADMINISTRATE_COMMENTS')")
      */
     public function editStatusAction(Request $request, $comment, $status)
     {
@@ -164,6 +167,7 @@ class CommentController extends DefaultController
     /**
      * @Route("/comment/{id}/edit", name="ed_blog_comment_edit")
      * @ParamConverter("comment", class="ED\BlogBundle\Interfaces\Model\CommentInterface", converter="abstract_converter")
+     * @Security("has_role('ADMINISTRATE_COMMENTS')")
      */
     public function editAction(Request $request, $comment)
     {

@@ -472,7 +472,7 @@ Before you can access Blog administration area you should promote a Blog Adminis
 > * **ROLE_BLOG_AUTHOR** - Authors can see/access: Articles, Media library, can publish and manage their own posts
 > * **ROLE_BLOG_CONTRIBUTOR** - Contributors can see/access: Articles, Media library, can write and manage their own posts but cannot publish them
 
-Now you can login as a blog administrator and visit `/blog/admin`. Please save your initial blog settings first on `/blog/admin/settings/edit`.
+Now you can login as a blog administrator and visit `/blog/admin/`. Please save your initial blog settings first on `/blog/admin/settings/edit`.
 
 Congratulation! Your EDBlogBundle is ready. 
 

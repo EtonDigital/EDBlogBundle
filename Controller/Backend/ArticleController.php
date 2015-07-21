@@ -199,6 +199,13 @@ class ArticleController extends DefaultController
                     $draft
                         ->setStatus(Article::STATUS_DRAFTED)
                         ->setSlug('drafted-' . $article->getId());
+
+                    //copy title to latestDraft for updated display in article list
+                    $parentDraft = $latestDraft->getParent();
+                    $parentDraft
+                        ->setTitle($draft->getTitle());
+
+                    $em->persist($parentDraft);
                     $em->persist($draft);
                 }
                 else

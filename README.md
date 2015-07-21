@@ -27,10 +27,10 @@ Prerequisites
 -------------
 
 This bundle is relaying on many cool features provided by very popular Symfony2 bundles such as:
- * FOSUserBundle - for user management ( See https://github.com/FriendsOfSymfony/FOSUserBundle for more details)
- * KnpPaginatorBundle - Symfony 2 paginator ( See https://github.com/KnpLabs/KnpPaginatorBundle for more details )
- * StofDoctrineExtensionsBundle - DoctrineExtensions for Symfony2 ( See https://github.com/stof/StofDoctrineExtensionsBundle for more details )
- * SonataMediaBundle - Media management ( See https://github.com/sonata-project/SonataMediaBundle for more details)
+ * **FOSUserBundle** - for user management ( See https://github.com/FriendsOfSymfony/FOSUserBundle for more details)
+ * **KnpPaginatorBundle** - Symfony 2 paginator ( See https://github.com/KnpLabs/KnpPaginatorBundle for more details )
+ * **StofDoctrineExtensionsBundle** - DoctrineExtensions for Symfony2 ( See https://github.com/stof/StofDoctrineExtensionsBundle for more details )
+ * **SonataMediaBundle** - Media management ( See https://github.com/sonata-project/SonataMediaBundle for more details)
 
 Installation:
 -------------

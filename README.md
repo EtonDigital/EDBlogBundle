@@ -178,6 +178,7 @@ Create your ArticleMeta entity similar to this example:
 
 Create your Comment entity similar to this example:
 
+```php
             <?php
             //src/Acme/DemoBundle/Entity/Comment.php
             
@@ -195,3 +196,4 @@ Create your Comment entity similar to this example:
             class Comment extends BaseComment implements CommentInterface
             {
             }            
+```

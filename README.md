@@ -14,6 +14,15 @@ Features:
 * Articles with multiple revisions, writing locks, autosave...
 * Media gallery
 
+License:
+--------
+
+This bundle is under the MIT license.
+
+ ```
+ Resources/meta/LICENSE
+ ```
+
 Prerequisites
 -------------
 

@@ -144,7 +144,7 @@ Finally we should create local directory for media storage:
 Step 3: Creating blog related entities from provided model
 ==========================================================
 
-To be able to use EDBlog features you must implement certain entities somewhere inside your application. It will be very easy, only thing that you should do is to create relevant classes and extend our prepared models.
+To be able to use EDBlogBundle features you must implement certain entities somewhere inside your application. It will be very easy, only thing that you should do is to create relevant classes and extend our prepared models.
 
 ###3.1 Article entity
 

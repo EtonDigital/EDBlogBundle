@@ -16,6 +16,9 @@ class DefaultController extends Controller
         if($this->container->get('security.authorization_checker')->isGranted('ROLE_BLOG_USER') === false)
             throw new AccessDeniedException('This content is currently unavailable. It may be temporarily unavailable, the link you clicked on may have expired, or you may not have permission to view this page.');
 
+        if(!$user->hasRole('ROLE_BLOG_CONTRIBUTOR') && !$user->hasRole('ROLE_BLOG_AUTHOR') && !$user->hasRole('ROLE_BLOG_EDITOR') && !$user->hasRole('ROLE_BLOG_ADMIN'))
+            throw new AccessDeniedException('Sorry, you may not have permission to view this page.');
+
         return $user;
     }
 

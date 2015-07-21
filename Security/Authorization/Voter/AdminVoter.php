@@ -95,6 +95,17 @@ class AdminVoter implements VoterInterface
                     return self::ACCESS_DENIED;
                 }
             }
+            elseif( in_array('ADMINISTRATE_COMMENTS', $attributes) )
+            {
+                if($user->hasRole('ROLE_BLOG_ADMIN') || $user->hasRole('ROLE_BLOG_EDITOR'))
+                {
+                    return self::ACCESS_GRANTED;
+                }
+                else
+                {
+                    return self::ACCESS_DENIED;
+                }
+            }
 
             return self::ACCESS_ABSTAIN;
 

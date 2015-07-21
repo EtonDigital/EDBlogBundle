@@ -17,6 +17,7 @@ final class PermissionMap
         'ACCESS_COMMENTS',
         'ACCESS_COMMENTS_LIST',
         'CREATE_COMMENT',
+        'ADMINISTRATE_COMMENTS',
         'SWITCH_ARTICLE_AUTHOR'
     );
 

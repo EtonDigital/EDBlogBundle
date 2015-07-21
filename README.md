@@ -466,5 +466,7 @@ Now you can login as a blog administrator and visit `/blog/admin`. Please save y
 
 Congratulation! Your EDBlogBundle is ready. 
 
-Please tell us what you think. Enjoy using EDBlogBundle and don't forget to contribute!
+Please tell us what you think. 
+
+Enjoy using EDBlogBundle and don't forget to contribute!
 

@@ -221,6 +221,7 @@ $(document).ready(function(){
         var newWidget = container.attr('data-prototype');
         newWidget = newWidget.replace(/__name__/g, container.find('.row').length);
         $(this).before(newWidget);
+        recalculateSidebar();
     });
 
     $(document).on('click', '.js-remove-prototype', function(e){
@@ -233,6 +234,7 @@ $(document).ready(function(){
         }
 
         $(this).parents('.row').remove();
+        recalculateSidebar();
     });
 
     getFancyCategories();

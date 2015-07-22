@@ -463,7 +463,7 @@ Now you are ready to finish your EDBlogBundle installation:
     $ php app/console as:du --env=prod
     $ php app/console doc:sc:update --force
     
-Before you can access Blog administration area you should promote a Blog Administartor. In order to that you should assign two roles to your future blog administrator user ``ROLE_BLOG_USER`` and ``ROLE_BLOG_ADMIN``. You can do it easily by modifying your registration action or by running following code from the console:
+Before you can access Blog administration area you should promote a Blog Administartor. In order to do that you should assign two roles to your future blog administrator user ``ROLE_BLOG_USER`` and ``ROLE_BLOG_ADMIN``. You can do it easily by modifying your registration action or by running following code from the console:
  
     $ php app/console fos:user:promote
 

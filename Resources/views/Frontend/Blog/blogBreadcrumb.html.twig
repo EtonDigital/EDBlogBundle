@@ -5,7 +5,7 @@
                 {{ criteria.type }}:
                 {%  set categories = categoriesFromFirstLevel(criteria.value)  %}
                 {% for category in categories %}
-                    <a href="{{ path ('blogs_by_category',{ 'categorySlug' : category.Term.slug}) }}">{{ category.Term.title }}</a> /
+                    <a href="{{ path ('ed_frontend_blog_by_category',{ 'categorySlug' : category.Term.slug}) }}">{{ category.Term.title }}</a> /
                 {% endfor %}
                 {{ criteria.value.Term.title}}  {{  criteria.value.description ? '('~criteria.value.description~')' }}
             {% elseif (criteria.type == 'tag') %}

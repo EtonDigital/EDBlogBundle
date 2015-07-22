@@ -3,7 +3,7 @@
         <div class="c-sidebar__title">Top tags</div>
         <div>
             {% for tag in topNtags %}
-                <div class="margin--halfb"><a href="{{ path('blogs_by_tag', {'tagSlug': tag.term.slug}) }}">{{ tag.term.title }} ({{ tag.count}})</a></div>
+                <div class="margin--halfb"><a href="{{ path('ed_frontend_blog_by_tag', {'tagSlug': tag.term.slug}) }}">{{ tag.term.title }} ({{ tag.count}})</a></div>
             {% endfor %}
         </div>
     </div>

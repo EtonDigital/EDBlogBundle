@@ -219,12 +219,12 @@ class TagController extends DefaultController
     }
 
     /**
-     * @Route("/tag/toptags/{number}", name="ed_blog_get_N_top_tags")
+     * @Route("/tag/toptags/{number}", name="ed_blog_tags_top_tags")
      */
-    public function topNtagsAction($number)
+    public function topTagsAction($number)
     {
           $topNtags = $this->get('app_repository_taxonomy')->getTopNTags($number);
 
-          return $this->render("EDBlogBundle:Frontend/Blog:blog_sidebar_tags.html.twig",array('topNtags' => $topNtags));
+          return $this->render("EDBlogBundle:Frontend/Blog:blog_sidebar_tags.html.twig", array('topNtags' => $topNtags));
     }
 }

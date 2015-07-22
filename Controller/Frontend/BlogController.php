@@ -19,10 +19,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class BlogController extends Controller
 {
     /**
-     * @Route("/", name="app_default")
      * @Route("/", name="homepage")
-     * @Route("/blog", name="app_blog")
-     * @Route("/blog/", name="app_blog_index")
+     * @Route("/blog", name="ed_blog_frontend_index")
+     * @Route("/blog/")
      */
     public function indexAction()
     {
@@ -44,7 +43,7 @@ class BlogController extends Controller
     }
 
     /**
-     * @Route("/blog/{slug}", name="app_blog_single_article")
+     * @Route("/blog/{slug}", name="ed_frontend_blog_single_article")
      * @ParamConverter("article", class="ED\BlogBundle\Interfaces\Model\ArticleInterface", converter="abstract_converter")
      */
     public function singleArticleAction($article)
@@ -74,9 +73,9 @@ class BlogController extends Controller
     }
 
     /**
-     * @Route("/blog/category/{categorySlug}", name="blogs_by_category")
+     * @Route("/blog/category/{categorySlug}", name="ed_frontend_blog_by_category")
      */
-    public function categoryAction($categorySlug)
+    public function byCategoryAction($categorySlug)
     {
         $taxonomyType = Taxonomy::TYPE_CATEGORY;
         $taxonomy = $this->get('app_repository_taxonomy')->findBySlug($categorySlug);
@@ -106,9 +105,9 @@ class BlogController extends Controller
     }
 
     /**
-     * @Route("/blog/tag/{tagSlug}", name="blogs_by_tag")
+     * @Route("/blog/tag/{tagSlug}", name="ed_frontend_blog_by_tag")
      */
-    public function tagsAction($tagSlug)
+    public function byTagAction($tagSlug)
     {
         $taxonomyType = Taxonomy::TYPE_TAG;
 
@@ -139,10 +138,10 @@ class BlogController extends Controller
     }
 
     /**
-     * @Route("/blog/author/{username}", name="blogs_by_author")
+     * @Route("/blog/author/{username}", name="ed_frontend_blog_by_author")
      * @ParamConverter("user", class="ED\BlogBundle\Interfaces\Model\BlogUserInterface", converter="abstract_converter")
      */
-    public function authorAction($user)
+    public function byAuthorAction($user)
     {
         $criteria['type'] = "author";
         $criteria['value'] = $user;
@@ -164,7 +163,7 @@ class BlogController extends Controller
     }
 
     /**
-     * @Route("/blog/archive/{yearMonth}", name="blogs_archive")
+     * @Route("/blog/archive/{yearMonth}", name="ed_frontend_blog_archive")
      */
     public function archiveAction($yearMonth)
     {

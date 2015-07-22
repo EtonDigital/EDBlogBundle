@@ -230,6 +230,7 @@ class TaxonomyRepository extends EntityRepository implements BlogTaxonomyReposit
         $taxonomyClass = $this->_entityName;
         $query = "SELECT tax FROM $taxonomyClass tax
                   WHERE tax.type = :tag
+                    AND tax.count > 0
                   ORDER BY tax.count DESC
                   ";
 

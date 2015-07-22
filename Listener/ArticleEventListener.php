@@ -97,21 +97,32 @@ class ArticleEventListener implements EventSubscriberInterface
             }
 
             $this->updateArticleCount( $allTaxonomies );
+
+            $this->session->getFlashBag()->add('success', 'Article updated successfully.');
         }
     }
 
     public function postRemoved(TaxonomyArrayEvent $event)
+    {
+        $this->update($event);
+
+        $this->session->getFlashBag()->add('success', 'Article removed successfully.');
+    }
+
+    public function postCreated(TaxonomyArrayEvent $event)
+    {
+        $this->update($event);
+
+        $this->session->getFlashBag()->add('success', 'Article created successfully.');
+    }
+
+    private function update(TaxonomyArrayEvent $event)
     {
         $taxonomies = $event->getTaxonomies();
         $categories = $this->taxonomyRepository->getArticleCategoryCount($taxonomies);
         $tags = $this->taxonomyRepository->getArticleTagCount($taxonomies);
 
         $this->updateArticleCount( array_merge($categories, $tags) );
-    }
-
-    public function postCreated(TaxonomyArrayEvent $event)
-    {
-        $this->postRemoved($event);
     }
 
     private function updateArticleCount($taxonomies)

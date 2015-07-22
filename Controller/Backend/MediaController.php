@@ -39,7 +39,7 @@ class MediaController extends DefaultController
         return $response;
     }
 
-    private function getPaginated($paginator, $paramsForTwig = array())
+    private function getPaginated($paginator, $paramsForTwig = array(), $ajaxParams = array())
     {
         $mediaManager = $this->container->get('sonata.media.manager.media');
 
@@ -61,7 +61,7 @@ class MediaController extends DefaultController
             Pagination::DOZEN,
             null,
             'EDBlogBundle:Global:paginationClassic.html.twig',
-            array(),
+            $ajaxParams,
             'ed_blog_admin_media_list'
         );
 
@@ -92,20 +92,43 @@ class MediaController extends DefaultController
             }
 
             $mediaArray = new ArrayCollection();
+            $errorArray = array();
 
             foreach ($attachment as $attached)
             {
-                $media = new Media();
+                if(in_array($attached->getMimeType(), array(
+                    'image/pjpeg', 'image/jpeg', 'image/png', 'image/x-png', 'image/gif',
+                )))
+                {
+                    try {
+                        $media = new Media();
 
-                $media->setBinaryContent($attached);
-                $media->setContext('default');
-                $media->setProviderName('sonata.media.provider.image');
-                $media->setName($attached->getClientOriginalName());
-                $media->setEnabled(true);
+                        $media->setBinaryContent($attached);
+                        $media->setContext('default');
+                        $media->setProviderName('sonata.media.provider.image');
+                        $media->setName($attached->getClientOriginalName());
+                        $media->setEnabled(true);
 
-                $mediaManager->save($media);
-                $mediaArray->add($media);
+                        $mediaManager->save($media);
+                        $mediaArray->add($media);
+                    }
+                    catch(\Exception $e)
+                    {
+                        $errorArray[] = array(
+                            "name" => $attached->getClientOriginalName(),
+                            "message" => $e->getMessage()
+                        );
+                    }
+                }
+                else
+                {
+                    $errorArray[] = array(
+                        "name" => $attached->getClientOriginalName(),
+                        "message" => "The file is unsupported");
+                }
             }
+
+
 
             if(count($mediaArray))
             {
@@ -114,9 +137,7 @@ class MediaController extends DefaultController
         }
 
         $paginator = $this->get('ed_blog.paginator');
-        $response = $this->getPaginated($paginator, array(
-            'form' => $form->createView()
-        ));
+        $response = $this->getPaginated($paginator, array('form' => $form->createView()),  array('errors' => $errorArray));
 
         return $response;
     }

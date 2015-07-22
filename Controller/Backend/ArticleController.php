@@ -366,25 +366,47 @@ class ArticleController extends DefaultController
             }
 
             $mediaArray = new ArrayCollection();
+            $errorArray = array();
 
             foreach($attachment as $attached)
             {
-                $media = new Media();
-                $media->setBinaryContent($attached);
-                $media->setContext('default');
-                $media->setProviderName('sonata.media.provider.image');
-                $media->setName($attached->getClientOriginalName());
-                $media->setEnabled(true);
+                if(in_array($attached->getMimeType(), array(
+                    'image/pjpeg', 'image/jpeg', 'image/png', 'image/x-png', 'image/gif',
+                )))
+                {
+                    try
+                    {
+                        $media = new Media();
+                        $media->setBinaryContent($attached);
+                        $media->setContext('default');
+                        $media->setProviderName('sonata.media.provider.image');
+                        $media->setName($attached->getClientOriginalName());
+                        $media->setEnabled(true);
 
-                $mediaManager->save($media);
-                $mediaArray->add($media);
+                        $mediaManager->save($media);
+                        $mediaArray->add($media);
+                    }
+                    catch(\Exception $e)
+                    {
+                        $errorArray[] = array(
+                            "name" => $attached->getClientOriginalName(),
+                            "message" => $e->getMessage()
+                        );
+                    }
+                }
+                else
+                {
+                    $errorArray[] = array(
+                        "name" => $attached->getClientOriginalName(),
+                        "message" => "The file is unsupported");
+                }
             }
 
             $dispatcher->dispatch(EDBlogEvents::ED_BLOG_MEDIA_LIBRARY_MEDIA_UPLOADED, new MediaArrayEvent($mediaArray));
         }
 
         $paginator = $this->get('ed_blog.paginator');
-        $response = $this->getPaginated($paginator);
+        $response = $this->getPaginated($paginator, array('errors' => $errorArray));
 
         return $response;
     }

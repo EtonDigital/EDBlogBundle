@@ -127,7 +127,8 @@
         var lockTimer;
         var autosaveTimer;
         $(document).ready(function() {
-            initializeWritingLock();
+            if(typeof(initializeWritingLock) == "function")
+                initializeWritingLock();
             var $container = $('.isotope');
             $container.imagesLoaded( function() {
                 $container.isotope();

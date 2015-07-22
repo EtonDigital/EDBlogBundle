@@ -2,11 +2,11 @@
   <div class="logo" title=""><img class="margin--r" src="{{ asset('bundles/edblog/img/svg/edblog-logo.svg') }}" alt="EdBlog"></div>
 	<nav class="flright visible-sm-block visible-md-block visible-lg-block">
     {% if app.user %}
-      <a class="{% if currentPath == 'app_blog' or currentPath == 'app_blog_index' %} active{% endif %}" href="{{ path('app_blog_index') }}">Articles</a>
+      <a class="{% if currentPath == 'app_blog' or currentPath == 'ed_blog_frontend_index' %} active{% endif %}" href="{{ path('ed_blog_frontend_index') }}">Articles</a>
       <a class="" href="{{ path('ed_blog_homepage_index') }}">Admin panel</a>
       <a class="" href="{{ path('fos_user_security_logout') }}">Logout</a>
     {% else %}
-      <a class="{% if currentPath == 'app_blog_index' or currentPath == 'app_blog_index' %} active{% endif %}" href="{{ path('app_blog_index') }}">Articles</a>
+      <a class="{% if currentPath == 'ed_blog_frontend_index' or currentPath == 'ed_blog_frontend_index' %} active{% endif %}" href="{{ path('ed_blog_frontend_index') }}">Articles</a>
       <a class="btn btn-primary white" href="{{ path('fos_user_security_login') }}">Login to access admin panel</a>
     {% endif %}
         <a href="{{ path('ed_blog_admin_feed', { 'type':  'rss' }) }}"><i class="fa fa-rss"></i> rss</a>
@@ -19,11 +19,11 @@
   <a href="#" class="brdr--0 text--14 js-toggler"><i class="fa fa-reorder"></i> menu</a>
 	<nav class="toggled">
     {% if app.user %}
-      <a class="{% if currentPath == 'app_blog_index'%} active{% endif %}" href="{{ path('app_blog_index') }}">Articles</a>
+      <a class="{% if currentPath == 'ed_blog_frontend_index'%} active{% endif %}" href="{{ path('ed_blog_frontend_index') }}">Articles</a>
       <a class="" href="{{ path('ed_blog_homepage_index') }}">Admin panel</a>
       <a class="" href="{{ path('fos_user_security_logout') }}">Logout</a>
     {% else %}
-      <a class="{% if currentPath == 'app_blog_index'%} active{% endif %}" href="{{ path('app_blog_index') }}">Articles</a>
+      <a class="{% if currentPath == 'ed_blog_frontend_index'%} active{% endif %}" href="{{ path('ed_blog_frontend_index') }}">Articles</a>
       <a class="btn btn-primary white" href="{{ path('fos_user_security_login') }}">Login to access admin panel</a>
     {% endif %}
 	</nav>

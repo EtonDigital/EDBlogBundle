@@ -1,6 +1,6 @@
 {% if (criteria is defined) %}
     <div>
-        <p><a href="{{ path('app_blog_index') }}">Blog</a> /
+        <p><a href="{{ path('ed_blog_frontend_index') }}">Blog</a> /
             {% if (criteria.type == 'category') %}
                 {{ criteria.type }}:
                 {%  set categories = categoriesFromFirstLevel(criteria.value)  %}

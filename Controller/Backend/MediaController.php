@@ -272,30 +272,26 @@ class MediaController extends DefaultController
 
                 $em->persist($media);
                 $em->flush();
-
-                if($request->isXmlHttpRequest())
-                {
-                    return new JsonResponse(array(
-                        "success" => true,
-                        "html" => $this->renderView('@EDBlog/Media/editForm.html.twig', array(
-                            'media' => $media,
-                            'form' => $form->createView()
-                        ))
-                    ));
-                }
-                else
-                {
-                    $this->get('session')->getFlashBag()->add('success', 'Category created successfully.');
-
-                    return $this->render("@EDBlog/Media/edit.html.twig", array(
-                        'media' => $media,
-                        'form' => $form->createView()
-                    ));
-                }
             }
         }
 
-        return new JsonResponse(array('success' => false));
+        if($request->isXmlHttpRequest())
+        {
+            return new JsonResponse(array(
+                "success" => true,
+                "html" => $this->renderView('@EDBlog/Media/editForm.html.twig', array(
+                    'media' => $media,
+                    'form' => $form->createView()
+                ))
+            ));
+        }
+        else
+        {
+            return $this->render("@EDBlog/Media/edit.html.twig", array(
+                'media' => $media,
+                'form' => $form->createView()
+            ));
+        }
 
     }
 

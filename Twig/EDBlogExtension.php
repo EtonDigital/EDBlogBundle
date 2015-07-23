@@ -123,7 +123,7 @@ class EDBlogExtension extends \Twig_Extension
         $formatTime = $this->blogSettings->getSettingBlogTimeFormat();
         $formatDate = $this->blogSettings->getSettingBlogDateFormat();
 
-        return $date->format($formatDate + " " + $formatTime);
+        return $date->format("$formatDate $formatTime");
     }
 
     //Functions

@@ -24,17 +24,11 @@
     {% endblock %}
 
     {# We merge several css files into 1, and that way we reduce number of calls during page rendering #}
-    {# Vendor css files #}
-    {% stylesheets
-      'bundles/edblog/css/bootstrap.css' filter="cssrewrite" 
-    %}
-      <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-    
     {# EdBlog css files #}
     {% block stylesheets %}
-      {% stylesheets
-        'bundles/edblog/css/main.min.blessed.css' filter="cssrewrite" 
+      {% stylesheets filter="cssrewrite" filter="?uglifycss"
+        'bundles/edblog/css/bootstrap.css'
+        'bundles/edblog/css/main.min.blessed.css'
       %}
         <link rel="stylesheet" href="{{ asset_url }}" />
       {% endstylesheets %}
@@ -64,7 +58,7 @@
 
     {% block javascripts %}
 
-      {% javascripts
+      {% javascripts filter='uglifyjs2'
         '@EDBlogBundle/Resources/public/js/vendor/jquery.min.js'
         '@EDBlogBundle/Resources/public/js/vendor/bootstrap.min.js'
 

@@ -22,6 +22,12 @@ class DefaultController extends Controller
         return $user;
     }
 
+    public function checkCommentsAdministrator()
+    {
+        if($this->container->get('security.authorization_checker')->isGranted('ADMINISTRATE_COMMENTS') === false)
+            throw new AccessDeniedException('This content is currently unavailable. It may be temporarily unavailable, the link you clicked on may have expired, or you may not have permission to view this page.');
+    }
+
     public function getBlogAdministrator()
     {
         $user = $this->getLoggedUser();

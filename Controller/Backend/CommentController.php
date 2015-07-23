@@ -86,11 +86,12 @@ class CommentController extends DefaultController
 
     /**
      * @Route("/comment/list", name="ed_blog_admin_comment_list")
-     * @Security("has_role('ADMINISTRATE_COMMENTS')")
      */
     public function listAction(Request $request)
     {
         $user = $this->getBlogUser();
+        $this->checkCommentsAdministrator();
+
         $paginator = $this->get('ed_blog.paginator');
         $datetimeFormat = $this->get("blog_settings")->getDatetimeFormat();
         $orderBy = $request->get('orderby', null);
@@ -141,11 +142,11 @@ class CommentController extends DefaultController
     /**
      * @Route("/comment/{id}/status/{status}", name="ed_blog_comment_edit_status", requirements={"status": "0|1"})
      * @ParamConverter("comment", class="ED\BlogBundle\Interfaces\Model\CommentInterface", converter="abstract_converter")
-     * @Security("has_role('ADMINISTRATE_COMMENTS')")
      */
     public function editStatusAction(Request $request, $comment, $status)
     {
         $user = $this->getBlogUser();
+        $this->checkCommentsAdministrator();
 
         $comment->setStatus($status);
         $em = $this->getDoctrine()->getManager();
@@ -172,11 +173,11 @@ class CommentController extends DefaultController
     /**
      * @Route("/comment/{id}/edit", name="ed_blog_comment_edit")
      * @ParamConverter("comment", class="ED\BlogBundle\Interfaces\Model\CommentInterface", converter="abstract_converter")
-     * @Security("has_role('ADMINISTRATE_COMMENTS')")
      */
     public function editAction(Request $request, $comment)
     {
         $user = $this->getUser();
+        $this->checkCommentsAdministrator();
 
         $form = $this->createForm('ed_blog_comment', $comment);
 

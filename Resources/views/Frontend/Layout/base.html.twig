@@ -26,7 +26,7 @@
     {# We merge several css files into 1, and that way we reduce number of calls during page rendering #}
     {# EdBlog css files #}
     {% block stylesheets %}
-      {% stylesheets filter="cssrewrite" filter="?uglifycss"
+      {% stylesheets filter="cssrewrite"
         'bundles/edblog/css/bootstrap.css'
         'bundles/edblog/css/main.min.blessed.css'
       %}
@@ -58,7 +58,7 @@
 
     {% block javascripts %}
 
-      {% javascripts filter='uglifyjs2'
+      {% javascripts
         '@EDBlogBundle/Resources/public/js/vendor/jquery.min.js'
         '@EDBlogBundle/Resources/public/js/vendor/bootstrap.min.js'
 

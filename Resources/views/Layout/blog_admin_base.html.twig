@@ -27,7 +27,7 @@
     {# Vendor css files #}
     {# EdBlog css files #}
     {% block stylesheets %}
-      {% stylesheets filter="?uglifycss" filter="cssrewrite"
+      {% stylesheets filter="cssrewrite"
         'bundles/edblog/css/jquery.Jcrop.css'
         'bundles/edblog/css/nprogress.css'
         'bundles/edblog/css/bootstrap.css'
@@ -60,7 +60,7 @@
 
     {% block javascripts %}
 
-      {% javascripts filter='uglifyjs2'
+      {% javascripts
         '@EDBlogBundle/Resources/public/js/vendor/jquery.min.js'
         '@EDBlogBundle/Resources/public/js/vendor/bootstrap.min.js'
 

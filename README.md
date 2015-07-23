@@ -450,9 +450,6 @@ assetic:
     # ...
     bundles:    [ EDBlogBundle ]
 ```
-**Note:**
->UglifyJS and UglifyCSS compressors/beautifiers are supported by EDBlogBundle.
->Visit http://symfony.com/doc/current/cookbook/assetic/uglifyjs.html to learn more how to include it to your project.
 
 Step 7: Finish
 ==============

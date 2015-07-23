@@ -43,7 +43,8 @@ Installation process includes following steps:
  4. EDBlogBundle configuration
  5. Rutes configuration
  6. Assetic configuration
- 7. Finish
+ 7. RSS feed configuration
+ 8. Finish
  
 Step 1: Composer vendors installation and activation
 ====================================================
@@ -451,7 +452,32 @@ assetic:
     bundles:    [ EDBlogBundle ]
 ```
 
-Step 7: Finish
+Step 7: RSS feed
+================
+
+In order to use RSS feed functionality add `eko_feed` configuration to your `app/config/config.yml`. Please change required lines according to your application.
+
+```yml
+ # app/config/config.yml
+ 
+# ...
+eko_feed:
+    feeds:
+        article:
+            title:       'My articles/posts'
+            description: 'Latests articles'
+            link:
+                route_name: ed_blog_admin_feed
+                route_params: {type: rss} # necessary if route cantains required parameters
+            encoding:    'utf-8'
+            author:      'Acme' # Only required for Atom feeds
+```
+
+**Note:**
+ > Visit https://github.com/eko/FeedBundle to learn more about **eko/FeedBundle**
+
+
+Step 8: Finish
 ==============
 
 Now you are ready to finish your EDBlogBundle installation:

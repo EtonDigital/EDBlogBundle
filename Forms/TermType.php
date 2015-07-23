@@ -36,7 +36,8 @@ class TermType extends AbstractType
                 'required' => false,
                 'label' => 'Slug:',
                 'attr' => array(
-                    'class' => 'form-control form-control--lg margin--b'
+                    'class' => 'form-control form-control--lg margin--b',
+                    'placeholder' => 'Slug will be generated automatically from title or you can add it manually'
                 )
             ))
            ;

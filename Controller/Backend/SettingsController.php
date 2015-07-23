@@ -42,6 +42,7 @@ class SettingsController extends DefaultController
                 }
                 else
                 {
+                    $this->get('session')->getFlashBag()->add('success', 'Settings updated successfully.');
                     $this->redirect("ed_blog_admin_settings_edit");
                 }
             }

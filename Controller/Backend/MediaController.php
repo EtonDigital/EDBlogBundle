@@ -203,6 +203,7 @@ class MediaController extends DefaultController
             return new JsonResponse(array('success' => 'true'));
         }
 
+        $this->get('session')->getFlashBag()->add('success', 'Photo removed successfully.');
         return $this->redirectToRoute('ed_blog_admin_media_list');
     }
 
@@ -235,6 +236,7 @@ class MediaController extends DefaultController
             }
             else
             {
+                $this->get('session')->getFlashBag()->add('success', 'Photo details updated successfully.');
                 return $this->redirectToRoute('ed_blog_admin_media_list');
             }
         }
@@ -270,25 +272,31 @@ class MediaController extends DefaultController
 
                 $em->persist($media);
                 $em->flush();
+
+                if($request->isXmlHttpRequest())
+                {
+                    return new JsonResponse(array(
+                        "success" => true,
+                        "html" => $this->renderView('@EDBlog/Media/editForm.html.twig', array(
+                            'media' => $media,
+                            'form' => $form->createView()
+                        ))
+                    ));
+                }
+                else
+                {
+                    $this->get('session')->getFlashBag()->add('success', 'Category created successfully.');
+
+                    return $this->render("@EDBlog/Media/edit.html.twig", array(
+                        'media' => $media,
+                        'form' => $form->createView()
+                    ));
+                }
             }
         }
-        if($request->isXmlHttpRequest())
-        {
-            return new JsonResponse(array(
-                "success" => true,
-                "html" => $this->renderView('@EDBlog/Media/editForm.html.twig', array(
-                    'media' => $media,
-                    'form' => $form->createView()
-                ))
-            ));
-        }
-        else
-        {
-            return $this->render("@EDBlog/Media/edit.html.twig", array(
-                'media' => $media,
-                'form' => $form->createView()
-            ));
-        }
+
+        return new JsonResponse(array('success' => false));
+
     }
 
     /**

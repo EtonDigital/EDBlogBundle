@@ -70,6 +70,8 @@ class CommentController extends DefaultController
                     ->setArticle($article);
 
                 $form = $this->createForm('edcomment', $resetObject);
+
+                $this->get('session')->getFlashBag()->add('success', 'Comment created successfully.');
             }
         }
 
@@ -132,6 +134,7 @@ class CommentController extends DefaultController
         $em->remove($comment);
         $em->flush();
 
+        $this->get('session')->getFlashBag()->add('success', 'Comment removed successfully.');
         return $this->redirectToRoute('ed_blog_admin_comment_list');
     }
 
@@ -159,6 +162,8 @@ class CommentController extends DefaultController
         }
         else
         {
+            $this->get('session')->getFlashBag()->add('success', 'Comment status updated successfully.');
+
             return $this->redirectToRoute("ed_blog_admin_comment_list");
         }
 
@@ -187,6 +192,7 @@ class CommentController extends DefaultController
                 $em->persist($comment);
                 $em->flush();
 
+                $this->get('session')->getFlashBag()->add('success', 'Comment updated successfully.');
                 return $this->redirectToRoute('ed_blog_admin_comment_list');
             }
         }

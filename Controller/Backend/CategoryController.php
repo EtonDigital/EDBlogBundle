@@ -64,6 +64,7 @@ class CategoryController extends DefaultController
                 $em->persist($form->getData());
                 $em->flush();
 
+                $this->get('session')->getFlashBag()->add('success', 'Category created successfully.');
                 return $this->redirectToRoute('ed_blog_category_list');
             }
         }
@@ -96,6 +97,7 @@ class CategoryController extends DefaultController
                 $em->persist($form->getData());
                 $em->flush();
 
+                $this->get('session')->getFlashBag()->add('success', 'Category updated successfully.');
                 return $this->redirectToRoute('ed_blog_category_list');
             }
         }
@@ -121,6 +123,7 @@ class CategoryController extends DefaultController
         $em->remove($taxonomy);
         $em->flush();
 
+        $this->get('session')->getFlashBag()->add('success', 'Category removed successfully.');
         return $this->redirectToRoute('ed_blog_category_list');
     }
 

@@ -140,6 +140,7 @@ class TagController extends DefaultController
                 $em->persist($tag);
                 $em->flush();
 
+                $this->get('session')->getFlashBag()->add('success', 'Tag created successfully.');
                 return $this->redirectToRoute('ed_blog_tag_list');
             }
         }
@@ -190,6 +191,7 @@ class TagController extends DefaultController
                 $em->persist($form->getData());
                 $em->flush();
 
+                $this->get('session')->getFlashBag()->add('success', 'Tag updated successfully.');
                 return $this->redirectToRoute('ed_blog_tag_list');
             }
         }
@@ -215,6 +217,7 @@ class TagController extends DefaultController
         $em->remove($taxonomy);
         $em->flush();
 
+        $this->get('session')->getFlashBag()->add('success', 'Tag removed successfully.');
         return $this->redirectToRoute('ed_blog_tag_list');
     }
 

@@ -20,17 +20,7 @@
       <a class="flright text--mini" href="{{ path('homepage') }}">&lt; <span class="hidden-xs">Back to </span>Website</a>
       <div class="logo" title=""><img class="margin--r" src="{{ asset('bundles/edblog/img/svg/edblog-white-logo.svg') }}" alt="EdBlog">Admin panel</div>
     </header>
-    {#{% if app.user %}
-      {% if is_granted('ROLE_SUPPLIER_USER') %}
-        {{ include('EDHomeBundle::_header-supplier.html.twig') }}
-      {% else %}
-        {{ include('EDHomeBundle::_header.html.twig') }}
-      {% endif %}
-    {% else %}
-      {% if (app.request.attributes.get('_route') != 'homepage') and ( not app.user) %}
-        {{ include('EDHomeBundle::_header-non-loggedin.html.twig') }}
-      {% endif %}
-    {% endif %}#}
+
   {% endblock header %}
 
   <div class="wrap {% block wrapclass %}{% endblock wrapclass %}">
@@ -41,12 +31,10 @@
     {% endblock %}
 
     {# Used for footer #}
-    {#<div id="push"></div>#}
   </div>
 
   {% block footer %}
     {{ parent() }}
-    {#{% include('EDHomeBundle::_footer.html.twig') %}#}
   {% endblock footer %}
 
 {% endblock %} {# endblock body #}

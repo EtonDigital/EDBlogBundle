@@ -425,7 +425,7 @@ media:
 
 ed_blog_admin_feed:
     path:      /feed/{type}
-    defaults:  { _controller: EDBlogBundle:Feed:feed }
+    defaults:  { _controller: EDBlogBundle:Backend/Feed:feed }
 
 ed_blog_frontend:
     resource: "@EDBlogBundle/Controller/Frontend/"

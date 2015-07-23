@@ -28,17 +28,18 @@
     {# EdBlog css files #}
     {% block stylesheets %}
       {% stylesheets filter="cssrewrite"
-        'bundles/edblog/css/jquery.Jcrop.css'
-        'bundles/edblog/css/nprogress.css'
-        'bundles/edblog/css/bootstrap.css'
-        'bundles/edblog/css/main.min.blessed.css'
-        'bundles/edblog/css/bootstrap-tagsinput.css'
+          'bundles/edblog/css/jquery.Jcrop.css'
+          'bundles/edblog/css/nprogress.css'
+          'bundles/edblog/css/bootstrap.css'
+          'bundles/edblog/css/main.min.blessed.css'
+          'bundles/edblog/css/bootstrap-tagsinput.css'
       %}
         <link rel="stylesheet" href="{{ asset_url }}" />
       {% endstylesheets %}
     {% endblock %}
 
     {# Fonts #}
+    <link href="/bundles/edblog/css/pnotify.custom.min.css" media="all" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,300,400,600,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
@@ -48,9 +49,9 @@
   <body class="{% block body_class %}{% endblock body_class %}">
 
     {% block body %}
-      <div class="flash">
-        {{ include('EDBlogBundle:Utils:flash_message.html.twig') }}
-      </div>
+      {#<div class="flash">#}
+        {#{{ include('EDBlogBundle:Utils:flash_message.html.twig') }}#}
+      {#</div>#}
     {% endblock %}
 
     {% block modals %}
@@ -75,15 +76,19 @@
         '@EDBlogBundle/Resources/public/js/vendor/jquery.fileupload.js'
         '@EDBlogBundle/Resources/public/js/vendor/nprogress.js'
         '@EDBlogBundle/Resources/public/js/vendor/jquery.Jcrop.min.js'
+        '@EDBlogBundle/Resources/public/js/vendor/pnotify.custom.min.js'
 
         '@EDBlogBundle/Resources/public/js/general.js'
         '@EDBlogBundle/Resources/public/js/frontend.js'
         '@EDBlogBundle/Resources/public/js/ed_autocomplete.js'
+
       %}
       <script type="text/javascript" src="{{ asset_url }}"></script>
       {% endjavascripts %}
 
       <script src="/bundles/edblog/js/tinymce/tinymce.min.js"></script>
+
+      {{ include('EDBlogBundle:Utils:flash_message.js.twig') }}
 
     {% endblock %}
 

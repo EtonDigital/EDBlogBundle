@@ -1,0 +1,13 @@
+<script type="text/javascript">
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        new PNotify({title: 'Success', text: '{{ flashMessage }}', type: 'success', icon: 'fa fa-check'});
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        new PNotify({title: 'Error', text: '{{ flashMessage }}', type: 'success', icon: 'fa fa-exclamation-triangle'});
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('info') %}
+        new PNotify({title: 'Error', text: '{{ flashMessage }}', type: 'success', icon: 'fa fa-info'});
+    {% endfor %}
+</script>

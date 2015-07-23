@@ -4,10 +4,10 @@
     {% endfor %}
 
     {% for flashMessage in app.session.flashbag.get('error') %}
-        new PNotify({title: 'Error', text: '{{ flashMessage }}', type: 'success', icon: 'fa fa-exclamation-triangle'});
+        new PNotify({title: 'Error', text: '{{ flashMessage }}', type: 'error', icon: 'fa fa-exclamation-triangle'});
     {% endfor %}
 
     {% for flashMessage in app.session.flashbag.get('info') %}
-        new PNotify({title: 'Error', text: '{{ flashMessage }}', type: 'success', icon: 'fa fa-info'});
+        new PNotify({title: 'Info', text: '{{ flashMessage }}', type: 'info', icon: 'fa fa-info'});
     {% endfor %}
 </script>

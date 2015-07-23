@@ -293,17 +293,10 @@ function initUploadExcerptPhoto()
 
 function displayErrorsFromArray(errors)
 {
-    if($('#error-container').length == 0)
-    {
-        $('.dashboard-content:visible').last().prepend('<div class="alert alert-danger" id="error-container"></div>');
-    }
-
-    $('#error-container').html('');
     for(error in errors)
     {
         var e = errors[error];
-        $('#error-container').append('<div class="single-error">' +  e.name + ' : ' + e.message + '</div>');
-        $('#error-container').removeClass('hide');
+        new PNotify({title: 'Error while uploading', text: e.name + ' - '+  e.message, type: 'error', icon: 'fa fa-exclamation-triangle'});
     }
 
 }
@@ -320,10 +313,6 @@ function initUploadMedia()
             if(data.errors.length)
             {
                 displayErrorsFromArray(data.errors);
-            }
-            else
-            {
-                $('#error-container').addClass('hide');
             }
 
             $('.js-load-more').remove();

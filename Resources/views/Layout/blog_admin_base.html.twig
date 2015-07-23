@@ -26,8 +26,10 @@
     {# We merge several css files into 1, and that way we reduce number of calls during page rendering #}
     {# Vendor css files #}
     {# EdBlog css files #}
+
     {% block stylesheets %}
       {% stylesheets filter="cssrewrite"
+          'bundles/edblog/css/pnotify.custom.min.css'
           'bundles/edblog/css/jquery.Jcrop.css'
           'bundles/edblog/css/nprogress.css'
           'bundles/edblog/css/bootstrap.css'
@@ -39,7 +41,6 @@
     {% endblock %}
 
     {# Fonts #}
-    <link href="/bundles/edblog/css/pnotify.custom.min.css" media="all" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,300,400,600,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 

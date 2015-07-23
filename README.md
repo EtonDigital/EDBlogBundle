@@ -452,8 +452,8 @@ assetic:
     bundles:    [ EDBlogBundle ]
 ```
 
-Step 7: RSS feed
-================
+Step 7: RSS feed configuration
+==============================
 
 In order to use RSS feed functionality add `eko_feed` configuration to your `app/config/config.yml`. Please change required lines according to your application.
 

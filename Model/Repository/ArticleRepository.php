@@ -129,7 +129,7 @@ class ArticleRepository extends EntityRepository implements ArticleRepositoryInt
     {
         $articleClass = $this->_entityName;
         $q = $this->getEntityManager()
-            ->createQuery('delete from $articleClass');
+            ->createQuery("delete from $articleClass");
 
         $numDeleted = $q->execute();
 
@@ -184,35 +184,6 @@ class ArticleRepository extends EntityRepository implements ArticleRepositoryInt
 
         return $articles;
 
-        //return $this->sqlResultArrayToArrayForDisplay($articles);
-    }
-
-    //input        array(3) { [0] => array(3) { 'year' => string(4) "2015" 'month' => string(1) "5" 'num' => string(1) "4" } [1] => array(3) { 'year' => string(4) "2015" 'month' => string(1) "4" 'num' => string(1) "1" } [2] => array(3) { 'year' => string(4) "2014" 'month' => string(1) "5" 'num' => string(1) "1" } }
-    //output        array( "2015" => array("January" => "2","April" => "5","October"=> 3), "2014" => array("January" => "1","February" => "10","March"=> 23,"April"=> 2)
-    private function sqlResultArrayToArrayForDisplay($inputArray)
-    {
-        $resultArray=array();
-
-        if (count($inputArray))
-        {
-            foreach ($inputArray as $element)
-            {
-                end($resultArray);
-                $last_id = key($resultArray);
-
-                if ($last_id && $element['year']==$last_id)
-                {
-                    $tempArray = $resultArray[$element['year']];
-                    $tempArray[$element['month']]=$element['num'];
-
-                    $resultArray[$element['year']]=$tempArray;
-                } else
-                {
-                    $resultArray[$element['year']] = array($element['month'] => $element['num']);
-                }
-            }
-        }
-        return $resultArray;
     }
 
     private function getDateTimeFromParams($year, $month)

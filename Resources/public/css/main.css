@@ -2267,6 +2267,16 @@ option {
   text-align: center;
 }
 
+.ui-pnotify-title {
+  line-height: 17px;
+  display: inline-block;
+}
+
+.ui-pnotify-closer, .ui-pnotify-sticker {
+  position: relative;
+  z-index: 10;
+}
+
 .mce-container, .mce-container-body, .mce-menu {
   background: #f1f4f6 !important;
   border-color: #bcc2c6 !important;

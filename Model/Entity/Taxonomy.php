@@ -12,6 +12,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ED\BlogBundle\Interfaces\Model\BlogTaxonomyInterface;
 use ED\BlogBundle\Interfaces\Model\BlogTermInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class Taxonomy implements BlogTaxonomyInterface
 {
@@ -240,6 +242,25 @@ class Taxonomy implements BlogTaxonomyInterface
         return $this;
     }
 
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        $parentTaxon = $this->getParent();
 
+        while($parentTaxon)
+        {
+            if($parentTaxon == $this)
+            {
+                $context->buildViolation('Circular taxonomy reference detected. Please check your parent taxonomy.')
+                    ->atPath('parent')
+                    ->addViolation();
 
+                break;
+            }
+
+            $parentTaxon = $parentTaxon->getParent();
+        }
+    }
 }

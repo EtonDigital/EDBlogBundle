@@ -1,0 +1,9 @@
+.ui-pnotify-title {
+  line-height: 17px;
+  display: inline-block;
+}
+
+.ui-pnotify-closer, .ui-pnotify-sticker {
+  position: relative;
+  z-index: 10;
+}

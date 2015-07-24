@@ -310,7 +310,7 @@ function initUploadMedia()
         done: function (e, response) {
             var data = response.result;
 
-            if(data.errors.length)
+            if(data.hasOwnProperty('errors') && data.errors.length)
             {
                 displayErrorsFromArray(data.errors);
             }
@@ -389,5 +389,12 @@ function initNprogress()
             NProgress.start();
     }).ajaxStop(function(e){
         NProgress.done();
+    }).ajaxComplete(function(e, response)
+    {
+        var data = response.responseJSON;
+        if(data != undefined && data.hasOwnProperty("redirect") && data.hasOwnProperty("success") && data.success == false)
+        {
+            window.location = data.redirect;
+        }
     });
 }

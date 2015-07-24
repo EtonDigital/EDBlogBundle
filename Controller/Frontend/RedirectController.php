@@ -6,10 +6,11 @@
  * Time: 10.58
  */
 
-namespace ED\BlogBundle\Controller\Backend;
+namespace ED\BlogBundle\Controller\Frontend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -65,5 +66,16 @@ class RedirectController extends Controller
             return $this->redirect($redirectURL) ;
         }
 
+    }
+
+    /**
+     * @Route("/login", name="ed_blog_redirect_login", condition="request.isXmlHttpRequest()")
+     */
+    public function ajaxLoginAction()
+    {
+        return new JsonResponse( array(
+            "success" => false,
+            "redirect" => $this->generateUrl("fos_user_security_login", array(), true)
+        ));
     }
 }

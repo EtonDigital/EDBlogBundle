@@ -23,7 +23,13 @@
 
           {% for article in pagination %}
             <tr>
-              <td><a href="{{ path('ed_blog_admin_article_edit', { 'slug' : article.slug  }) }}">{{ article.title }}</a></td>
+              <td>
+                  {% if is_granted('EDIT_ARTICLE', article) %}
+                      <a href="{{ path('ed_blog_admin_article_edit', { 'slug' : article.slug  }) }}">{{ article.title }}</a>
+                  {% else %}
+                      <a href="{{ path('ed_blog_admin_article_show', { 'slug' : article.slug  }) }}">{{ article.title }}</a>
+                  {% endif  %}
+              </td>
               <td>{{ article.author.blogDisplayName }}</td>
               <td>
                   {% if(article.status == constant('STATUS_PUBLISHED', article)) %}

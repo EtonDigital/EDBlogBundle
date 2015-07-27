@@ -445,6 +445,9 @@ ed_blog:
     resource: "@EDBlogBundle/Controller/Backend/"
     type:     annotation
     prefix:   /blog/admin/
+    
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 ```
 Step 6: Assetic configuration
 =============================

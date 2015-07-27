@@ -345,11 +345,44 @@ ed_blog:
 Step 4: SonataMediaBundle installation and configuration
 ========================================================
 
-Next, we will install and configure media management core. Please generate ApplicationSonataMediaBundle by running following code:
+Next, we will install and configure media management core. Add following configuration to your config.yml:
+                                                           
+```yml
+# app/config/config.yml
+
+sonata_media:
+   default_context: default
+   db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+   contexts:
+       default:  # the default context is mandatory
+           providers:
+               - sonata.media.provider.dailymotion
+               - sonata.media.provider.youtube
+               - sonata.media.provider.image
+               - sonata.media.provider.file
+
+           formats:
+               crop:  { width: 600 , quality: 80}
+               small: { width: 100 , quality: 70}
+               big:   { width: 500 , quality: 70}
+               lib:   { width: 350 , height: 250 , quality: 70}
+               excerpt:   { width: 780 , height: 500 , quality: 70}
+
+   cdn:
+       server:
+           path: /uploads/media # http://media.sonata-project.org/
+
+   filesystem:
+       local:
+           directory:  %kernel.root_dir%/../web/uploads/media
+           create:     false
+```    
+ 
+To generate ApplicationSonataMediaBundle open terminal and run following code:
     
     $ php app/console sonata:easy-extends:generate --dest=src SonataMediaBundle
     
-Now you can include ApplicationSonataMediaBundle in ``app/AppKernel.php`` by uncommenting or adding this line:
+Now you can include ApplicationSonataMediaBundle in ``app/AppKernel.php`` by add/uncomment this line:
 
 ```php
 <?php
@@ -362,45 +395,13 @@ class AppKernel extends Kernel
     {
         $bundles = array(
             // ...
-            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),	
+            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(), //add/uncomment	
         );
         
         // ...
     }
 }
-```    
-Add following configuration to your config.yml:
-
-```yml
- # app/config/config.yml
-
-sonata_media:
-    default_context: default
-    db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
-    contexts:
-        default:  # the default context is mandatory
-            providers:
-                - sonata.media.provider.dailymotion
-                - sonata.media.provider.youtube
-                - sonata.media.provider.image
-                - sonata.media.provider.file
-
-            formats:
-                crop:  { width: 600 , quality: 80}
-                small: { width: 100 , quality: 70}
-                big:   { width: 500 , quality: 70}
-                lib:   { width: 350 , height: 250 , quality: 70}
-                excerpt:   { width: 780 , height: 500 , quality: 70}
-
-    cdn:
-        server:
-            path: /uploads/media # http://media.sonata-project.org/
-
-    filesystem:
-        local:
-            directory:  %kernel.root_dir%/../web/uploads/media
-            create:     false
-```    
+```
             
 Finally we should create local directory for media storage:
 

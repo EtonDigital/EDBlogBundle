@@ -38,9 +38,9 @@ Installation:
 
 Installation process includes following steps:
  1. Composer vendors installation and activation
- 2. SonataMediaBundle installation and configuration
- 3. Creating blog related entities from provided model
- 4. EDBlogBundle configuration
+ 2. Creating blog related entities from provided model
+ 3. EDBlogBundle configuration
+ 4. SonataMediaBundle installation and configuration
  5. Rutes configuration
  6. Assetic configuration
  7. RSS feed configuration

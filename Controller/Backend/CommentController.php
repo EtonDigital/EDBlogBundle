@@ -8,6 +8,7 @@
 
 namespace ED\BlogBundle\Controller\Backend;
 
+use ED\BlogBundle\Util\IDEncrypt;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use ED\BlogBundle\Event\CommentEvent;
 use ED\BlogBundle\Events\EDBlogEvents;
@@ -37,6 +38,7 @@ class CommentController extends DefaultController
         $object
             ->setAuthor($user)
             ->setArticle($article);
+        $class = get_class($object);
 
         $form = $this->createForm('edcomment', $object);
 
@@ -63,24 +65,26 @@ class CommentController extends DefaultController
                 $dispatcher = $this->get("event_dispatcher");
                 $dispatcher->dispatch(EDBlogEvents::ED_BLOG_COMMENT_CREATED, new CommentEvent($object));
 
-                $class = get_class($object);
                 $resetObject = new $class;
                 $resetObject
                     ->setAuthor($user)
                     ->setArticle($article);
 
                 $form = $this->createForm('edcomment', $resetObject);
-
-                $this->get('session')->getFlashBag()->add('success', 'Comment created successfully.');
             }
         }
 
         $comments = $this->getDoctrine()->getRepository( $class )->findByArticle($article, $this->get("blog_settings")->getCommentsDisplayOrder());
 
-        return $this->render("@EDBlog/Comment/list.html.twig", array(
-            'form' => $form->createView(),
-            'article' => $article,
-            'comments' => $comments
+        return new JsonResponse(array(
+            'success' => true,
+            'lock' => true,
+            'currentComment'=>IDEncrypt::encrypt($object->getId()),
+            'html' =>  $this->renderView("@EDBlog/Comment/list.html.twig", array(
+                'form' => $form->createView(),
+                'article' => $article,
+                'comments' => $comments
+            ))
         ));
     }
 

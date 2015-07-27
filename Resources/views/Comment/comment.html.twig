@@ -1,5 +1,5 @@
 {% if (comment.status == constant('STATUS_ACTIVE', comment)) or (app.user and comment.author == app.user) or (not app.user and isMyComment(comment)) %}
-    <div class="col-sm-3 margin--t">
+    <div id="{{ comment.id|encrypt }}" class="col-sm-3 margin--t">
         <div class="text--bold c-grey">
             {% if comment.author %}
                 {{ comment.author.commenterDisplayName }}

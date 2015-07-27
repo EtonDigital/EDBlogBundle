@@ -86,78 +86,12 @@ class AppKernel extends Kernel
 }
 ```
     
-Step 2: SonataMediaBundle installation and configuration
-========================================================
-
-Next, we will install and configure media management core. Please generate ApplicationSonataMediaBundle by running following code:
-    
-    $ php app/console sonata:easy-extends:generate --dest=src SonataMediaBundle
-    
-Now you can include ApplicationSonataMediaBundle in ``app/AppKernel.php`` by uncommenting or adding this line:
-
-```php
-<?php
-//app/Kernel.php
-
-//...
-class AppKernel extends Kernel
-{
-    public function registerBundles()
-    {
-        $bundles = array(
-            // ...
-            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),	
-        );
-        
-        // ...
-    }
-}
-```    
-Add following configuration to your config.yml:
-
-```yml
- # app/config/config.yml
-
-sonata_media:
-    default_context: default
-    db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
-    contexts:
-    default:  # the default context is mandatory
-        providers:
-        - sonata.media.provider.dailymotion
-        - sonata.media.provider.youtube
-        - sonata.media.provider.image
-        - sonata.media.provider.file
-
-        formats:
-        crop:  { width: 600 , quality: 80}
-        small: { width: 100 , quality: 70}
-        big:   { width: 500 , quality: 70}
-        lib:   { width: 350 , height: 250 , quality: 70}
-        excerpt:   { width: 780 , height: 500 , quality: 70}
-
-    cdn:
-    server:
-        path: /uploads/media # http://media.sonata-project.org/
-
-    filesystem:
-    local:
-        directory:  %kernel.root_dir%/../web/uploads/media
-        create:     false
-```    
-            
-Finally we should create local directory for media storage:
-
-    $ mkdir web/uploads
-    $ mkdir web/uploads/media
-    $ sudo chmod -R 0777 web/uploads
-    
-Step 3: Creating blog related entities from provided model
+Step 2: Creating blog related entities from provided model
 ==========================================================
 
 To be able to use EDBlogBundle features you must implement certain entities somewhere inside your application. It will be very easy, only thing that you should do is to create relevant classes and extend our prepared models.
 
-###3.1 Article entity
+###2.1 Article entity
 
 Create your Article entity similar to this example:
  
@@ -181,7 +115,7 @@ class Article extends BaseArticle implements ArticleInterface
 }
 ```
         
-###3.2 ArticleMeta entity
+###2.2 ArticleMeta entity
 
 Create your ArticleMeta entity similar to this example:
   
@@ -204,7 +138,7 @@ class ArticleMeta extends BaseArticleMeta implements ArticleMetaInterface
 }
 ```
             
-###3.3 Comment entity
+###2.3 Comment entity
 
 Create your Comment entity similar to this example:
 
@@ -228,7 +162,7 @@ class Comment extends BaseComment implements CommentInterface
 }            
 ```
 
-###3.4 Settings entity
+###2.4 Settings entity
 
 Create your Settings entity similar to this example:
 
@@ -251,7 +185,7 @@ class Settings extends BaseSettings implements BlogSettingsInterface
 }
 ```
 
-###3.5 Taxonomy entity
+###2.5 Taxonomy entity
 
 Create your Taxonomy entity similar to this example:
 
@@ -274,7 +208,7 @@ class Taxonomy extends BaseTaxonomy implements BlogTaxonomyInterface
 }
 ```
 
-###3.5 TaxonomyRelation entity
+###2.6 TaxonomyRelation entity
 
 Create your TaxonomyRelation entity similar to this example:
 
@@ -297,7 +231,7 @@ class TaxonomyRelation extends BaseTaxonomyRelation implements TaxonomyRelationI
 }
 ```
 
-###3.6 Term entity
+###2.7 Term entity
 
 Create your Term entity similar to this example:
 
@@ -322,7 +256,7 @@ class Term extends BaseTerm implements BlogTermInterface
 }
 ```
 
-###3.7 User entity
+###2.8 User entity
 
 To be able to use EDBlogBundle your User entity should implement two interfaces: BlogUserInterface and ArticleCommenterInterface. Modify your User entity something similar to the following example.
 
@@ -369,7 +303,7 @@ class User extends BaseUser implements BlogUserInterface, ArticleCommenterInterf
 }
 ```
 
-###3.8 User Repository
+###2.9 User Repository
 
 Your User repository class should implement BlogUserRepositoryInterface. We prepared ``ED\BlogBundle\Model\Repository\UserRepository`` that you can use as a start point. Modify your UserRepository class something similar to:
 
@@ -387,7 +321,7 @@ class AppUserRepository extends BaseUserRepository implements BlogUserRepository
 }
 ```
 
-Step 4: EDBlogBundle configuration
+Step 3: EDBlogBundle configuration
 =================================
 
 Now when your entities are ready, you can configure EDBlogBundle in your ``app/config/config.yml``. Please add `ed_blog` to your configuration while targeting previously created entities, something similar to the following example:
@@ -407,6 +341,72 @@ ed_blog:
         blog_comment_class: Acme\Bundle\DemoBundle\Entity\Comment
         blog_settings_class: Acme\Bundle\DemoBundle\Entity\Settings
 ```
+
+Step 4: SonataMediaBundle installation and configuration
+========================================================
+
+Next, we will install and configure media management core. Please generate ApplicationSonataMediaBundle by running following code:
+    
+    $ php app/console sonata:easy-extends:generate --dest=src SonataMediaBundle
+    
+Now you can include ApplicationSonataMediaBundle in ``app/AppKernel.php`` by uncommenting or adding this line:
+
+```php
+<?php
+//app/Kernel.php
+
+//...
+class AppKernel extends Kernel
+{
+    public function registerBundles()
+    {
+        $bundles = array(
+            // ...
+            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),	
+        );
+        
+        // ...
+    }
+}
+```    
+Add following configuration to your config.yml:
+
+```yml
+ # app/config/config.yml
+
+sonata_media:
+    default_context: default
+    db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+    contexts:
+        default:  # the default context is mandatory
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+
+            formats:
+                crop:  { width: 600 , quality: 80}
+                small: { width: 100 , quality: 70}
+                big:   { width: 500 , quality: 70}
+                lib:   { width: 350 , height: 250 , quality: 70}
+                excerpt:   { width: 780 , height: 500 , quality: 70}
+
+    cdn:
+        server:
+            path: /uploads/media # http://media.sonata-project.org/
+
+    filesystem:
+        local:
+            directory:  %kernel.root_dir%/../web/uploads/media
+            create:     false
+```    
+            
+Finally we should create local directory for media storage:
+
+    $ mkdir web/uploads
+    $ mkdir web/uploads/media
+    $ sudo chmod -R 0777 web/uploads
 
 Step 5: Rutes configuration
 ===========================

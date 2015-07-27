@@ -300,6 +300,11 @@ class User extends BaseUser implements BlogUserInterface, ArticleCommenterInterf
     
         return $this;
     }
+    
+    public function getCommenterDisplayName()
+    {
+        return $this->blogDisplayName;
+    }
 }
 ```
 

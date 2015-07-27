@@ -282,6 +282,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser implements BlogUserInterface, ArticleCommenterInterface
 {
+    //...
+
     /**
      * Required by BlogUserInterface
      *

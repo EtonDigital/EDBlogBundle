@@ -6,7 +6,8 @@ $(document).ready(function() {
         obj.autocomplete({
             serviceUrl: source,
             deferRequestBy: 50,
-            minChars: 3
+            minChars: 3,
+            containerClass: 'dropdown-menu'
         });
     });
 });

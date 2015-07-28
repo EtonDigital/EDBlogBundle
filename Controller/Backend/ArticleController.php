@@ -278,6 +278,8 @@ class ArticleController extends DefaultController
             "id" => "DESC"
         ));
 
+        $latestDraft = $latestDraft ? $latestDraft : $article;
+
         $title = $request->get('title', $latestDraft->getTitle());
         $content = $request->get('content', $latestDraft->getContent());
         $em  = $this->getDoctrine()->getManager();

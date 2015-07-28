@@ -170,24 +170,6 @@ $(document).ready(function(){
         $('.js-modal-add-excerpt-media .js-close-insert-modal').trigger('click');
     });
 
-    $(document).on('submit', '.js-comment-form', function(e){
-        e.preventDefault();
-        var form=$(this);
-        var submit=form.find(':submit');
-        submit.attr('disabled', 'disabled');
-
-        $.post($(this).attr('action'),$(this).serialize() , function(data){
-            $('.js-comments-content').replaceWith(data.html);
-            if (data.currentComment)
-            {
-                $('html, body').animate({
-                    scrollTop: $("#"+data.currentComment).offset().top
-                }, 2000);
-            }
-        });
-    });
-
-
     $(document).on('submit', '.ajax_media_form', function(e){
         e.preventDefault();
         $.post($(this).attr('action'), $(this).serialize(), function(data){});

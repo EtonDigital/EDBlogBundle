@@ -152,9 +152,14 @@ $(document).ready(function(){
         var submit=form.find(':submit');
         submit.attr('disabled', 'disabled');
 
-        //'js-single-click'
         $.post($(this).attr('action'),$(this).serialize() , function(data){
-            $('.js-comments-content').replaceWith(data);
+            $('.js-comments-content').replaceWith(data.html);
+            if (data.currentComment)
+            {
+                $('html, body').animate({
+                    scrollTop: $("#"+data.currentComment).offset().top
+                }, 2000);
+            }
         });
     });
 

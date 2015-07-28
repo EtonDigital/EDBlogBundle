@@ -100,16 +100,9 @@ class UserController extends DefaultController
      * @Route("/user/edit/{username}", name="ed_blog_user_edit")
      * @ParamConverter("user", class="ED\BlogBundle\Interfaces\Model\BlogUserInterface", converter="abstract_converter")
      */
-    public function editAction(Request $request, $username)
+    public function editAction(Request $request, $user)
     {
         $admin = $this->getBlogAdministrator();
-
-        $user = $this->getDoctrine()->getRepository(get_class($admin))->findOneByUsername( $username );
-
-        if(!$user)
-        {
-            throw new NotFoundHttpException("Sorry, user not found");
-        }
 
         $form = $this->createForm('edblog_user', array(
             'role' => $this->getDefaultBlogRole($user),
@@ -143,20 +136,13 @@ class UserController extends DefaultController
     }
 
     /**
-     * @Route("/user/edit/{username}", name="ed_blog_user_revoke")
+     * @Route("/user/{username}/revoke", name="ed_blog_user_revoke")
      * @ParamConverter("user", class="ED\BlogBundle\Interfaces\Model\BlogUserInterface", converter="abstract_converter")
      */
-    public function revokeAction($username)
+    public function revokeAction($user)
     {
         $admin = $this->getBlogAdministrator();
         $em = $this->getDoctrine()->getManager();
-
-        $user = $this->getDoctrine()->getRepository( get_class($admin) )->findOneByUsername( $username );
-
-        if(!$user)
-        {
-            throw new NotFoundHttpException("Sorry, user not found");
-        }
 
         $this->get('ed_blog.handler.blog_user_handler')->revokeBlogRoles($user);
 

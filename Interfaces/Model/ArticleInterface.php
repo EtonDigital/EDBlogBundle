@@ -47,7 +47,7 @@ interface ArticleInterface
 
     public function getMetaData();
 
-    public function setParent(ArticleInterface $parent);
+    public function setParent(ArticleInterface $parent=null);
 
     public function getParent();
 

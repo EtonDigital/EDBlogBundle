@@ -295,7 +295,7 @@ class Article implements ArticleInterface, RoutedItemInterface
     /**
      * @param mixed $parent
      */
-    public function setParent(ArticleInterface $parent)
+    public function setParent(ArticleInterface $parent=null)
     {
         $this->parent = $parent;
 

@@ -11,10 +11,6 @@ namespace ED\BlogBundle\Interfaces\Model;
 
 interface BlogTermInterface
 {
-    public function getId();
-
-    public function setId($id);
-
     public function getTitle();
 
     public function setTitle($title);

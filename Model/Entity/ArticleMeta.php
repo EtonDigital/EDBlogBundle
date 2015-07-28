@@ -9,6 +9,7 @@
 namespace ED\BlogBundle\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ED\BlogBundle\Interfaces\Model\ArticleInterface;
 
 class ArticleMeta
 {
@@ -63,7 +64,7 @@ class ArticleMeta
     /**
      * @param mixed $article
      */
-    public function setArticle($article)
+    public function setArticle(ArticleInterface $article)
     {
         $this->article = $article;
 

@@ -32,4 +32,10 @@ interface BlogTaxonomyRepositoryInterface
     public function updateTaxonomyCount(BlogTaxonomyInterface $taxonomy, $count);
 
     public function getSortableQuery($orderBy, $order);
+
+    public function removeAll();
+
+    public function getTagByTitles($tagTitles);
+
+    public function getTopNTags($number);
 }

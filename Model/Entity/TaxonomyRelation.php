@@ -9,6 +9,8 @@
 namespace ED\BlogBundle\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ED\BlogBundle\Interfaces\Model\ArticleInterface;
+use ED\BlogBundle\Interfaces\Model\BlogTaxonomyInterface;
 use ED\BlogBundle\Interfaces\Model\TaxonomyRelationInterface;
 
 
@@ -61,7 +63,7 @@ class TaxonomyRelation implements TaxonomyRelationInterface
     /**
      * @param mixed $article
      */
-    public function setArticle($article)
+    public function setArticle(ArticleInterface $article)
     {
         $this->article = $article;
         return $this;
@@ -78,7 +80,7 @@ class TaxonomyRelation implements TaxonomyRelationInterface
     /**
      * @param mixed $taxonomy
      */
-    public function setTaxonomy($taxonomy)
+    public function setTaxonomy(BlogTaxonomyInterface $taxonomy)
     {
         $this->taxonomy = $taxonomy;
         return $this;

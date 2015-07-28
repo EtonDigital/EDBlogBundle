@@ -11,11 +11,11 @@ namespace ED\BlogBundle\Interfaces\Model;
 
 interface TaxonomyRelationInterface
 {
-    public function setArticle($article);
+    public function setArticle(ArticleInterface $article);
 
     public function getArticle();
 
-    public function setTaxonomy($taxonomy);
+    public function setTaxonomy(BlogTaxonomyInterface $taxonomy);
 
     public function getTaxonomy();
 }

@@ -9,6 +9,8 @@
 namespace ED\BlogBundle\Interfaces\Repository;
 
 
+use ED\BlogBundle\Interfaces\Model\BlogUserInterface;
+
 interface BlogUserRepositoryInterface
 {
     /**
@@ -17,7 +19,7 @@ interface BlogUserRepositoryInterface
      * @param $user
      * @return mixed
      */
-    public function getNumberOfActiveBlogs($user);
+    public function getNumberOfActiveBlogs(BlogUserInterface $user);
 
     /**
      * Query for Blog administration list page

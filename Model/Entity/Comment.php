@@ -9,6 +9,8 @@
 namespace ED\BlogBundle\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ED\BlogBundle\Interfaces\Model\ArticleCommenterInterface;
+use ED\BlogBundle\Interfaces\Model\ArticleInterface;
 use ED\BlogBundle\Interfaces\Model\CommentInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -205,7 +207,7 @@ class Comment implements CommentInterface
     /**
      * @param mixed $article
      */
-    public function setArticle($article)
+    public function setArticle(ArticleInterface $article)
     {
         $this->article = $article;
         return $this;
@@ -240,7 +242,7 @@ class Comment implements CommentInterface
     /**
      * @param mixed $modifiedAt
      */
-    public function setModifiedAt($modifiedAt)
+    public function setModifiedAt(\DateTime $modifiedAt)
     {
         $this->modifiedAt = $modifiedAt;
 
@@ -275,7 +277,7 @@ class Comment implements CommentInterface
     /**
      * @param mixed $author
      */
-    public function setAuthor($author)
+    public function setAuthor(ArticleCommenterInterface $author)
     {
         $this->author = $author;
         return $this;

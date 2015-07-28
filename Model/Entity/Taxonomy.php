@@ -110,7 +110,7 @@ class Taxonomy implements BlogTaxonomyInterface
     /**
      * @param mixed $term
      */
-    public function setTerm($term)
+    public function setTerm(BlogTermInterface $term)
     {
         $this->term = $term;
         return $this;

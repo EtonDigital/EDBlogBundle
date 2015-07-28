@@ -11,7 +11,5 @@ namespace ED\BlogBundle\Interfaces\Model;
 
 interface ArticleCommenterInterface
 {
-    public function getId();
-
     public function getCommenterDisplayName();
 }

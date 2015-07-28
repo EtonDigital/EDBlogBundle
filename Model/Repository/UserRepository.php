@@ -9,13 +9,14 @@
 namespace ED\BlogBundle\Model\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use ED\BlogBundle\Interfaces\Model\BlogUserInterface;
 use ED\BlogBundle\Interfaces\Repository\BlogUserRepositoryInterface;
 use Doctrine\ORM\Mapping;
 use ED\BlogBundle\Model\Entity\Article;
 
 class UserRepository extends EntityRepository implements BlogUserRepositoryInterface
 {
-    public function getNumberOfActiveBlogs($user)
+    public function getNumberOfActiveBlogs(BlogUserInterface $user)
     {
 
         $query = "SELECT COUNT(a) FROM AppBundle:Article a

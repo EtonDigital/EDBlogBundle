@@ -19,7 +19,7 @@ interface CommentInterface
 
     public function getName();
 
-    public function setArticle($article);
+    public function setArticle(ArticleInterface $article);
 
     public function getArticle();
 
@@ -34,4 +34,16 @@ interface CommentInterface
     public function setEmail($email);
 
     public function getEmail();
+
+    public function setCreatedAt($createdAt);
+
+    public function getCreatedAt();
+
+    public function setModifiedAt(\DateTime $modifiedAt);
+
+    public function getModifiedAt();
+
+    public function setAuthor(ArticleCommenterInterface $author);
+
+    public function getAuthor();
 }

@@ -11,4 +11,6 @@ namespace ED\BlogBundle\Interfaces\Repository;
 interface BlogSettingsRepositoryInterface
 {
     public function getSettingsArray();
+
+    public function removeAll();
 }

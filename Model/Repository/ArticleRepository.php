@@ -9,6 +9,7 @@
 namespace ED\BlogBundle\Model\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use ED\BlogBundle\Interfaces\Model\BlogUserInterface;
 use ED\BlogBundle\Model\Entity\Article;
 use Doctrine\ORM\Mapping;
 use ED\BlogBundle\Interfaces\Repository\ArticleRepositoryInterface;
@@ -20,7 +21,7 @@ use ED\BlogBundle\Model\Entity\Taxonomy;
 class ArticleRepository extends EntityRepository implements ArticleRepositoryInterface
 {
 
-    public function getNumberOfActiveBlogs($user)
+    public function getNumberOfActiveBlogs(BlogUserInterface $user)
     {
         $articleClass = $this->_entityName;
 
@@ -99,7 +100,7 @@ class ArticleRepository extends EntityRepository implements ArticleRepositoryInt
         return $articles;
     }
 
-    public function getActiveArticlesByAuthor($author, $limit = null)
+    public function getActiveArticlesByAuthor(BlogUserInterface $author, $limit = null)
     {
         $articleClass = $this->_entityName;
         $query = "SELECT a FROM $articleClass a

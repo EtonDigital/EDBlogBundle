@@ -11,10 +11,6 @@ namespace ED\BlogBundle\Interfaces\Model;
 
 interface ArticleInterface
 {
-    public function setCategories($categories);
-
-    public function getCategories();
-
     public function setTitle($title);
 
     public function getTitle();
@@ -35,11 +31,35 @@ interface ArticleInterface
 
     public function getStatus();
 
-    public function setPublishedAt($publishedAt);
+    public function setPublishedAt(\DateTime $publishedAt);
 
     public function getPublishedAt();
 
+    public function setModifiedAt(\DateTime $modifiedAt);
+
+    public function getModifiedAt();
+
+    public function setAuthor(BlogUserInterface $author);
+
     public function getAuthor();
 
+    public function setMetaData($metaData);
+
     public function getMetaData();
+
+    public function setParent(ArticleInterface $parent);
+
+    public function getParent();
+
+    public function setCategories($categories);
+
+    public function getCategories();
+
+    public function setTags($tags);
+
+    public function getTags();
+
+    public function setComments($comments);
+
+    public function getComments();
 }

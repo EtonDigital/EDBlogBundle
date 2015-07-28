@@ -11,9 +11,15 @@ namespace ED\BlogBundle\Interfaces\Model;
 
 interface ArticleMetaInterface
 {
+    public function setArticle(ArticleInterface $article);
+
     public function getArticle();
 
+    public function setKey($key);
+
     public function getKey();
+
+    public function setValue($value);
 
     public function getValue();
 }

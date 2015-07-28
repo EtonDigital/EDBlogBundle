@@ -11,6 +11,7 @@ namespace ED\BlogBundle\Model\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ED\BlogBundle\Interfaces\Model\ArticleInterface;
+use ED\BlogBundle\Interfaces\Model\BlogUserInterface;
 use ED\BlogBundle\Interfaces\Model\CommentInterface;
 use ED\BlogBundle\Interfaces\Model\ArticleMetaInterface;
 use Eko\FeedBundle\Item\Writer\RoutedItemInterface;
@@ -294,7 +295,7 @@ class Article implements ArticleInterface, RoutedItemInterface
     /**
      * @param mixed $parent
      */
-    public function setParent($parent)
+    public function setParent(ArticleInterface $parent)
     {
         $this->parent = $parent;
 
@@ -330,7 +331,7 @@ class Article implements ArticleInterface, RoutedItemInterface
     /**
      * @param mixed $publishedAt
      */
-    public function setPublishedAt($publishedAt)
+    public function setPublishedAt(\DateTime $publishedAt)
     {
         $this->publishedAt = $publishedAt;
 
@@ -348,7 +349,7 @@ class Article implements ArticleInterface, RoutedItemInterface
     /**
      * @param mixed $modifiedAt
      */
-    public function setModifiedAt($modifiedAt)
+    public function setModifiedAt(\DateTime $modifiedAt)
     {
         $this->modifiedAt = $modifiedAt;
 
@@ -366,7 +367,7 @@ class Article implements ArticleInterface, RoutedItemInterface
     /**
      * @param mixed $author
      */
-    public function setAuthor($author)
+    public function setAuthor(BlogUserInterface $author)
     {
         $this->author = $author;
         return $this;

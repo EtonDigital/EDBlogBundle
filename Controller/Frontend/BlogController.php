@@ -148,7 +148,7 @@ class BlogController extends Controller
 
         $paginator = $this->get('ed_blog.paginator');
         $response = $paginator->paginate(
-            $this->getDoctrine()->getManager()->getRepository('AppBundle:Article')->getActiveArticlesByAuthor($user),
+            $this->get('app_repository_article')->getActiveArticlesByAuthor($user),
             'EDBlogBundle:Frontend/Blog:index',
             'EDBlogBundle:Frontend/Global:pagination',
             array("criteria" => $criteria),

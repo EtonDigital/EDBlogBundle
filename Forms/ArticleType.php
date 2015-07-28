@@ -56,7 +56,7 @@ class ArticleType extends AbstractType
                     'label' => 'Excerpt text:',
                     'attr' => array(
                         'class' => 'form-control form-control--lg margin--halfb',
-                        'rows'  => 4,
+                        'rows'  => 2,
                         'placeholder' => 'Enter excerpt text'
                     )
                 ))

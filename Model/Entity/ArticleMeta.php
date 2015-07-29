@@ -64,7 +64,7 @@ class ArticleMeta
     /**
      * @param mixed $article
      */
-    public function setArticle(ArticleInterface $article)
+    public function setArticle(ArticleInterface $article=null)
     {
         $this->article = $article;
 

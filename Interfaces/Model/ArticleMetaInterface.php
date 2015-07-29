@@ -11,7 +11,7 @@ namespace ED\BlogBundle\Interfaces\Model;
 
 interface ArticleMetaInterface
 {
-    public function setArticle(ArticleInterface $article);
+    public function setArticle(ArticleInterface $article=null);
 
     public function getArticle();
 

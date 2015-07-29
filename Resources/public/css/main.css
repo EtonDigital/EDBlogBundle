@@ -753,6 +753,11 @@ th.sort--desc a:hover:after {
   height: 48px;
 }
 
+.autocomplete-suggestion {
+  padding-left: 10px;
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 992px) {
   .login-form {
     width: 420px;
@@ -799,10 +804,6 @@ th.sort--desc a:hover:after {
   .b-upload .wording div {
     text-align: left;
   }
-}
-
-.autocomplete-suggestion {
-  padding-left: 10px;
 }
 
 .pagination {

@@ -801,6 +801,10 @@ th.sort--desc a:hover:after {
   }
 }
 
+.autocomplete-suggestion {
+  padding-left: 10px;
+}
+
 .pagination {
   overflow: hidden;
   *zoom: 1;

@@ -43,7 +43,7 @@ interface CommentInterface
 
     public function getModifiedAt();
 
-    public function setAuthor(ArticleCommenterInterface $author);
+    public function setAuthor(ArticleCommenterInterface $author=null);
 
     public function getAuthor();
 }

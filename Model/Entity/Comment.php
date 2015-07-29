@@ -277,7 +277,7 @@ class Comment implements CommentInterface
     /**
      * @param mixed $author
      */
-    public function setAuthor(ArticleCommenterInterface $author)
+    public function setAuthor(ArticleCommenterInterface $author=null)
     {
         $this->author = $author;
         return $this;

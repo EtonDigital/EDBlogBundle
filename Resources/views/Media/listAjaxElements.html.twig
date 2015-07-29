@@ -1,13 +1,13 @@
 {% for media in pagination %}
-  <li class="phototiles__item [ gl muted--total ]">
-  	<div class="phototiles__iteminner">
-    	<div class="phototiles__itemabs">
-        <a href='{{ path('ed_blog_admin_media_edit', { 'id': media.id}) }}' class='js-add-media-editor cursor-default' data-content='{% media media, "big" %}'>
-            {% media media, 'lib' %}
-        </a>
-        <a href="#delete" data-title="Delete photo from media library" data-text="Are you sure you want to delete this photo from media library?" data-href="{{ path('ed_blog_admin_media_delete', { 'id' : media.id }) }}" data-toggle="modal" class="toggle--remove hastooltip js-delete-object" title="" data-placement="left" data-original-title="Delete"><i class="fa fa-times"></i></a>
-      </div>
-    </div>
-      {{ render(controller('EDBlogBundle:Backend/Media:editInfo', { 'id': media.id })) }}
-  </li>
+    <li class="phototiles__item [ gl muted--total ]">
+        <div class="phototiles__iteminner">
+            <div class="phototiles__itemabs">
+                <a href='{{ path('ed_blog_admin_media_edit', { 'id': media.id}) }}' class='js-add-media-editor cursor-default' data-content='{% media media, "big" %}'>
+                    &nbsp{% media media, 'lib' %}
+                </a>
+                <a href="#delete" data-title="Delete photo from media library" data-text="Are you sure you want to delete this photo from media library?" data-href="{{ path('ed_blog_admin_media_delete', { 'id' : media.id }) }}" data-toggle="modal" class="toggle--remove hastooltip js-delete-object" title="" data-placement="left" data-original-title="Delete"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+        {{ render(controller('EDBlogBundle:Backend/Media:editInfo', { 'id': media.id })) }}
+    </li>
 {% endfor %}

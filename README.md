@@ -32,6 +32,11 @@ This bundle is relaying on many cool features provided by very popular Symfony2 
  * **KnpPaginatorBundle** - Symfony 2 paginator ( See https://github.com/KnpLabs/KnpPaginatorBundle for more details )
  * **StofDoctrineExtensionsBundle** - DoctrineExtensions for Symfony2 ( See https://github.com/stof/StofDoctrineExtensionsBundle for more details )
  * **SonataMediaBundle** - Media management ( See https://github.com/sonata-project/SonataMediaBundle for more details)
+ 
+Demo:
+-------------
+
+Visit demo application on http://blog-demo.etonlabs.com to see behaviour of our bundle integrated into standard Symfony2 application.
 
 Installation:
 -------------

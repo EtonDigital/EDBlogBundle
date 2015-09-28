@@ -34,7 +34,7 @@
                               {{ user.blogDisplayName }}
                           </td>
                           <td>
-                              {{ user.email }}
+                              <span class="label label-info">unavailable</span>
                           </td>
                           <td>
                               {% include 'EDBlogBundle:Users:blog_privileges.html.twig' with { 'user' : user } %}
@@ -44,7 +44,7 @@
                           </td>
                           <td>
                               <a href="{{ path('ed_blog_user_edit', {'username': user.username}) }}" class=""><i class="fa fa-pencil"></i> Edit</a>
-                              <a href="#" class="js-delete-object" data-title="Revoke access" data-text="Are you sure you want to revoke access to the blog admin panel for the selected user?" data-href="{{ path('ed_blog_user_revoke', {'username': user.username} ) }}" data-toggle="modal" data-target="#delete"><i class="fa fa-times"></i> Revoke</a>
+                              <a href="#" class="js-delete-object" data-title="Revoke access" data-text="Are you sure you want to revoke access to the blog admin panel for the selected user?" data-href="#" data-toggle="modal" data-target="#delete"><i class="fa fa-times"></i> Revoke</a>
                           </td>
 
                       </tr>

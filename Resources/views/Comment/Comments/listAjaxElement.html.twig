@@ -3,7 +3,7 @@
 {% endif %}
 <tr>
     <td>{% if comment.author %}{{ comment.author.commenterDisplayName }}{% else %}{{ comment.name }}{% endif %}</td>
-    <td>{% if comment.author %}{{ comment.author.email }}{% else %}{{ comment.email }}{% endif %}</td>
+    <td><span class="label label-info">unavailable</span></td>
     <td>{% if comment.author %}<span class="label label-success"> Registered user</span>{% else %}<span class="label label-warning"> Public user</span>{% endif %}</td>
     <td>{{ comment.comment | displayLinks | raw }}</td>
     <td><a href="{{ path('ed_blog_admin_article_show', { 'slug' : comment.article.slug }) }}">{{ comment.article.title }}</a></td>

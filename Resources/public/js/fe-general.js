@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     initUploadExcerptPhoto();
     initUploadMedia();
-
+    $('#edcomment_save').removeAttr('disabled');
     $(document).on('click', '.js-single-click', function(){
         $(this).attr('disabled', 'disabled');
     });

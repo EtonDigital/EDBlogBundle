@@ -59,7 +59,7 @@ If you already don't have composer installed, you can get it using:
 
 Then you can require following packages:
      
-    $ composer require friendsofsymfony/user-bundle:"~2.0@dev" eko/feedbundle:1.2.5 ed/blog-bundle:v1.0.2
+    $ composer require friendsofsymfony/user-bundle:"~2.0@dev" eko/feedbundle:1.2.5 ed/blog-bundle:v1.0.3
 
 Activate newly required bundles in `app/AppKernel.php` similar to this example:
 

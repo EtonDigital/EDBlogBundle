@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class BlogController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="ed_blog_homepage")
      * @Route("/blog", name="ed_blog_frontend_index")
      * @Route("/blog/")
      */

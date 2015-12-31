@@ -13,6 +13,7 @@ use ED\BlogBundle\Event\ArticleAdministrationEvent;
 use ED\BlogBundle\Event\TaxonomyArrayEvent;
 use ED\BlogBundle\Events\EDBlogEvents;
 use ED\BlogBundle\Interfaces\Repository\BlogTaxonomyRepositoryInterface;
+use ED\BlogBundle\Model\Entity\Taxonomy;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -104,7 +105,12 @@ class ArticleEventListener implements EventSubscriberInterface
 
     public function postRemoved(TaxonomyArrayEvent $event)
     {
-        $this->update($event);
+        /** @var Taxonomy[] $taxonomies */
+        $taxonomies = $event->getTaxonomies();
+
+        foreach($taxonomies as $taxonomy) {
+            $this->taxonomyRepository->updateTaxonomyCount($taxonomy, $taxonomy->getCount() - 1);
+        }
 
         $this->session->getFlashBag()->add('success', 'Article removed successfully.');
     }

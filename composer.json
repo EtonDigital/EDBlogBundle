@@ -38,7 +38,7 @@
     "friendsofsymfony/user-bundle": "*",
     "sonata-project/media-bundle": "~2.3",
     "sonata-project/doctrine-orm-admin-bundle": "^2.3",
-    "jms/serializer-bundle": "~0.13",
+    "jms/serializer-bundle": "~1.1",
     "knplabs/knp-paginator-bundle": "*",
     "doctrine/doctrine-fixtures-bundle": "*",
     "stof/doctrine-extensions-bundle": "~1.1@dev",

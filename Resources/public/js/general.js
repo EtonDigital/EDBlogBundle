@@ -10,7 +10,7 @@ $(document).ready(function(){
         "code"
     ],
     toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
-    toolbar2: "| link unlink anchor | forecolor backcolor  | print preview code | code",
+    toolbar2: "| link unlink anchor | forecolor backcolor  | print preview code ",
     image_advtab: true,
     relative_urls: false,
     remove_script_host: false

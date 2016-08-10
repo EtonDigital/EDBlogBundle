@@ -30,6 +30,7 @@
   "require": {
     "php": ">=5.3.3",
     "symfony/symfony": ">=2.5",
+    "sensio/framework-extra-bundle": "*",
     "incenteev/composer-parameter-handler": "~2.0",
     "friendsofsymfony/user-bundle": "*",
     "sonata-project/media-bundle": "~2.3",

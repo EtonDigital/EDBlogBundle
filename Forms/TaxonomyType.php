@@ -52,7 +52,7 @@ class TaxonomyType extends AbstractType
                 'label' => 'Parent category:',
                 'required' => false,
                 'class' => $this->dataClass,
-                'placeholder' => 'Select parent category',
+                'empty_value' => 'Select parent category',
                 'query_builder' => function (EntityRepository $er) use ($object) {
                     if($object && $object->getId())
                     {

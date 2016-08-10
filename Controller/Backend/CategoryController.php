@@ -65,7 +65,7 @@ class CategoryController extends DefaultController
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('success', 'Category created successfully.');
-                return $this->redirectToRoute('ed_blog_category_list');
+                return $this->redirect($this->generateUrl('ed_blog_category_list'));
             }
         }
 
@@ -98,7 +98,7 @@ class CategoryController extends DefaultController
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('success', 'Category updated successfully.');
-                return $this->redirectToRoute('ed_blog_category_list');
+                return $this->redirect($this->generateUrl('ed_blog_category_list'));
             }
         }
 
@@ -124,7 +124,7 @@ class CategoryController extends DefaultController
         $em->flush();
 
         $this->get('session')->getFlashBag()->add('success', 'Category removed successfully.');
-        return $this->redirectToRoute('ed_blog_category_list');
+        return $this->redirect($this->generateUrl('ed_blog_category_list'));
     }
 
     /**

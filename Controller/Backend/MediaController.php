@@ -204,7 +204,7 @@ class MediaController extends DefaultController
         }
 
         $this->get('session')->getFlashBag()->add('success', 'Photo removed successfully.');
-        return $this->redirectToRoute('ed_blog_admin_media_list');
+        return $this->redirect($this->generateUrl('ed_blog_admin_media_list'));
     }
 
     /**
@@ -237,7 +237,7 @@ class MediaController extends DefaultController
             else
             {
                 $this->get('session')->getFlashBag()->add('success', 'Photo details updated successfully.');
-                return $this->redirectToRoute('ed_blog_admin_media_list');
+                return $this->redirect($this->generateUrl('ed_blog_admin_media_list'));
             }
         }
 

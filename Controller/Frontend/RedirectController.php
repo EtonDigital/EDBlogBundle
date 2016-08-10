@@ -51,7 +51,7 @@ class RedirectController extends Controller
 
         if(!$redirectURL || $redirectURL == $this->generateUrl('ed_blog_redirect_authenticate', array(), true))
         {
-            return $this->redirectToRoute("ed_blog_homepage_index");
+            return $this->redirect($this->generateUrl("ed_blog_homepage_index"));
         }
         else
         {

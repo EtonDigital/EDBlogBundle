@@ -76,7 +76,7 @@ class TagController extends DefaultController
         }
         else
         {
-            return $this->redirectToRoute('ed_blog_homepage_index');
+            return $this->redirect($this->generateUrl('ed_blog_homepage_index'));
         }
     }
 
@@ -141,7 +141,7 @@ class TagController extends DefaultController
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('success', 'Tag created successfully.');
-                return $this->redirectToRoute('ed_blog_tag_list');
+                return $this->redirect($this->generateUrl('ed_blog_tag_list'));
             }
         }
 
@@ -192,7 +192,7 @@ class TagController extends DefaultController
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('success', 'Tag updated successfully.');
-                return $this->redirectToRoute('ed_blog_tag_list');
+                return $this->redirect($this->generateUrl('ed_blog_tag_list'));
             }
         }
 
@@ -218,7 +218,7 @@ class TagController extends DefaultController
         $em->flush();
 
         $this->get('session')->getFlashBag()->add('success', 'Tag removed successfully.');
-        return $this->redirectToRoute('ed_blog_tag_list');
+        return $this->redirect($this->generateUrl('ed_blog_tag_list'));
     }
 
     /**

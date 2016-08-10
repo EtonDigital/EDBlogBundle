@@ -150,7 +150,7 @@ class UserController extends DefaultController
         $em->flush();
         $this->get('session')->getFlashBag()->add('success', 'User revoked successfully.');
 
-        return $this->redirectToRoute('ed_blog_user_list');
+        return $this->redirect($this->generateUrl('ed_blog_user_list'));
     }
 
 }

@@ -52,13 +52,18 @@ class ArticleController extends DefaultController
                 $draft = $form->getData();
 
                 //Permission is needed to change author from default user
-                if(!$this->isGranted('SWITCH_ARTICLE_AUTHOR'))
+                if($this->container->get('security.context')->isGranted('SWITCH_ARTICLE_AUTHOR', $draft) !== false)
                 {
                     $draft
                         ->setAuthor($user);
                 }
+//                if(!$this->isGranted('SWITCH_ARTICLE_AUTHOR'))
+//                {
+//                    $draft
+//                        ->setAuthor($user);
+//                }
 
-                if ($this->isGranted('PUBLISH_ARTICLE', $draft) && $form->get('publish')->isClicked())
+                if (($this->container->get('security.context')->isGranted('PUBLISH_ARTICLE', $draft) !== false) && $form->get('publish')->isClicked())
                 {
                     $article = $this->get('article_generator')->generateNewArticleFromDraft($draft);
 
@@ -88,9 +93,9 @@ class ArticleController extends DefaultController
                 $dispacher->dispatch(EDBlogEvents::ED_BLOG_ARTICLE_CREATED, new TaxonomyArrayEvent( $taxonomies ));
 
 
-                return $this->redirectToRoute('ed_blog_admin_article_edit', array(
+                return $this->redirect($this->generateUrl('ed_blog_admin_article_edit', array(
                     'slug' => $draft->getParent() ? $draft->getParent()->getSlug() : $draft->getSlug()
-                ));
+                )));
             }
         }
 
@@ -234,7 +239,7 @@ class ArticleController extends DefaultController
                 //note - must be after flush, depends on DB
                 $dispacher->dispatch(EDBlogEvents::ED_BLOG_ARTICLE_POST_UPDATE, new ArticleAdministrationEvent($article));
 
-                return $this->redirectToRoute('ed_blog_admin_article_edit', array('slug' => $article->getSlug()));
+                return $this->redirect($this->generateUrl('ed_blog_admin_article_edit', array('slug' => $article->getSlug())));
             }
         }
 
@@ -259,7 +264,7 @@ class ArticleController extends DefaultController
         $user = $this->getBlogUser();
 
         if(!$request->isXmlHttpRequest())
-            return $this->redirectToRoute('ed_blog_homepage_index');
+            return $this->redirect($this->generateUrl('ed_blog_homepage_index'));
 
         if($this->container->get('security.context')->isGranted('EDIT_ARTICLE', $article) === false)
         {
@@ -514,7 +519,7 @@ class ArticleController extends DefaultController
         $dispacher = $this->get('event_dispatcher');
         $dispacher->dispatch(EDBlogEvents::ED_BLOG_ARTICLE_REMOVED, new TaxonomyArrayEvent( $taxonomies ));
 
-        return $this->redirectToRoute('ed_blog_admin_article_list');
+        return $this->redirect($this->generateUrl('ed_blog_admin_article_list'));
     }
 
     /**
@@ -526,7 +531,7 @@ class ArticleController extends DefaultController
         $user = $this->getBlogUser();
 
         if(!$request->isXmlHttpRequest())
-            return $this->redirectToRoute('ed_blog_homepage_index');
+            return $this->redirect($this->generateUrl('ed_blog_homepage_index'));
 
         $isWritingLocked = $this->get('ed_blog.handler.article_handler')->isLocked($user, $article);
 
@@ -562,8 +567,8 @@ class ArticleController extends DefaultController
 
         $this->get('ed_blog.handler.article_handler')->takeoverLock($user, $article);
 
-        return $this->redirectToRoute('ed_blog_admin_article_edit', array(
+        return $this->redirect($this->generateUrl('ed_blog_admin_article_edit', array(
             'slug' => $article->getSlug()
-        ));
+        )));
     }
 }

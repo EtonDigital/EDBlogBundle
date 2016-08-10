@@ -140,7 +140,7 @@ class CommentController extends DefaultController
         $em->flush();
 
         $this->get('session')->getFlashBag()->add('success', 'Comment removed successfully.');
-        return $this->redirectToRoute('ed_blog_admin_comment_list');
+        return $this->redirect($this->generateUrl('ed_blog_admin_comment_list'));
     }
 
     /**
@@ -169,7 +169,7 @@ class CommentController extends DefaultController
         {
             $this->get('session')->getFlashBag()->add('success', 'Comment status updated successfully.');
 
-            return $this->redirectToRoute("ed_blog_admin_comment_list");
+            return $this->redirect($this->generateUrl("ed_blog_admin_comment_list"));
         }
 
     }
@@ -198,7 +198,7 @@ class CommentController extends DefaultController
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('success', 'Comment updated successfully.');
-                return $this->redirectToRoute('ed_blog_admin_comment_list');
+                return $this->redirect($this->generateUrl('ed_blog_admin_comment_list'));
             }
         }
 

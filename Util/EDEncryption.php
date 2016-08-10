@@ -30,7 +30,7 @@ class EDEncryption {
     if (!$value) {
       return false;
     }
-    $this->salt = 'encrypt';
+    $this->salt = 'coin2014coin2014';
     $text = $value;
     $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_ECB);
     $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);

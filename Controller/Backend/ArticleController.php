@@ -112,7 +112,7 @@ class ArticleController extends DefaultController
     {
         $user = $this->getBlogUser();
 
-        if($this->container->get('security.authorization_checker')->isGranted('EDIT_ARTICLE', $article) === false)
+        if($this->container->get('security.context')->isGranted('EDIT_ARTICLE', $article) === false)
         {
             throw new AccessDeniedException('This content is currently unavailable. It may be temporarily unavailable, the link you clicked on may have expired, or you may not have permission to view this page.');
         }
@@ -261,7 +261,7 @@ class ArticleController extends DefaultController
         if(!$request->isXmlHttpRequest())
             return $this->redirectToRoute('ed_blog_homepage_index');
 
-        if($this->container->get('security.authorization_checker')->isGranted('EDIT_ARTICLE', $article) === false)
+        if($this->container->get('security.context')->isGranted('EDIT_ARTICLE', $article) === false)
         {
             return new JsonResponse( array(
                 "success" => false,
@@ -500,7 +500,7 @@ class ArticleController extends DefaultController
     {
         $user = $this->getBlogUser();
 
-        if($this->container->get('security.authorization_checker')->isGranted('EDIT_ARTICLE', $article) === false)
+        if($this->container->get('security.context')->isGranted('EDIT_ARTICLE', $article) === false)
         {
             throw new AccessDeniedException('This content is currently unavailable. It may be temporarily unavailable, the link you clicked on may have expired, or you may not have permission to view this page.');
         }

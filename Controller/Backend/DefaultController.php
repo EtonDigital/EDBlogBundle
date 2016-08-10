@@ -13,7 +13,7 @@ class DefaultController extends Controller
     {
         $user = $this->getLoggedUser();
 
-        if($this->container->get('security.authorization_checker')->isGranted('ROLE_BLOG_USER') === false)
+        if($this->container->get('security.context')->isGranted('ROLE_BLOG_USER') === false)
             throw new AccessDeniedException('This content is currently unavailable. It may be temporarily unavailable, the link you clicked on may have expired, or you may not have permission to view this page.');
 
         if(!$user->hasRole('ROLE_BLOG_CONTRIBUTOR') && !$user->hasRole('ROLE_BLOG_AUTHOR') && !$user->hasRole('ROLE_BLOG_EDITOR') && !$user->hasRole('ROLE_BLOG_ADMIN'))
@@ -24,7 +24,7 @@ class DefaultController extends Controller
 
     public function checkCommentsAdministrator()
     {
-        if($this->container->get('security.authorization_checker')->isGranted('ADMINISTRATE_COMMENTS') === false)
+        if($this->container->get('security.context')->isGranted('ADMINISTRATE_COMMENTS') === false)
             throw new AccessDeniedException('This content is currently unavailable. It may be temporarily unavailable, the link you clicked on may have expired, or you may not have permission to view this page.');
     }
 
@@ -32,7 +32,7 @@ class DefaultController extends Controller
     {
         $user = $this->getLoggedUser();
 
-        if($this->container->get('security.authorization_checker')->isGranted('ROLE_BLOG_ADMIN') === false)
+        if($this->container->get('security.context')->isGranted('ROLE_BLOG_ADMIN') === false)
             throw new AccessDeniedException('This content is currently unavailable. It may be temporarily unavailable, the link you clicked on may have expired, or you may not have permission to view this page.');
 
         return $user;
@@ -40,7 +40,7 @@ class DefaultController extends Controller
 
     private function getLoggedUser()
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->get('security.context')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('Please login first.');
         }

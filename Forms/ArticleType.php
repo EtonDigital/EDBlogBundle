@@ -15,23 +15,23 @@ use ED\BlogBundle\Model\Entity\Article;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class ArticleType extends AbstractType
 {
     protected $dataClass;
     protected $userClass;
     protected $entityManager;
-    protected $authorizationChecker;
+    protected $securityContext;
     protected $taxonomyClass;
 
-    function __construct($dataClass, $userClass, $taxonomyClass, $entityManager, AuthorizationChecker $authorizationChecker)
+    function __construct($dataClass, $userClass, $taxonomyClass, $entityManager, SecurityContext $securityContext)
     {
         $this->dataClass = $dataClass;
         $this->entityManager = $entityManager;
         $this->userClass = $userClass;
         $this->taxonomyClass = $taxonomyClass;
-        $this->authorizationChecker = $authorizationChecker;
+        $this->securityContext = $securityContext;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -104,14 +104,14 @@ class ArticleType extends AbstractType
             ))
             ;
 
-        if($this->authorizationChecker->isGranted('SWITCH_ARTICLE_AUTHOR'))
+        if($this->securityContext->isGranted('SWITCH_ARTICLE_AUTHOR'))
         {
             $builder
                 ->add('author', 'entity', array(
                     'label' => 'Author:',
                     'required' => true,
                     'class' => $this->userClass,
-                    'placeholder' => 'Select author',
+                    'empty_value' => 'Select author',
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('a')
                             ->where('a.roles like :type')
@@ -124,7 +124,7 @@ class ArticleType extends AbstractType
                     )
                 ));
         }
-        if($this->authorizationChecker->isGranted('EDIT_PUBLISH_STATUS', $object))
+        if($this->securityContext->isGranted('EDIT_PUBLISH_STATUS', $object))
         {
             $builder
                 ->add('status', 'choice', array(
@@ -145,7 +145,7 @@ class ArticleType extends AbstractType
         if(!$object->getParent())
         {
             //When creating new articles
-            if($this->authorizationChecker->isGranted('PUBLISH_ARTICLE', $object))
+            if($this->securityContext->isGranted('PUBLISH_ARTICLE', $object))
             {
                 $builder
                     ->add('publish', 'submit',
@@ -169,7 +169,7 @@ class ArticleType extends AbstractType
                             'attr' => array('class' => 'btn btn-md btn-b-blue btn-wide--xl flright--responsive-mob margin--r')
                         ));
 
-                if($this->authorizationChecker->isGranted('PUBLISH_ARTICLE', $object))
+                if($this->securityContext->isGranted('PUBLISH_ARTICLE', $object))
                 {
                     $builder
                         ->add('publish', 'submit',

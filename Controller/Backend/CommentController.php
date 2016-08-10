@@ -31,7 +31,7 @@ class CommentController extends DefaultController
         $user = $this->getUser();
         $blogSettings = $this->get('blog_settings');
 
-        if($this->container->get('security.authorization_checker')->isGranted('ACCESS_COMMENTS', $user) === false || $this->container->get('security.authorization_checker')->isGranted('CREATE_COMMENT', $user) === false)
+        if($this->container->get('security.context')->isGranted('ACCESS_COMMENTS', $user) === false || $this->container->get('security.context')->isGranted('CREATE_COMMENT', $user) === false)
             throw new AccessDeniedHttpException("Sorry, commenting is currently disabled by blog administrator.");
 
         $object = $this->get('comment_generator')->getObject();

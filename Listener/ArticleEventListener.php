@@ -98,7 +98,7 @@ class ArticleEventListener implements EventSubscriberInterface
 
             $this->updateArticleCount( $allTaxonomies );
 
-            $this->session->getFlashBag()->add('success', 'Article updated successfully.');
+            $this->session->getFlashBag()->add('success', 'Contest updated successfully.');
         }
     }
 
@@ -106,14 +106,14 @@ class ArticleEventListener implements EventSubscriberInterface
     {
         $this->update($event);
 
-        $this->session->getFlashBag()->add('success', 'Article removed successfully.');
+        $this->session->getFlashBag()->add('success', 'Contest removed successfully.');
     }
 
     public function postCreated(TaxonomyArrayEvent $event)
     {
         $this->update($event);
 
-        $this->session->getFlashBag()->add('success', 'Article created successfully.');
+        $this->session->getFlashBag()->add('success', 'Contest created successfully.');
     }
 
     private function update(TaxonomyArrayEvent $event)

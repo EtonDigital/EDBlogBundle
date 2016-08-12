@@ -156,7 +156,8 @@ class ArticleController extends DefaultController
                 //force author if no permission to switch blog author
                 if($article->getAuthor() != $draft->getAuthor())
                 {
-                    if($this->isGranted('SWITCH_ARTICLE_AUTHOR'))
+                    if($this->container->get('security.context')->isGranted('SWITCH_ARTICLE_AUTHOR'))
+//                    if($this->isGranted('SWITCH_ARTICLE_AUTHOR'))
                     {
                         //switch author authorized
                         $article->setAuthor($draft->getAuthor());
@@ -170,9 +171,9 @@ class ArticleController extends DefaultController
                     }
                 }
 
-                if( $this->isGranted('PUBLISH_ARTICLE', $article) && (($article->getStatus() == Article::STATUS_DRAFTED && $form->get('publish')->isClicked()) || $article->getStatus() == Article::STATUS_PUBLISHED && $form->get('update')->isClicked()) )
+                if( $this->container->get('security.context')->isGranted('PUBLISH_ARTICLE', $article) && (($article->getStatus() == Article::STATUS_DRAFTED && $form->get('publish')->isClicked()) || $article->getStatus() == Article::STATUS_PUBLISHED && $form->get('update')->isClicked()) )
                 {
-                    if($this->isGranted('EDIT_PUBLISH_STATUS', $draft) && $article->getStatus() != $draft->getStatus())
+                    if($this->container->get('security.context')->isGranted('EDIT_PUBLISH_STATUS', $draft) && $article->getStatus() != $draft->getStatus())
                     {
                         //article converted to draft
                         $article->setStatus($draft->getStatus());

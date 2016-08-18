@@ -54,7 +54,11 @@ class ArticleVoter implements VoterInterface
 
     public function vote(TokenInterface $token, $object, array $attributes)
     {
-        $class = get_class($object);
+        if($object){
+          $class = get_class($object);
+        }else{
+          return self::ACCESS_ABSTAIN;
+        }
 
         if (!$this->supportsClass($class))
         {

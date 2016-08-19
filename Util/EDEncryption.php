@@ -4,6 +4,8 @@ namespace  ED\BlogBundle\Util;
 
 class EDEncryption {
 
+  const SALT = 'coin2014';
+  
   private $salt;
 
   public function safe_b64encode($string) {
@@ -30,7 +32,7 @@ class EDEncryption {
     if (!$value) {
       return false;
     }
-    $this->salt = 'coin2014';
+    $this->salt = self::SALT ? self::SALT : '';
     $text = $value;
     $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_ECB);
     $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
@@ -47,7 +49,7 @@ class EDEncryption {
     if (!$value) {
       return false;
     }
-    $this->salt = 'encrypt';
+    $this->salt = self::SALT ? self::SALT : '';
     $crypttext = $this->safe_b64decode($value);
     $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_ECB);
     $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);

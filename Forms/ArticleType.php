@@ -197,7 +197,7 @@ class ArticleType extends AbstractType
      */
     public function getName()
     {
-        return "article";
+        return "articletype";
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

@@ -97,7 +97,7 @@
             <argument>%blog_taxonomy_class%</argument>
             <argument type="service" id="doctrine"/>
             <argument type="service" id="security.context"/>
-            <tag name="form.type" alias="article" />
+            <tag name="form.type" alias="articletype" />
         </service>
         <service id="blog_taxonomy_form_type" class="ED\BlogBundle\Forms\TaxonomyType">
             <argument>%blog_taxonomy_class%</argument>

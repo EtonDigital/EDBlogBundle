@@ -245,7 +245,7 @@ class Taxonomy implements BlogTaxonomyInterface
     /**
      * @Assert\Callback
      */
-    public function validate(ExecutionContextInterface $context)
+    public function validate($context)
     {
         $parentTaxon = $this->getParent();
 

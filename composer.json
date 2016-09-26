@@ -33,7 +33,7 @@
     "doctrine/doctrine-bundle": "~1.4",
     "twig/extensions": "~1.0",
     "symfony/assetic-bundle": "~2.3",
-    "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
+    "sensio/framework-extra-bundle": "~3.0,>=3 49c4f8daa4f2b3725d0423db992cacf89a23a4e6.0.2",
     "incenteev/composer-parameter-handler": "~2.0",
     "friendsofsymfony/user-bundle": "*",
     "sonata-project/media-bundle": "~2.3",
@@ -42,8 +42,6 @@
     "knplabs/knp-paginator-bundle": "*",
     "doctrine/doctrine-fixtures-bundle": "*",
     "stof/doctrine-extensions-bundle": "~1.1@dev",
-    "eko/feedbundle": "1.2.5",
-    "ed/blog-bundle": "v1.0.4"
   },
   "require-dev": {
     "doctrine/doctrine-bundle": "~1.3",

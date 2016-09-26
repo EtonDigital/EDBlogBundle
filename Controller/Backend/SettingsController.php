@@ -48,7 +48,7 @@ class SettingsController extends DefaultController
             }
         }
 
-        return $this->render('@EDBlog/Settings/edit.html.twig', array(
+        return $this->render('EDBlogBundle:Settings:edit.html.twig', array(
             'form' => $form->createView()
         ));
 

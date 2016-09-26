@@ -25,7 +25,7 @@ class ArticleType extends AbstractType
     protected $authorizationChecker;
     protected $taxonomyClass;
 
-    function __construct($dataClass, $userClass, $taxonomyClass, $entityManager, AuthorizationChecker $authorizationChecker)
+    function __construct($dataClass, $userClass, $taxonomyClass, $entityManager, $authorizationChecker)
     {
         $this->dataClass = $dataClass;
         $this->entityManager = $entityManager;

@@ -610,7 +610,9 @@ class Article implements ArticleInterface, RoutedItemInterface
     public function hasMetaData(ArticleMetaInterface $metaData)
     {
         $result = false;
-
+        
+        if(count($this->metaData) == 0) return $result;
+        
         foreach($this->metaData as $meta)
         {
             if($meta->getKey() == $metaData->getKey() && $meta->getValue() == $metaData->getValue())
@@ -627,6 +629,8 @@ class Article implements ArticleInterface, RoutedItemInterface
     public function getMetaByKey($key)
     {
         $result = false;
+        
+        if(count($this->metaData) == 0) return $result;
 
         foreach($this->metaData as $meta)
         {

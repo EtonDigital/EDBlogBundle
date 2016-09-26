@@ -19,7 +19,7 @@ class ArticleVoter implements VoterInterface
 {
     private $permissionMap;
 
-    function __construct(ArticlePermissionMap $permissionMap)
+    function __construct(ArticlePermissionMap $permissionMap=null)
     {
         $this->permissionMap = $permissionMap;
     }

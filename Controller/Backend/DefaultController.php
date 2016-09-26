@@ -40,7 +40,7 @@ class DefaultController extends Controller
 
     private function getLoggedUser()
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->get('security.context')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('Please login first.');
         }

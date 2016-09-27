@@ -18,9 +18,9 @@ class ArticleExcerptType extends AbstractType
         $builder->add('media', 'file',array(
             'attr' => array(
                 'class' => 'sr-only',
+                'multiple' => false
 //                'data-href' => $this->generateUrl('ed_blog_admin_article_upload')
-            ),
-            'multiple' => false
+            )
         ));
     }
 

@@ -58,7 +58,7 @@ class ArticleController extends DefaultController
                         ->setAuthor($user);
                 }
 
-                if ($this->isGranted('PUBLISH_ARTICLE', $draft) && $form->get('publish')->isClicked())
+                if ($this->get('security.context')->isGranted('PUBLISH_ARTICLE', $draft) && $form->get('publish')->isClicked())
                 {
                     $article = $this->get('article_generator')->generateNewArticleFromDraft($draft);
 
@@ -112,7 +112,7 @@ class ArticleController extends DefaultController
     {
         $user = $this->getBlogUser();
 
-        if($this->container->get('security.context')->isGranted('EDIT_ARTICLE', $article) === false)
+        if($this->get('security.context')->isGranted('EDIT_ARTICLE', $article) === false)
         {
             throw new AccessDeniedException('This content is currently unavailable. It may be temporarily unavailable, the link you clicked on may have expired, or you may not have permission to view this page.');
         }
@@ -151,7 +151,7 @@ class ArticleController extends DefaultController
                 //force author if no permission to switch blog author
                 if($article->getAuthor() != $draft->getAuthor())
                 {
-                    if($this->isGranted('SWITCH_ARTICLE_AUTHOR'))
+                    if($this->get('security.context')->isGranted('SWITCH_ARTICLE_AUTHOR'))
                     {
                         //switch author authorized
                         $article->setAuthor($draft->getAuthor());
@@ -165,9 +165,9 @@ class ArticleController extends DefaultController
                     }
                 }
 
-                if( $this->isGranted('PUBLISH_ARTICLE', $article) && (($article->getStatus() == Article::STATUS_DRAFTED && $form->get('publish')->isClicked()) || $article->getStatus() == Article::STATUS_PUBLISHED && $form->get('update')->isClicked()) )
+                if( $this->get('security.context')->isGranted('PUBLISH_ARTICLE', $article) && (($article->getStatus() == Article::STATUS_DRAFTED && $form->get('publish')->isClicked()) || $article->getStatus() == Article::STATUS_PUBLISHED && $form->get('update')->isClicked()) )
                 {
-                    if($this->isGranted('EDIT_PUBLISH_STATUS', $draft) && $article->getStatus() != $draft->getStatus())
+                    if($this->get('security.context')->isGranted('EDIT_PUBLISH_STATUS', $draft) && $article->getStatus() != $draft->getStatus())
                     {
                         //article converted to draft
                         $article->setStatus($draft->getStatus());
@@ -261,7 +261,7 @@ class ArticleController extends DefaultController
         if(!$request->isXmlHttpRequest())
             return $this->redirectToRoute('ed_blog_homepage_index');
 
-        if($this->container->get('security.context')->isGranted('EDIT_ARTICLE', $article) === false)
+        if($this->get('security.context')->isGranted('EDIT_ARTICLE', $article) === false)
         {
             return new JsonResponse( array(
                 "success" => false,
@@ -500,7 +500,7 @@ class ArticleController extends DefaultController
     {
         $user = $this->getBlogUser();
 
-        if($this->container->get('security.context')->isGranted('EDIT_ARTICLE', $article) === false)
+        if($this->get('security.context')->isGranted('EDIT_ARTICLE', $article) === false)
         {
             throw new AccessDeniedException('This content is currently unavailable. It may be temporarily unavailable, the link you clicked on may have expired, or you may not have permission to view this page.');
         }

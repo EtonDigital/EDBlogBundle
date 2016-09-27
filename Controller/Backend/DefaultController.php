@@ -55,4 +55,9 @@ class DefaultController extends Controller
 
         return $this->get('ed_blog.handler.blog_user_handler')->getDefaultBlogRole($user);
     }
+
+    public function redirectToRoute($name, $params = array())
+    {
+        return $this->redirect($this->generateUrl($name, $params));
+    }
 }

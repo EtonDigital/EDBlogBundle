@@ -52,7 +52,7 @@ class ArticleController extends DefaultController
                 $draft = $form->getData();
 
                 //Permission is needed to change author from default user
-                if(!$this->isGranted('SWITCH_ARTICLE_AUTHOR'))
+                if(!$this->get('security.context')->isGranted('SWITCH_ARTICLE_AUTHOR'))
                 {
                     $draft
                         ->setAuthor($user);

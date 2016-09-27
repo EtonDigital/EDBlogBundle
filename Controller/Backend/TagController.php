@@ -145,7 +145,7 @@ class TagController extends DefaultController
             }
         }
 
-        return $this->render("@EDBlog/Taxonomy/Tag/create.html.twig", array(
+        return $this->render("EDBlogBundle:Taxonomy/Tag:create.html.twig", array(
             'form' => $form->createView()
         ));
     }
@@ -196,7 +196,7 @@ class TagController extends DefaultController
             }
         }
 
-        return $this->render("@EDBlog/Taxonomy/Tag/edit.html.twig", array(
+        return $this->render("EDBlogBundle:Taxonomy/Tag:edit.html.twig", array(
             'form' => $form->createView(),
             'slug' => $slug
         ));

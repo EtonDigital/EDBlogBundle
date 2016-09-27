@@ -111,7 +111,6 @@ class ArticleType extends AbstractType
                     'label' => 'Author:',
                     'required' => true,
                     'class' => $this->userClass,
-                    'placeholder' => 'Select author',
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('a')
                             ->where('a.roles like :type')
@@ -121,6 +120,7 @@ class ArticleType extends AbstractType
                     },
                     'attr' => array(
                         'class' => 'form-control form-control--lg color-placeholder',
+                        'placeholder' => 'Select author',
                     )
                 ));
         }

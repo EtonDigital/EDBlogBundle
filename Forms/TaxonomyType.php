@@ -52,7 +52,6 @@ class TaxonomyType extends AbstractType
                 'label' => 'Parent category:',
                 'required' => false,
                 'class' => $this->dataClass,
-                'placeholder' => 'Select parent category',
                 'query_builder' => function (EntityRepository $er) use ($object) {
                     if($object && $object->getId())
                     {
@@ -73,7 +72,8 @@ class TaxonomyType extends AbstractType
                 },
                 'attr' => array(
                     'class' => 'form-control form-control--lg margin--b hide js-get-pretty-categories',
-                    'data-empty-option' => 'Select parent category'
+                    'data-empty-option' => 'Select parent category',
+                    'placeholder' => 'Select parent category'
                 )
             ))
             ->add('type', 'hidden', array(

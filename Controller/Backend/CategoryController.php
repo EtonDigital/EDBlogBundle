@@ -69,7 +69,7 @@ class CategoryController extends DefaultController
             }
         }
 
-        return $this->render("@EDBlog/Taxonomy/Category/create.html.twig", array(
+        return $this->render("EDBlogBundle:Taxonomy/Category:create.html.twig", array(
             'form' => $form->createView()
         ));
     }
@@ -102,7 +102,7 @@ class CategoryController extends DefaultController
             }
         }
 
-        return $this->render("@EDBlog/Taxonomy/Category/edit.html.twig", array(
+        return $this->render("EDBlogBundle:Taxonomy/Category:edit.html.twig", array(
             'form' => $form->createView(),
             'slug' => $slug
         ));
@@ -138,7 +138,7 @@ class CategoryController extends DefaultController
 
         return new JsonResponse(array(
             'success' => true,
-            'html' => $this->renderView("@EDBlog/Taxonomy/Category/pretty" . ($template == 'all' ? "" : "_$template") . ".html.twig", array(
+            'html' => $this->renderView("EDBlogBundle:Taxonomy/Category:pretty" . ($template == 'all' ? "" : "_$template") . ".html.twig", array(
                 'categories' => $categories,
                 'selected' => $selected
                 ))

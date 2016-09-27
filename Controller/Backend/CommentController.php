@@ -80,7 +80,7 @@ class CommentController extends DefaultController
             'success' => true,
             'lock' => true,
             'currentComment'=>IDEncrypt::encrypt($object->getId()),
-            'html' =>  $this->renderView("@EDBlog/Comment/list.html.twig", array(
+            'html' =>  $this->renderView("EDBlogBundle:Comment:list.html.twig", array(
                 'form' => $form->createView(),
                 'article' => $article,
                 'comments' => $comments
@@ -162,7 +162,7 @@ class CommentController extends DefaultController
         {
             return new JsonResponse(array(
                 "success" => true,
-                "html" => $this->renderView("@EDBlog/Comment/Comments/listAjaxElement.html.twig", array( "comment" => $comment))
+                "html" => $this->renderView("EDBlogBundle:Comment/Comments:listAjaxElement.html.twig", array( "comment" => $comment))
             ));
         }
         else
@@ -202,7 +202,7 @@ class CommentController extends DefaultController
             }
         }
 
-        return $this->render('@EDBlog/Comment/edit.html.twig', array(
+        return $this->render('EDBlogBundle:Comment:edit.html.twig', array(
             'form' => $form->createView(),
             'comment' => $comment
         ));

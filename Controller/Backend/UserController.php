@@ -68,7 +68,7 @@ class UserController extends DefaultController
             $this->get('session')->getFlashBag()->add('success', 'User imported successfully.');
         }
 
-        return $this->render('@EDBlog/Users/add.html.twig', array(
+        return $this->render('EDBlogBundle:Users:add.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -129,7 +129,7 @@ class UserController extends DefaultController
             }
         }
 
-        return $this->render('@EDBlog/Users/edit.html.twig', array(
+        return $this->render('EDBlogBundle:Users:edit.html.twig', array(
             'form' => $form->createView(),
             'user' => $user
         ));

@@ -544,7 +544,7 @@ class ArticleController extends DefaultController
             return new JsonResponse(array(
                 'success' => true,
                 'lock' => true,
-                'html' =>  $this->renderView('@EDBlog/Article/checkWritingLock.html.twig', array(
+                'html' =>  $this->renderView('EDBlogBundle:Article:checkWritingLock.html.twig', array(
                     'user' => $userLocked
                 ))
             ));

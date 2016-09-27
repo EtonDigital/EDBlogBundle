@@ -279,7 +279,7 @@ class MediaController extends DefaultController
         {
             return new JsonResponse(array(
                 "success" => true,
-                "html" => $this->renderView('@EDBlog/Media/editForm.html.twig', array(
+                "html" => $this->renderView('EDBlogBundle:Media:editForm.html.twig', array(
                     'media' => $media,
                     'form' => $form->createView()
                 ))
@@ -287,7 +287,7 @@ class MediaController extends DefaultController
         }
         else
         {
-            return $this->render("@EDBlog/Media/edit.html.twig", array(
+            return $this->render("EDBlogBundle:Media:edit.html.twig", array(
                 'media' => $media,
                 'form' => $form->createView()
             ));
@@ -375,7 +375,7 @@ class MediaController extends DefaultController
 
         return new JsonResponse( array(
             'success' => true,
-            'html' => $this->renderView('@EDBlog/Media/cropPanel.html.twig', array(
+            'html' => $this->renderView('EDBlogBundle:Media:cropPanel.html.twig', array(
                 'media' => $mediaNew
             )),
             'redirectUrl' => $this->generateUrl('ed_blog_admin_media_edit', array('id' => $mediaNew->getId()), true),

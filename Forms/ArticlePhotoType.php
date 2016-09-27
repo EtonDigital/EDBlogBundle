@@ -19,8 +19,9 @@ class ArticlePhotoType extends AbstractType
             'attr' => array(
                 'class' => 'sr-only media-uploader',
              //   'data-href' => $this->generateUrl('ed_blog_admin_article_upload')
-            ),
-            'multiple' => true
+                'multiple' => true
+            )
+
         ));
     }
 

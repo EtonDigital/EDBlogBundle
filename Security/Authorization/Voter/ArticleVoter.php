@@ -49,6 +49,10 @@ class ArticleVoter implements VoterInterface
         {
             return false;
         }
+        catch(\Error $e)
+        {
+            return false;
+        }
 
     }
 

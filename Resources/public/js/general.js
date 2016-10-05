@@ -69,7 +69,7 @@ $(document).ready(function(){
       $.post($(this).attr('data-href'), function(){
           $('.js-media-object-remove').addClass('hidden');
           $('.js-media-object').attr('src', '/bundles/edblog/img/svg/image-placeholder.svg');
-          $('#article_excerpt_photo').val('');
+          $('#article_excerptPhoto').val('');
       });
     });
 
@@ -77,7 +77,7 @@ $(document).ready(function(){
     {
       $('.js-media-object-remove').addClass('hidden');
       $('.js-media-object').attr('src', '/bundles/edblog/img/svg/image-placeholder.svg');
-      $('#article_excerpt_photo').val('');
+      $('#article_excerptPhoto').val('');
     });
 
     $(document).on('click', '.js-delete-object', function(e){

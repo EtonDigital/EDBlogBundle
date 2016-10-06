@@ -20,7 +20,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 class Article implements ArticleInterface, RoutedItemInterface
 {
-    const EXCERPT_LENGTH = 140;
+    const EXCERPT_LENGTH = 2000;
     const STATUS_PUBLISHED = 'published';
     const STATUS_DRAFTED = 'draft';
 
@@ -44,9 +44,9 @@ class Article implements ArticleInterface, RoutedItemInterface
     protected $title;
 
     /**
-     * @ORM\Column(type="string", length=140, nullable=true)
+     * @ORM\Column(type="string", length=2000, nullable=true)
      * @Assert\Length(
-     *      max = 140,
+     *      max = 2000,
      *      maxMessage = "Article excerpt should not be longer than {{ limit }} characters"
      * )
      */

@@ -11,6 +11,7 @@ namespace ED\BlogBundle\Forms;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class TermType extends AbstractType
 {
@@ -30,6 +31,11 @@ class TermType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control form-control--lg margin--b',
                     'placeholder' => 'Enter title'
+                ),
+                'constraints' => array(
+                    new NotBlank(array(
+                        "message" => "Please enter title"
+                    ))
                 )
             ))
             ->add('slug', 'text', array(

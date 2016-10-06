@@ -13,6 +13,7 @@ use ED\BlogBundle\Handler\BlogUserHandler;
 use ED\BlogBundle\Transformers\UserToEmailTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ImportUserType extends AbstractType
 {
@@ -34,17 +35,30 @@ class ImportUserType extends AbstractType
         $builder
             ->add(
                 $builder->create('user','text', array(
+                    'label' => 'User:',
                     'required' => true,
                     'attr' => array(
                         "class" => "form-control form-control--lg margin--halfb",
                         "placeholder" => "Search",
                         "data-ed-autocomplete" => true
-                    )))->addModelTransformer($userTransformer)
+                    ),
+                    'constraints' => array(
+                        new NotBlank(array(
+                            "message" => "Please enter title"
+                        ))
+                    )
+                ))->addModelTransformer($userTransformer)
             )
             ->add('adminRole', 'choice', array(
-                'label' => 'Roles?',
+                'label' => 'Roles:',
                 'expanded' => true,
-                'choices' => $this->blogUserHandler->getBlogRolesArray()
+                'required'  => true,
+                'choices' => $this->blogUserHandler->getBlogRolesArray(),
+                'constraints' => array(
+                    new NotBlank(array(
+                        "message" => "Please choose role"
+                    ))
+                )
             ))
             ->add('Save', 'submit', array(
                 'attr' => array(

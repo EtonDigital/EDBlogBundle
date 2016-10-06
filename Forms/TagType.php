@@ -24,14 +24,7 @@ class TagType extends TaxonomyType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('term', 'edterm', array(
-                'required' => true,
-                'label' => 'Title:',
-                'attr' => array(
-                    'class' => 'form-control form-control--lg margin--b',
-                    'placeholder' => 'Enter tag title'
-                )
-            ))
+            ->add('term', 'edterm')
             ->add('description', 'text', array(
                 'required' => false,
                 'label' => 'Description:',

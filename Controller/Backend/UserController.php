@@ -63,12 +63,12 @@ class UserController extends DefaultController
 
                 $em->persist($blogUser);
                 $em->flush();
-            }
 
-            $this->get('session')->getFlashBag()->add('success', 'User imported successfully.');
+                $this->get('session')->getFlashBag()->add('success', 'User imported successfully.');
+            }
         }
 
-        return $this->render('@EDBlog/Users/add.html.twig', array(
+        return $this->render('EDBlogBundle:Users:add.html.twig', array(
             'form' => $form->createView()
         ));
     }

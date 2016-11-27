@@ -45,7 +45,7 @@ class AbstractConverter implements ParamConverterInterface
         }
         elseif($username)
         {
-            $searchArray = array('username' => $username);
+            $searchArray = array('usernameCanonical' => $username);
         }
         elseif($id)
         {

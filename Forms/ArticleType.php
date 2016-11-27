@@ -115,7 +115,7 @@ class ArticleType extends AbstractType
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('a')
                             ->where('a.roles like :type')
-                            ->orderBy('a.username', 'ASC')
+                            ->orderBy('a.usernameCanonical', 'ASC')
                             ->setParameter('type', '%ROLE_BLOG_USER%');
 
                     },

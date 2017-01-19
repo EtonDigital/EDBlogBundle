@@ -40,6 +40,20 @@ class ArticleType extends AbstractType
         $tagTransformer = new TagsToTextTransformer($this->entityManager->getManager(), $this->taxonomyClass);
         $photoTransformer = new PhotoToIdTransformer($this->entityManager->getManager());
 
+        if($object->getParent())
+        {
+            $builder
+                ->add('slug', 'text',
+                    array(
+                        'required' => true,
+                        'label' => 'Slug:',
+                        'attr' => array(
+                            'class' => 'form-control form-control--lg margin--b',
+                            'placeholder' => 'Enter slug for the article'
+                        )
+                    ));
+        }
+
         $builder
             ->add('title', 'text',
                 array(

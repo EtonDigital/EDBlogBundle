@@ -30,12 +30,13 @@
   "require": {
     "php": ">=5.3.3",
     "symfony/symfony": "2.8.*",
-    "sensio/framework-extra-bundle": "*",
+    "symfony/symfony": ">=2.5",
     "incenteev/composer-parameter-handler": "~2.0",
     "friendsofsymfony/user-bundle": "*",
+    "sonata-project/media-bundle": "~2.3",
     "knplabs/knp-paginator-bundle": "*",
     "doctrine/doctrine-fixtures-bundle": "*",
-    "eko/feedbundle": "~1.2"
+    "eko/feedbundle": "~1.2"  
   },
   "require-dev": {
     "doctrine/doctrine-bundle": "~1.3",

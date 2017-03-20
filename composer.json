@@ -33,8 +33,6 @@
     "sensio/framework-extra-bundle": "*",
     "incenteev/composer-parameter-handler": "~2.0",
     "friendsofsymfony/user-bundle": "*",
-    "sonata-project/media-bundle": "~2.3",
-    "sonata-project/doctrine-orm-admin-bundle": "^2.3",
     "jms/serializer-bundle": "~0.13",
     "knplabs/knp-paginator-bundle": "*",
     "doctrine/doctrine-fixtures-bundle": "*",

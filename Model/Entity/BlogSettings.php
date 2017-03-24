@@ -26,9 +26,13 @@ class BlogSettings
     const DATE_FORMAT_2="Y-m-d";
     const DATE_FORMAT_3="m/d/Y";
     const DATE_FORMAT_4="d/m/Y";
+    const DATE_FORMAT_CUSTOM="Custom Date Format";
+    const DATE_FORMAT_CUSTOM_FIELD="custom_date_format";
     const TIME_FORMAT_1="g:i a";
     const TIME_FORMAT_2="g:i A";
     const TIME_FORMAT_3="H:i";
+    const TIME_FORMAT_CUSTOM="Custom Time Format";
+    const TIME_FORMAT_CUSTOM_FIELD="custom_time_format";
 
     /**
      * @ORM\Id

@@ -8,7 +8,9 @@
 
 namespace ED\BlogBundle\Forms;
 
-
+use ED\BlogBundle\Forms\TermType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use ED\BlogBundle\Model\Entity\Taxonomy;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -24,7 +26,7 @@ class TagType extends TaxonomyType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('term', 'edterm', array(
+            ->add('term', TermType::class, array(
                 'required' => true,
                 'label' => 'Title:',
                 'attr' => array(
@@ -32,7 +34,7 @@ class TagType extends TaxonomyType
                     'placeholder' => 'Enter tag title'
                 )
             ))
-            ->add('description', 'text', array(
+            ->add('description', TextType::class, array(
                 'required' => false,
                 'label' => 'Description:',
                 'attr' => array(
@@ -40,7 +42,7 @@ class TagType extends TaxonomyType
                     'placeholder' => 'Enter tag description'
                 )
             ))
-            ->add('type', 'hidden', array(
+            ->add('type', HiddenType::class, array(
                 'data' => Taxonomy::TYPE_TAG
             ))
             ->remove('parent');

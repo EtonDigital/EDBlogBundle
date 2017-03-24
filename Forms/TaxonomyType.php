@@ -10,7 +10,9 @@ namespace ED\BlogBundle\Forms;
 
 
 use Doctrine\ORM\EntityRepository;
+use ED\BlogBundle\Forms\TermType;
 use ED\BlogBundle\Model\Entity\Taxonomy;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -35,7 +37,7 @@ class TaxonomyType extends AbstractType
         $object = $builder->getData();
 
         $builder
-            ->add('term', 'edterm', array(
+            ->add('term', TermType::class, array(
                 'required' => true,
                 'label' => 'Title:',
                 'attr' => array(
@@ -51,7 +53,7 @@ class TaxonomyType extends AbstractType
                     'placeholder' => 'Enter description of the category'
                 )
             ))
-            ->add('parent', 'entity', array(
+            ->add('parent', EntityType::class, array(
                 'label' => 'Parent category:',
                 'required' => false,
                 'class' => $this->dataClass,

@@ -12,7 +12,9 @@ use Doctrine\ORM\EntityRepository;
 use ED\BlogBundle\Model\Entity\Article;
 use ED\BlogBundle\Transformers\PhotoToIdTransformer;
 use ED\BlogBundle\Transformers\TagsToTextTransformer;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use ED\BlogBundle\Forms\ArticleMetaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -67,7 +69,7 @@ class ArticleType extends AbstractType
                     )
                 ))
             ->add(
-                $builder->create('excerptPhoto', 'hidden',
+                $builder->create('excerptPhoto', HiddenType::class,
                     array(
                         'attr' => array('class' => 'sr-only js-excerpt-photo'),
                         'required' => false
@@ -81,7 +83,7 @@ class ArticleType extends AbstractType
                         'class' => 'tinymce hide'
                     )
                 ))
-            ->add('categories', 'entity', array(
+            ->add('categories', EntityType::class, array(
                 'class' => $this->taxonomyClass,
                 'required' => false,
                 'expanded' => true,
@@ -91,7 +93,7 @@ class ArticleType extends AbstractType
                     'placeholder' => 'Select category'
                 )))
             ->add(
-                $builder->create('tags','text', array(
+                $builder->create('tags', TextType::class, array(
                 'required' => false,
                 'attr' => array(
                     "class" => "form-control form-control--lg margin--halfb",
@@ -100,7 +102,7 @@ class ArticleType extends AbstractType
                 )))->addModelTransformer($tagTransformer)
                 )
             ->add('metaData', CollectionType::class, array(
-                'type' =>  'article_meta',
+                'entry_type' => ArticleType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
@@ -113,7 +115,7 @@ class ArticleType extends AbstractType
         if($this->authorizationChecker->isGranted('SWITCH_ARTICLE_AUTHOR'))
         {
             $builder
-                ->add('author', 'entity', array(
+                ->add('author', EntityType::class, array(
                     'label' => 'Author:',
                     'required' => true,
                     'class' => $this->userClass,

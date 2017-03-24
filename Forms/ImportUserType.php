@@ -13,6 +13,7 @@ use ED\BlogBundle\Handler\BlogUserHandler;
 use ED\BlogBundle\Transformers\UserToEmailTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -35,7 +36,7 @@ class ImportUserType extends AbstractType
 
         $builder
             ->add(
-                $builder->create('user','text', array(
+                $builder->create('user', TextType::class, array(
                     'required' => true,
                     'attr' => array(
                         "class" => "form-control form-control--lg margin--halfb",

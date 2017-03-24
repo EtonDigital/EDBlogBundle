@@ -27,8 +27,8 @@ class SettingsType extends AbstractType
                 'label' => 'The comments are: ',
                 'expanded' => true,
                 'choices' => array(
-                    BlogSettings::COMMENTS_ENABLED => "Enabled",
-                    BlogSettings::COMMENTS_DISABLED => "Disabled"
+                    "Enabled" => BlogSettings::COMMENTS_ENABLED,
+                    "Disabled" => BlogSettings::COMMENTS_DISABLED
                 ),
                 'data' => isset($options['data']['comments_enabled']) ? $options['data']['comments_enabled'] : null
 
@@ -37,8 +37,8 @@ class SettingsType extends AbstractType
                 'label' => 'The comments are publicly visible: ',
                 'expanded' => true,
                 'choices' => array(
-                    BlogSettings::COMMENTS_PUBLIC_VISIBLE => "Enabled",
-                    BlogSettings::COMMENTS_PUBLIC_HIDE => "Disabled"
+                    "Enabled" => BlogSettings::COMMENTS_PUBLIC_VISIBLE,
+                    "Disabled" => BlogSettings::COMMENTS_PUBLIC_HIDE
                 ),
                 'data' => isset($options['data']['comments_visible_public']) ? $options['data']['comments_visible_public'] : null
             ))
@@ -46,8 +46,8 @@ class SettingsType extends AbstractType
                 'label' => 'Who can write comments: ',
                 'expanded' => true,
                 'choices' => array(
-                    BlogSettings::COMMENTER_ACCESS_LEVEL_PUBLIC => "All users",
-                    BlogSettings::COMMENTER_ACCESS_LEVEL_PRIVATE => "Registered users"
+                    "All users" => BlogSettings::COMMENTER_ACCESS_LEVEL_PUBLIC,
+                    "Registered users" => BlogSettings::COMMENTER_ACCESS_LEVEL_PRIVATE
                 ),
                 'data' => isset($options['data']['commenter_access_level']) ? $options['data']['commenter_access_level'] : null
             ))
@@ -55,8 +55,8 @@ class SettingsType extends AbstractType
                 'label' => 'Display comments: ',
                 'expanded' => true,
                 'choices' => array(
-                    BlogSettings::COMMENTS_ORDER_LATEST_BOTTOM => "Latest on the bottom",
-                    BlogSettings::COMMENTS_ORDER_LATEST_TOP => "Latest on the top"
+                    "Latest on the bottom" => BlogSettings::COMMENTS_ORDER_LATEST_BOTTOM,
+                    "Latest on the top" => BlogSettings::COMMENTS_ORDER_LATEST_TOP
                 ),
                 'data' => isset($options['data']['comments_display_order']) ? $options['data']['comments_display_order'] : null
             ))
@@ -64,8 +64,8 @@ class SettingsType extends AbstractType
                 'label' => 'Comments should be approved manually: ',
                 'expanded' => true,
                 'choices' => array(
-                    BlogSettings::COMMENTS_APPROVE_MANUAL => "Enabled",
-                    BlogSettings::COMMENTS_APPROVE_AUTOMATIC => "Disabled"
+                    "Enabled" => BlogSettings::COMMENTS_APPROVE_MANUAL,
+                    "Disabled" => BlogSettings::COMMENTS_APPROVE_AUTOMATIC
                 ),
                 'data' => isset($options['data']['comments_manual_approving']) ? $options['data']['comments_manual_approving'] : null
             ))
@@ -76,12 +76,12 @@ class SettingsType extends AbstractType
                     BlogSettings::DATE_FORMAT_2 => $currentDate->format(BlogSettings::DATE_FORMAT_2),
                     BlogSettings::DATE_FORMAT_3 => $currentDate->format(BlogSettings::DATE_FORMAT_3),
                     BlogSettings::DATE_FORMAT_4 => $currentDate->format(BlogSettings::DATE_FORMAT_4),
-                    'custom_date_format'=> false
+                    BlogSettings::DATE_FORMAT_CUSTOM => BlogSettings::DATE_FORMAT_CUSTOM_FIELD
                 ),
                 'expanded' => true,
                 'data' => isset($options['data']['date_format']) ?  $this->setCustomDateDefault($options['data']['date_format']) : null
             ))
-            ->add('custom_date_format', TextType::class, array(
+            ->add(BlogSettings::DATE_FORMAT_CUSTOM_FIELD, TextType::class, array(
                 'label' => isset($options['data']['date_format']) ? $currentDate->format($options['data']['date_format']) : null,
                 'required' => false,
                 'data' => isset($options['data']['date_format'])  ? $options['data']['date_format'] : null
@@ -92,14 +92,14 @@ class SettingsType extends AbstractType
                     BlogSettings::TIME_FORMAT_1 => $currentDate->format(BlogSettings::TIME_FORMAT_1),
                     BlogSettings::TIME_FORMAT_2 => $currentDate->format(BlogSettings::TIME_FORMAT_2),
                     BlogSettings::TIME_FORMAT_3 => $currentDate->format(BlogSettings::TIME_FORMAT_3),
-                    'custom_time_format'=> false
+                    BlogSettings::TIME_FORMAT_CUSTOM => BlogSettings::TIME_FORMAT_CUSTOM_FIELD
                 ),
                 'multiple' => false,
                 'expanded' => true,
 
                 'data' => isset($options['data']['time_format']) ? $this->setCustomTimeDefault($options['data']['time_format']) : null
             ))
-            ->add('custom_time_format', TextType::class, array(
+            ->add(BlogSettings::TIME_FORMAT_CUSTOM_FIELD, TextType::class, array(
                 'label' => isset($options['data']['time_format']) ? $currentDate->format($options['data']['time_format']) : null,
                 'required' => false,
                 'data' => isset($options['data']['time_format']) ? $options['data']['time_format'] : null
@@ -118,7 +118,7 @@ class SettingsType extends AbstractType
             return $value;
         }else
         {
-            return 'custom_date_format';
+            return BlogSettings::DATE_FORMAT_CUSTOM_FIELD;
         }
     }
 
@@ -129,7 +129,7 @@ class SettingsType extends AbstractType
             return $value;
         }else
         {
-            return 'custom_time_format';
+            return BlogSettings::TIME_FORMAT_CUSTOM_FIELD;
         }
     }
 

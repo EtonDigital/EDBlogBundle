@@ -11,12 +11,12 @@ namespace ED\BlogBundle\Model\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ED\BlogBundle\Interfaces\Model\ArticleInterface;
+use ED\BlogBundle\Interfaces\Model\ArticleMetaInterface;
 use ED\BlogBundle\Interfaces\Model\BlogUserInterface;
 use ED\BlogBundle\Interfaces\Model\CommentInterface;
-use ED\BlogBundle\Interfaces\Model\ArticleMetaInterface;
 use Eko\FeedBundle\Item\Writer\RoutedItemInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class Article implements ArticleInterface, RoutedItemInterface
 {

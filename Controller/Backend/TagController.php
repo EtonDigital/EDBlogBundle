@@ -10,10 +10,10 @@ namespace ED\BlogBundle\Controller\Backend;
 
 use ED\BlogBundle\Handler\Pagination;
 use ED\BlogBundle\Model\Entity\Taxonomy;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TagController extends DefaultController

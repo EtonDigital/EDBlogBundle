@@ -11,8 +11,8 @@ namespace ED\BlogBundle\Controller\Backend;
 use ED\BlogBundle\Forms\SettingsType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\FormError;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class SettingsController extends DefaultController
 {

@@ -9,10 +9,10 @@
 namespace ED\BlogBundle\Model\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use ED\BlogBundle\Interfaces\Model\BlogUserInterface;
-use ED\BlogBundle\Model\Entity\Article;
 use Doctrine\ORM\Mapping;
+use ED\BlogBundle\Interfaces\Model\BlogUserInterface;
 use ED\BlogBundle\Interfaces\Repository\ArticleRepositoryInterface;
+use ED\BlogBundle\Model\Entity\Article;
 use ED\BlogBundle\Model\Entity\Taxonomy;
 
 /**

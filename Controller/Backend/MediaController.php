@@ -12,14 +12,14 @@ use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use ED\BlogBundle\Event\MediaArrayEvent;
 use ED\BlogBundle\Events\EDBlogEvents;
-use ED\BlogBundle\Forms\MediaInfoType;
 use ED\BlogBundle\Forms\ArticlePhotoType;
+use ED\BlogBundle\Forms\MediaInfoType;
 use ED\BlogBundle\Forms\MediaType;
 use ED\BlogBundle\Handler\Pagination;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class MediaController extends DefaultController
 {

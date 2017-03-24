@@ -2,12 +2,12 @@
 
 namespace ED\BlogBundle\Controller\Backend;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ED\BlogBundle\Handler\Pagination;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class UserController extends DefaultController
 {

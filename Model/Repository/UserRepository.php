@@ -9,9 +9,9 @@
 namespace ED\BlogBundle\Model\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Mapping;
 use ED\BlogBundle\Interfaces\Model\BlogUserInterface;
 use ED\BlogBundle\Interfaces\Repository\BlogUserRepositoryInterface;
-use Doctrine\ORM\Mapping;
 use ED\BlogBundle\Model\Entity\Article;
 
 class UserRepository extends EntityRepository implements BlogUserRepositoryInterface

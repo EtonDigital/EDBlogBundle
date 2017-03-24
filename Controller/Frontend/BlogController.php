@@ -11,9 +11,9 @@ namespace ED\BlogBundle\Controller\Frontend;
 use ED\BlogBundle\Handler\Pagination;
 use ED\BlogBundle\Model\Entity\Article;
 use ED\BlogBundle\Model\Entity\Taxonomy;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BlogController extends Controller

@@ -18,11 +18,11 @@ use ED\BlogBundle\Forms\ArticleExcerptType;
 use ED\BlogBundle\Forms\ArticlePhotoType;
 use ED\BlogBundle\Handler\Pagination;
 use ED\BlogBundle\Model\Entity\Article;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ArticleController extends DefaultController
 {

@@ -82,7 +82,7 @@ class SettingsType extends AbstractType
                 'data' => isset($options['data']['date_format']) ?  $this->setCustomDateDefault($options['data']['date_format']) : null
             ))
             ->add(BlogSettings::DATE_FORMAT_CUSTOM_FIELD, TextType::class, array(
-                'label' => isset($options['data']['date_format']) ? $currentDate->format($options['data']['date_format']) : null,
+                'label' => isset($options['data']['date_format']) ? $options['data']['date_format'] : null,
                 'required' => false,
                 'data' => isset($options['data']['date_format'])  ? $options['data']['date_format'] : null
             ))
@@ -100,7 +100,7 @@ class SettingsType extends AbstractType
                 'data' => isset($options['data']['time_format']) ? $this->setCustomTimeDefault($options['data']['time_format']) : null
             ))
             ->add(BlogSettings::TIME_FORMAT_CUSTOM_FIELD, TextType::class, array(
-                'label' => isset($options['data']['time_format']) ? $currentDate->format($options['data']['time_format']) : null,
+                'label' => isset($options['data']['time_format']) ? $options['data']['time_format'] : null,
                 'required' => false,
                 'data' => isset($options['data']['time_format']) ? $options['data']['time_format'] : null
             ))

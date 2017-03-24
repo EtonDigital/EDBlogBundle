@@ -15,10 +15,10 @@ class BlogUserHandler
     public function getBlogRolesArray()
     {
         return array(
-            'ROLE_BLOG_ADMIN' => 'Administrator',
-            'ROLE_BLOG_EDITOR' => 'Editor',
-            'ROLE_BLOG_AUTHOR' => 'Author',
-            'ROLE_BLOG_CONTRIBUTOR' => 'Contributor'
+            'Administrator' => 'ROLE_BLOG_ADMIN',
+            'Editor' => 'ROLE_BLOG_EDITOR',
+            'Author' => 'ROLE_BLOG_AUTHOR',
+            'Contributor' => 'ROLE_BLOG_CONTRIBUTOR'
         );
     }
 

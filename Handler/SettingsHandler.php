@@ -145,17 +145,17 @@ class SettingsHandler
 
     private function modifySeetingsToAcceptCustomField($settings)
     {
-        if(isset($settings['date_format']) && $settings['date_format']=="custom_date_format")
+        if(isset($settings['date_format']) && $settings['date_format']==BlogSettings::DATE_FORMAT_CUSTOM_FIELD)
         {
-            $settings['date_format']=$settings['custom_date_format'];
+            $settings['date_format']=$settings[BlogSettings::DATE_FORMAT_CUSTOM_FIELD];
         }
-        unset($settings['custom_date_format']);
+        unset($settings[BlogSettings::DATE_FORMAT_CUSTOM_FIELD]);
 
-        if(isset($settings['time_format']) && $settings['time_format']=="custom_time_format")
+        if(isset($settings['time_format']) && $settings['time_format']==BlogSettings::TIME_FORMAT_CUSTOM_FIELD)
         {
-            $settings['time_format']=$settings['custom_time_format'];
+            $settings['time_format']=$settings[BlogSettings::TIME_FORMAT_CUSTOM_FIELD];
         }
-        unset($settings['custom_time_format']);
+        unset($settings[BlogSettings::TIME_FORMAT_CUSTOM_FIELD]);
 
         return $settings;
     }

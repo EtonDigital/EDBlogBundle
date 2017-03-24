@@ -77,16 +77,20 @@
 
 
         <!-- Blog Repository services -->
-        <service id="app_repository_article" class="Doctrine\ORM\EntityRepository" factory-service="doctrine.orm.default_entity_manager" factory-method="getRepository">
+        <service id="app_repository_article" class="Doctrine\ORM\EntityRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
             <argument>%article_class%</argument>
         </service>
-        <service id="app_repository_taxonomy" class="Doctrine\ORM\EntityRepository" factory-service="doctrine.orm.default_entity_manager" factory-method="getRepository">
+        <service id="app_repository_taxonomy" class="Doctrine\ORM\EntityRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
             <argument>%blog_taxonomy_class%</argument>
         </service>
-        <service id="app_repository_comment" class="Doctrine\ORM\EntityRepository" factory-service="doctrine.orm.default_entity_manager" factory-method="getRepository">
+        <service id="app_repository_comment" class="Doctrine\ORM\EntityRepository">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
             <argument>%blog_comment_class%</argument>
         </service>
-        <service id="app_repository_user" class="Doctrine\ORM\EntityRepository" factory-service="doctrine.orm.default_entity_manager" factory-method="getRepository">
+        <service id="app_repository_user" class="Doctrine\ORM\EntityRepository"> 
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository" />
             <argument>%user_model_class%</argument>
         </service>
 

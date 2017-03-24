@@ -102,7 +102,7 @@ class ArticleType extends AbstractType
                 )))->addModelTransformer($tagTransformer)
                 )
             ->add('metaData', CollectionType::class, array(
-                'entry_type' => ArticleType::class,
+                'entry_type' => ArticleMetaType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

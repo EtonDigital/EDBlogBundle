@@ -4,31 +4,58 @@ namespace  ED\BlogBundle\Util;
 
 use ED\BlogBundle\Util\EDEncryption;
 
-class IDEncrypt {
+class IDEncrypt
+{
+    /**
+     * EDEncryption class.
+     *
+     * @var EDEncryption
+     */
+    private static $_encryption;
 
-  private static $EDEncr;
-
-  private static function getEDEncr() {
-    if (!self::$EDEncr instanceof EDEncryption) {
-      self::$EDEncr = new EDEncryption();
+    /**
+     * Encryption.
+     *
+     * @param int $id Encryption text
+     *
+     * @return string
+     */
+    public static function encrypt($id)
+    {
+        return self::_getEDEncryption()->encode($id);
     }
-    return self::$EDEncr;
-  }
 
-  /**
-   * @param  raw int
-   * @return encrypted string 
-   */
-  public static function encrypt($id) {
-    return self::getEDEncr()->encode($id);
-  }
+    /**
+     * Get EDEncryption.
+     *
+     * @return EDEncryption
+     */
+    private static function _getEDEncryption()
+    {
+        if (!self::$_encryption instanceof EDEncryption) {
+            self::$_encryption = new EDEncryption();
+        }
 
-  /**
-   * @param  raw int
-   * @return decrypted string 
-   */
-  public static function decrypt($encrypted) {
-    return self::getEDEncr()->decode($encrypted);
-  }
+        return self::$_encryption;
+    }
 
+    /**
+     * Decryption.
+     *
+     * @param string $encrypted Decryption text
+     *
+     * @return string
+     */
+    public static function decrypt($encrypted)
+    {
+        if (!is_array($encrypted)) {
+            return self::_getEDEncryption()->decode($encrypted);
+        }
+        $val = array();
+        foreach ($encrypted as $encryptedId) {
+            $val[] = self::_getEDEncryption()->decode($encryptedId);
+        }
+
+        return $val;
+    }
 }

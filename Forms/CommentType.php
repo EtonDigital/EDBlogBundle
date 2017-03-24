@@ -10,10 +10,14 @@ namespace ED\BlogBundle\Forms;
 
 use FOS\UserBundle\Event\FormEvent;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CommentType extends AbstractType
 {
@@ -33,7 +37,7 @@ class CommentType extends AbstractType
         $user = $object->getAuthor();
 
         $builder
-            ->add('comment', 'textarea', array(
+            ->add('comment', TextareaType::class, array(
                 'required' => true,
                 'label' => 'Comment:',
                 'attr' => array(
@@ -42,7 +46,7 @@ class CommentType extends AbstractType
                     'placeholder' => 'Enter your comment'
                 )
             ))
-            ->add('save', 'submit', array(
+            ->add('save', SubmitType::class, array(
                 'label' => 'Submit comment',
                 'attr' => array(
                     'class' => 'btn btn-md btn-primary btn-wide flright--responsive-mob margin--t margin--b first-in-line'
@@ -56,7 +60,7 @@ class CommentType extends AbstractType
             if(!$comment->getAuthor())
             {
                 $form
-                    ->add('name', 'text', array(
+                    ->add('name', TextType::class, array(
                         'required' => true,
                         'label' => 'Display name:',
                         'attr' => array(
@@ -64,7 +68,7 @@ class CommentType extends AbstractType
                             'placeholder' => 'Enter your name and surname'
                         )
                     ))
-                    ->add('email', 'email', array(
+                    ->add('email', EmailType::class, array(
                         'required' => true,
                         'label' => 'Email:',
                         'attr' => array(
@@ -72,7 +76,7 @@ class CommentType extends AbstractType
                             'placeholder' => 'Enter your email address'
                         )
                     ))
-                    ->add('username', 'text', array(
+                    ->add('username', TextType::class, array(
                         'required' => false,
                         'mapped' => false,
                         'attr' => array(
@@ -102,12 +106,12 @@ class CommentType extends AbstractType
      *
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return "edcomment";
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => $this->dataClass,

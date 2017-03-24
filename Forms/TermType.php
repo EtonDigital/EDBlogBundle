@@ -9,8 +9,9 @@
 namespace ED\BlogBundle\Forms;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TermType extends AbstractType
 {
@@ -24,7 +25,7 @@ class TermType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', array(
+            ->add('title', TextType::class, array(
                 'required' => true,
                 'label' => 'Title:',
                 'attr' => array(
@@ -32,7 +33,7 @@ class TermType extends AbstractType
                     'placeholder' => 'Enter title'
                 )
             ))
-            ->add('slug', 'text', array(
+            ->add('slug', TextType::class, array(
                 'required' => false,
                 'label' => 'Slug:',
                 'attr' => array(
@@ -48,12 +49,12 @@ class TermType extends AbstractType
      *
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return "edterm";
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => $this->dataClass,

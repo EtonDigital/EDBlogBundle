@@ -12,8 +12,11 @@ namespace ED\BlogBundle\Forms;
 use Doctrine\ORM\EntityRepository;
 use ED\BlogBundle\Model\Entity\Taxonomy;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaxonomyType extends AbstractType
 {
@@ -40,7 +43,7 @@ class TaxonomyType extends AbstractType
                     'placeholder' => 'Enter title of the category'
                 )
             ))
-            ->add('description', 'text', array(
+            ->add('description', TextType::class, array(
                 'required' => false,
                 'label' => 'Description:',
                 'attr' => array(
@@ -76,10 +79,10 @@ class TaxonomyType extends AbstractType
                     'data-empty-option' => 'Select parent category'
                 )
             ))
-            ->add('type', 'hidden', array(
+            ->add('type', HiddenType::class, array(
                 'data' => Taxonomy::TYPE_CATEGORY
             ))
-            ->add('save', 'submit', array(
+            ->add('save', SubmitType::class, array(
                 'attr' => array(
                     'class' => 'btn btn-md btn-primary btn-wide--xl flright--responsive-mob margin--t margin--b first-in-line'
                 )
@@ -91,12 +94,12 @@ class TaxonomyType extends AbstractType
      *
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return "edtaxonomy";
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => $this->dataClass,

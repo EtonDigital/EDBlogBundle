@@ -12,6 +12,8 @@ namespace ED\BlogBundle\Forms;
 use ED\BlogBundle\Handler\BlogUserHandler;
 use ED\BlogBundle\Transformers\UserToEmailTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class ImportUserType extends AbstractType
@@ -41,19 +43,19 @@ class ImportUserType extends AbstractType
                         "data-ed-autocomplete" => true
                     )))->addModelTransformer($userTransformer)
             )
-            ->add('adminRole', 'choice', array(
+            ->add('adminRole', ChoiceType::class, array(
                 'label' => 'Roles?',
                 'expanded' => true,
                 'choices' => $this->blogUserHandler->getBlogRolesArray()
             ))
-            ->add('Save', 'submit', array(
+            ->add('Save', SubmitType::class, array(
                 'attr' => array(
                     'class' => 'btn btn-md btn-primary btn-wide--xl flright--responsive-mob margin--b'
                 ))
             );
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return "edblog_user_import";
     }

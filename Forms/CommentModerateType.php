@@ -10,9 +10,13 @@ namespace ED\BlogBundle\Forms;
 
 use ED\BlogBundle\Model\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CommentModerateType extends AbstractType
 {
@@ -26,7 +30,7 @@ class CommentModerateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('comment', 'textarea', array(
+            ->add('comment', TextareaType::class, array(
                 'required' => true,
                 'label' => 'Comment:',
                 'attr' => array(
@@ -35,7 +39,7 @@ class CommentModerateType extends AbstractType
                     'placeholder' => 'Edit comment'
                 )
             ))
-            ->add('status', 'choice', array(
+            ->add('status', ChoiceType::class, array(
                 'label' => 'Status: ',
                 'choices' => array(
                     Comment::STATUS_PENDING => "Pending",
@@ -45,7 +49,7 @@ class CommentModerateType extends AbstractType
                     'class' => 'form-control form-control--lg margin--b color-placeholder'
                 )
             ))
-            ->add('update', 'submit', array(
+            ->add('update', SubmitType::class, array(
                 'label' => 'Update',
                 'attr' => array(
                     'class' => 'btn btn-md btn-primary btn-wide flright--responsive-mob margin--t margin--b first-in-line'
@@ -59,7 +63,7 @@ class CommentModerateType extends AbstractType
             if(!$comment->getAuthor())
             {
                 $form
-                    ->add('name', 'text', array(
+                    ->add('name', TextType::class, array(
                         'required' => true,
                         'label' => 'Display name:',
                         'attr' => array(
@@ -71,7 +75,7 @@ class CommentModerateType extends AbstractType
         });
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => $this->dataClass,
@@ -83,7 +87,7 @@ class CommentModerateType extends AbstractType
      *
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return "ed_blog_comment";
     }

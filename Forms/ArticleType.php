@@ -8,13 +8,19 @@
 
 namespace ED\BlogBundle\Forms;
 
-use ED\BlogBundle\Transformers\PhotoToIdTransformer;
-use ED\BlogBundle\Transformers\TagsToTextTransformer;
 use Doctrine\ORM\EntityRepository;
 use ED\BlogBundle\Model\Entity\Article;
+use ED\BlogBundle\Transformers\PhotoToIdTransformer;
+use ED\BlogBundle\Transformers\TagsToTextTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class ArticleType extends AbstractType
@@ -41,7 +47,7 @@ class ArticleType extends AbstractType
         $photoTransformer = new PhotoToIdTransformer($this->entityManager->getManager());
 
         $builder
-            ->add('title', 'text',
+            ->add('title', TextType::class,
                 array(
                     'required' => true,
                     'label' => 'Title:',
@@ -50,7 +56,7 @@ class ArticleType extends AbstractType
                         'placeholder' => 'Enter title of the article'
                     )
                 ))
-            ->add('excerpt', 'textarea',
+            ->add('excerpt', TextareaType::class,
                 array(
                     'required' => false,
                     'label' => 'Excerpt text:',
@@ -67,7 +73,7 @@ class ArticleType extends AbstractType
                         'required' => false
                     ))->addModelTransformer($photoTransformer)
                 )
-            ->add('content', 'textarea',
+            ->add('content', TextareaType::class,
                 array(
                     'required' => false,
                     'label' => ' ',
@@ -93,13 +99,13 @@ class ArticleType extends AbstractType
                     "data-role" => "tagsinput"
                 )))->addModelTransformer($tagTransformer)
                 )
-            ->add('metaData', 'collection', array(
+            ->add('metaData', CollectionType::class, array(
                 'type' =>  'article_meta',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
             ))
-            ->add('metaExtras', 'hidden', array(
+            ->add('metaExtras', HiddenType::class, array(
                 'mapped' => false
             ))
             ;
@@ -127,7 +133,7 @@ class ArticleType extends AbstractType
         if($this->authorizationChecker->isGranted('EDIT_PUBLISH_STATUS', $object))
         {
             $builder
-                ->add('status', 'choice', array(
+                ->add('status', ChoiceType::class, array(
                     'label' => 'Status:',
                     'choices' => array(
                         Article::STATUS_PUBLISHED => "Published",
@@ -148,13 +154,13 @@ class ArticleType extends AbstractType
             if($this->authorizationChecker->isGranted('PUBLISH_ARTICLE', $object))
             {
                 $builder
-                    ->add('publish', 'submit',
+                    ->add('publish', SubmitType::class,
                         array(
                             'attr' => array('class' => 'btn btn-md btn-primary btn-wide--xl flright--responsive-mob margin--b first-in-line js-publish-article')
                         ));
             }
 
-            $builder->add('save_draft', 'submit',
+            $builder->add('save_draft', SubmitType::class,
                     array(
                         'attr' => array('class' => 'btn btn-md btn-b-blue btn-wide--xl flright--responsive-mob margin--r')
                     ));
@@ -164,7 +170,7 @@ class ArticleType extends AbstractType
             if($object && $object->getParent() && $object->getParent()->getStatus() == Article::STATUS_DRAFTED)
             {
                 $builder
-                    ->add('save', 'submit',
+                    ->add('save', SubmitType::class,
                         array(
                             'attr' => array('class' => 'btn btn-md btn-b-blue btn-wide--xl flright--responsive-mob margin--r')
                         ));
@@ -172,7 +178,7 @@ class ArticleType extends AbstractType
                 if($this->authorizationChecker->isGranted('PUBLISH_ARTICLE', $object))
                 {
                     $builder
-                        ->add('publish', 'submit',
+                        ->add('publish', SubmitType::class,
                             array(
                                 'attr' => array('class' => 'btn btn-md btn-primary btn-wide--xl flright--responsive-mob margin--b first-in-line js-publish-article')
                             ));
@@ -180,7 +186,7 @@ class ArticleType extends AbstractType
             }
             else
             {
-                $builder->add('update', 'submit',
+                $builder->add('update', SubmitType::class,
                     array(
                         'attr' => array('class' => 'btn btn-md btn-primary btn-wide--xl flright--responsive-mob margin--r')
                     ));
@@ -195,12 +201,12 @@ class ArticleType extends AbstractType
      *
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return "article";
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => $this->dataClass,

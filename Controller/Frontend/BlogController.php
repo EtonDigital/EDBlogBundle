@@ -8,6 +8,7 @@
 
 namespace ED\BlogBundle\Controller\Frontend;
 
+use ED\BlogBundle\Forms\CommentType;
 use ED\BlogBundle\Handler\Pagination;
 use ED\BlogBundle\Model\Entity\Article;
 use ED\BlogBundle\Model\Entity\Taxonomy;
@@ -59,7 +60,7 @@ class BlogController extends Controller
             ->setAuthor($this->getUser())
             ->setArticle($article);
 
-        $form = $this->createForm('edcomment', $newComment);
+        $form = $this->createForm(CommentType::class, $newComment);
         $comments =  $this->get("app_repository_comment")->findByArticle($article, $this->get("blog_settings")->getCommentsDisplayOrder());
         $commentsCount = $this->get("app_repository_comment")->findCountByArticle($article);
 

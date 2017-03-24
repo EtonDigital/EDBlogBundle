@@ -26,7 +26,7 @@ class SettingsController extends DefaultController
         $settingsClass = $this->container->getParameter('blog_settings_class');
 
         $data = $this->getDoctrine()->getRepository($settingsClass)->getSettingsArray();
-        $form = $this->createForm(new SettingsType(), $data);
+        $form = $this->createForm(SettingsType::class, $data);
 
         if($request->isMethod('POST'))
         {

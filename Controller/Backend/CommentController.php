@@ -10,6 +10,8 @@ namespace ED\BlogBundle\Controller\Backend;
 
 use ED\BlogBundle\Event\CommentEvent;
 use ED\BlogBundle\Events\EDBlogEvents;
+use ED\BlogBundle\Forms\CommentType;
+use ED\BlogBundle\Forms\CommentModerateType;
 use ED\BlogBundle\Handler\Pagination;
 use ED\BlogBundle\Model\Entity\Comment;
 use ED\BlogBundle\Util\IDEncrypt;
@@ -40,7 +42,7 @@ class CommentController extends DefaultController
             ->setArticle($article);
         $class = get_class($object);
 
-        $form = $this->createForm('edcomment', $object);
+        $form = $this->createForm(CommentType::class, $object);
 
         if($request->isMethod('POST'))
         {
@@ -70,7 +72,7 @@ class CommentController extends DefaultController
                     ->setAuthor($user)
                     ->setArticle($article);
 
-                $form = $this->createForm('edcomment', $resetObject);
+                $form = $this->createForm(CommentType::class, $resetObject);
             }
         }
 
@@ -183,7 +185,7 @@ class CommentController extends DefaultController
         $user = $this->getUser();
         $this->checkCommentsAdministrator();
 
-        $form = $this->createForm('ed_blog_comment', $comment);
+        $form = $this->createForm(CommentModerateType::class, $comment);
 
         if($request->isMethod("POST"))
         {

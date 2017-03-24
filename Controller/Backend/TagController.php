@@ -8,6 +8,7 @@
 
 namespace ED\BlogBundle\Controller\Backend;
 
+use ED\BlogBundle\Forms\TagType;
 use ED\BlogBundle\Handler\Pagination;
 use ED\BlogBundle\Model\Entity\Taxonomy;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -115,7 +116,7 @@ class TagController extends DefaultController
     {
         $user = $this->getBlogAdministrator();
 
-        $form = $this->createForm('edtag', $this->get('taxonomy_generator')->getObject());
+        $form = $this->createForm(TagType::class, $this->get('taxonomy_generator')->getObject());
 
         if($request->isMethod('post'))
         {
@@ -160,7 +161,7 @@ class TagController extends DefaultController
         if(!$taxonomy)
             throw new NotFoundHttpException("Sorry, requested resource can't be found.");
 
-        $form = $this->createForm('edtag', $taxonomy);
+        $form = $this->createForm(TagType::class, $taxonomy);
 
         if($request->isMethod('post'))
         {

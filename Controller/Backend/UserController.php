@@ -2,6 +2,8 @@
 
 namespace ED\BlogBundle\Controller\Backend;
 
+use ED\BlogBundle\Forms\ImportUserType;
+use ED\BlogBundle\Forms\BlogUserType;
 use ED\BlogBundle\Handler\Pagination;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -45,7 +47,7 @@ class UserController extends DefaultController
     {
         $user = $this->getBlogAdministrator();
 
-        $form = $this->createForm('edblog_user_import');
+        $form = $this->createForm(ImportUserType::class);
 
         if($request->isMethod('post'))
         {
@@ -104,7 +106,7 @@ class UserController extends DefaultController
     {
         $admin = $this->getBlogAdministrator();
 
-        $form = $this->createForm('edblog_user', array(
+        $form = $this->createForm(BlogUserType::class, array(
             'role' => $this->getDefaultBlogRole($user),
             'blogDisplayName' => $user->getBlogDisplayName()
         ));

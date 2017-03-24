@@ -18,6 +18,7 @@ use ED\BlogBundle\Forms\MediaType;
 use ED\BlogBundle\Handler\Pagination;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -30,7 +31,7 @@ class MediaController extends DefaultController
     {
         $user = $this->getBlogUser();
 
-        $formMedia = $this->createForm(new ArticlePhotoType());
+        $formMedia = $this->createForm(ArticlePhotoType::class);
 
         $paramsForTwig = array('form_media' => $formMedia->createView());
         $paginator = $this->get('ed_blog.paginator');
@@ -76,7 +77,7 @@ class MediaController extends DefaultController
         $user = $this->getBlogUser();
         $mediaManager = $this->container->get('sonata.media.manager.media');
 
-        $form = $this->createForm(new ArticlePhotoType());
+        $form = $this->createForm(ArticlePhotoType::class);
 
         if ($request->getMethod() == 'POST')
         {
@@ -151,7 +152,7 @@ class MediaController extends DefaultController
         $mediaManager = $this->container->get('sonata.media.manager.media');
         $builder = $this->createFormBuilder();
 
-        $form = $builder->add('excerptImage', 'file',
+        $form = $builder->add('excerptImage', FileType::class,
             array('required' => false)
         )->getForm();
 
@@ -215,7 +216,7 @@ class MediaController extends DefaultController
     {
         $user = $this->getBlogUser();
 
-        $form = $this->createForm(new MediaInfoType(), array("description" => $media->getDescription()));
+        $form = $this->createForm(MediaInfoType::class, array("description" => $media->getDescription()));
 
         if($request->isMethod('POST'))
         {
@@ -254,7 +255,7 @@ class MediaController extends DefaultController
     public function editAction(Request $request, $media)
     {
         $user = $this->getBlogUser();
-        $form = $this->createForm(new MediaType(), array(
+        $form = $this->createForm(MediaType::class, array(
             'name' => $media->getName(),
             'description' => $media->getDescription()
         ));

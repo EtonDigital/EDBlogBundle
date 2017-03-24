@@ -14,8 +14,10 @@ use ED\BlogBundle\Event\ArticleAdministrationEvent;
 use ED\BlogBundle\Event\MediaArrayEvent;
 use ED\BlogBundle\Event\TaxonomyArrayEvent;
 use ED\BlogBundle\Events\EDBlogEvents;
+use ED\BlogBundle\Forms\ArticleType;
 use ED\BlogBundle\Forms\ArticleExcerptType;
 use ED\BlogBundle\Forms\ArticlePhotoType;
+use ED\BlogBundle\Forms\CommentType;
 use ED\BlogBundle\Handler\Pagination;
 use ED\BlogBundle\Model\Entity\Article;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -38,9 +40,9 @@ class ArticleController extends DefaultController
         $draft = $this->get('article_generator')->getObject();
         $draft->setAuthor($user);
 
-        $formMedia = $this->createForm(new ArticlePhotoType());
-        $formExcerptMedia = $this->createForm(new ArticleExcerptType());
-        $form = $this->createForm('article', $draft);
+        $formMedia = $this->createForm(ArticlePhotoType::class);
+        $formExcerptMedia = $this->createForm(ArticleExcerptType::class);
+        $form = $this->createForm(ArticleType::class, $draft);
 
         if ($request->getMethod() == 'POST')
         {
@@ -134,10 +136,10 @@ class ArticleController extends DefaultController
         $dispacher = $this->get('event_dispatcher');
         $dispacher->dispatch(EDBlogEvents::ED_BLOG_ARTICLE_PREUPDATE_INIT, new ArticleAdministrationEvent($article));
 
-        $formMedia = $this->createForm(new ArticlePhotoType());
-        $formExcerptMedia = $this->createForm(new ArticleExcerptType());
+        $formMedia = $this->createForm(ArticlePhotoType::class);
+        $formExcerptMedia = $this->createForm(ArticleExcerptType::class);
 
-        $form = $this->createForm('article', $draft);
+        $form = $this->createForm(ArticleType::class, $draft);
 
         if ($request->getMethod() == 'POST')
         {
@@ -348,11 +350,11 @@ class ArticleController extends DefaultController
 
         if(!$request->get('excerpt', false))
         {
-            $form = $this->createForm(new ArticlePhotoType());
+            $form = $this->createForm(ArticlePhotoType::class);
         }
         else
         {
-            $form = $this->createForm(new ArticleExcerptType());
+            $form = $this->createForm(ArticleExcerptType::class);
         }
 
         if ($request->getMethod() == 'POST')
@@ -481,7 +483,7 @@ class ArticleController extends DefaultController
             ->setArticle($article)
             ->setAuthor($user);
 
-        $form = $this->createForm('edcomment', $comment);
+        $form = $this->createForm(CommentType::class, $comment);
         $comments =  $this->get("app_repository_comment")->findByArticle($article, $this->get("blog_settings")->getCommentsDisplayOrder());
 
         return $this->render("EDBlogBundle:Article:show.html.twig",

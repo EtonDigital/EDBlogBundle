@@ -8,6 +8,7 @@
 
 namespace ED\BlogBundle\Controller\Backend;
 
+use ED\BlogBundle\Forms\TaxonomyType;
 use ED\BlogBundle\Handler\Pagination;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -51,7 +52,7 @@ class CategoryController extends DefaultController
     {
         $user = $this->getBlogAdministrator();
 
-        $form = $this->createForm('edtaxonomy', $this->get('taxonomy_generator')->getObject());
+        $form = $this->createForm(TaxonomyType::class, $this->get('taxonomy_generator')->getObject());
 
         if($request->isMethod('post'))
         {
@@ -84,7 +85,7 @@ class CategoryController extends DefaultController
         if(!$taxonomy)
             throw new NotFoundHttpException("Sorry, requested resource can't be found.");
 
-        $form = $this->createForm('edtaxonomy', $taxonomy);
+        $form = $this->createForm(TaxonomyType::class, $taxonomy);
 
         if($request->isMethod('post'))
         {

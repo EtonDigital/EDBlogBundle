@@ -109,7 +109,6 @@ class EDBlogExtension extends \Twig_Extension
         if ($date instanceof \DateTime)
         {
             $format = $this->blogSettings->getSettingBlogDateFormat();
-            var_dump($format);die;
 
             return $date->format($format);
         }
@@ -122,12 +121,7 @@ class EDBlogExtension extends \Twig_Extension
     public function blogDateTime(\DateTime $date)
     {
         $formatTime = $this->blogSettings->getSettingBlogTimeFormat();
-        $formatDate = $this->blogSettings->getSettingBlogDateFormat();
-        
-        var_dump($formatDate);
-        var_dump($formatTime);
-        var_dump($date->format("$formatDate $formatTime"));
-        die;
+        $formatDate = $this->blogSettings->getSettingBlogDateFormat();        
         
         return $date->format("$formatDate $formatTime");
     }

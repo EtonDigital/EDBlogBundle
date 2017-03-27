@@ -72,27 +72,27 @@ class SettingsType extends AbstractType
             ->add('date_format', ChoiceType::class, array(
                 'label' => 'Date format: ',
                 'choices' => array(
-                    $currentDate->format(BlogSettings::DATE_FORMAT_1) => BlogSettings::DATE_FORMAT_1,
-                    $currentDate->format(BlogSettings::DATE_FORMAT_2) => BlogSettings::DATE_FORMAT_2,
-                    $currentDate->format(BlogSettings::DATE_FORMAT_3) => BlogSettings::DATE_FORMAT_3,
-                    $currentDate->format(BlogSettings::DATE_FORMAT_4) => BlogSettings::DATE_FORMAT_4,
-                    BlogSettings::DATE_FORMAT_CUSTOM => BlogSettings::DATE_FORMAT_CUSTOM_FIELD
+                    BlogSettings::DATE_FORMAT_1 => $currentDate->format(BlogSettings::DATE_FORMAT_1),
+                    BlogSettings::DATE_FORMAT_2 => $currentDate->format(BlogSettings::DATE_FORMAT_2),
+                    BlogSettings::DATE_FORMAT_3 => $currentDate->format(BlogSettings::DATE_FORMAT_3),
+                    BlogSettings::DATE_FORMAT_4 => $currentDate->format(BlogSettings::DATE_FORMAT_4),
+                    BlogSettings::DATE_FORMAT_CUSTOM_FIELD => false
                 ),
                 'expanded' => true,
                 'data' => isset($options['data']['date_format']) ?  $this->setCustomDateDefault($options['data']['date_format']) : null
             ))
             ->add(BlogSettings::DATE_FORMAT_CUSTOM_FIELD, TextType::class, array(
-                'label' => isset($options['data']['date_format']) ? $options['data']['date_format'] : null,
+                'label' => isset($options['data']['date_format']) ? $currentDate->format($options['data']['date_format']) : null,
                 'required' => false,
                 'data' => isset($options['data']['date_format'])  ? $options['data']['date_format'] : null
             ))
             ->add('time_format', ChoiceType::class, array(
                 'label' => 'Time format ',
                 'choices' => array(
-                    $currentDate->format(BlogSettings::TIME_FORMAT_1) => BlogSettings::TIME_FORMAT_1,
-                    $currentDate->format(BlogSettings::TIME_FORMAT_2) => BlogSettings::TIME_FORMAT_2,
-                    $currentDate->format(BlogSettings::TIME_FORMAT_3) => BlogSettings::TIME_FORMAT_3,
-                    BlogSettings::TIME_FORMAT_CUSTOM => BlogSettings::TIME_FORMAT_CUSTOM_FIELD
+                    BlogSettings::TIME_FORMAT_1 => $currentDate->format(BlogSettings::TIME_FORMAT_1),
+                    BlogSettings::TIME_FORMAT_2 => $currentDate->format(BlogSettings::TIME_FORMAT_2),
+                    BlogSettings::TIME_FORMAT_3 => $currentDate->format(BlogSettings::TIME_FORMAT_3),
+                    BlogSettings::TIME_FORMAT_CUSTOM_FIELD => false                    
                 ),
                 'multiple' => false,
                 'expanded' => true,
@@ -100,7 +100,7 @@ class SettingsType extends AbstractType
                 'data' => isset($options['data']['time_format']) ? $this->setCustomTimeDefault($options['data']['time_format']) : null
             ))
             ->add(BlogSettings::TIME_FORMAT_CUSTOM_FIELD, TextType::class, array(
-                'label' => isset($options['data']['time_format']) ? $options['data']['time_format'] : null,
+                'label' => isset($options['data']['time_format']) ? $currentDate->format($options['data']['time_format']) : null,
                 'required' => false,
                 'data' => isset($options['data']['time_format']) ? $options['data']['time_format'] : null
             ))

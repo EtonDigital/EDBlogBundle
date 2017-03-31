@@ -64,7 +64,7 @@ class CommentModerateType extends AbstractType
             {
                 $form
                     ->add('name', TextType::class, array(
-                        'required' => true,
+                        'required' => false,
                         'label' => 'Display name:',
                         'attr' => array(
                             'class' => 'form-control form-control--lg margin--b',

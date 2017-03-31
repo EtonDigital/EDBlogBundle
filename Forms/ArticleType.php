@@ -138,8 +138,8 @@ class ArticleType extends AbstractType
                 ->add('status', ChoiceType::class, array(
                     'label' => 'Status:',
                     'choices' => array(
-                        Article::STATUS_PUBLISHED => "Published",
-                        Article::STATUS_DRAFTED => "Draft"
+                        "Published" => Article::STATUS_PUBLISHED,
+                        "Draft" => Article::STATUS_DRAFTED
                     ),
                     'required' => true,
                     'attr' => array(

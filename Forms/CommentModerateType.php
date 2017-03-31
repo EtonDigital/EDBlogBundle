@@ -42,8 +42,8 @@ class CommentModerateType extends AbstractType
             ->add('status', ChoiceType::class, array(
                 'label' => 'Status: ',
                 'choices' => array(
-                    Comment::STATUS_PENDING => "Pending",
-                    Comment::STATUS_ACTIVE => "Active"
+                    "Pending" => Comment::STATUS_PENDING,
+                    "Active" => Comment::STATUS_ACTIVE
                 ),
                 'attr' => array(
                     'class' => 'form-control form-control--lg margin--b color-placeholder'

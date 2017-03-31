@@ -4,6 +4,9 @@ namespace  ED\BlogBundle\Util;
 
 use ED\BlogBundle\Util\EDEncryption;
 
+/**
+ * Class EDEncryption
+ */
 class IDEncrypt
 {
     /**
@@ -12,7 +15,6 @@ class IDEncrypt
      * @var EDEncryption
      */
     private static $_encryption;
-
     /**
      * Encryption.
      *
@@ -24,7 +26,6 @@ class IDEncrypt
     {
         return self::_getEDEncryption()->encode($id);
     }
-
     /**
      * Get EDEncryption.
      *
@@ -35,10 +36,8 @@ class IDEncrypt
         if (!self::$_encryption instanceof EDEncryption) {
             self::$_encryption = new EDEncryption();
         }
-
         return self::$_encryption;
     }
-
     /**
      * Decryption.
      *
@@ -55,7 +54,6 @@ class IDEncrypt
         foreach ($encrypted as $encryptedId) {
             $val[] = self::_getEDEncryption()->decode($encryptedId);
         }
-
         return $val;
     }
 }

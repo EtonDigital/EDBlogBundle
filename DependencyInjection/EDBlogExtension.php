@@ -112,9 +112,12 @@ class EDBlogExtension extends Extension implements PrependExtensionInterface
         }
     }
 
-    public function getConfiguration(array $config, ContainerBuilder $container)
+    /**
+     * {@inheritDoc}
+     */
+    public function getAlias()
     {
-        return new Configuration($container->getParameter('ed_blog'));
+        return 'ed_blog';
     }
 
 

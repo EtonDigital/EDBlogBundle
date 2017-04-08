@@ -14,8 +14,6 @@
   {{ parent() }}
   
   {% block header %}
-    {{ parent() }}
-    
     <header role="banner" class="header--dashboard">
       <a class="flright text--mini" href="{{ path('ed_blog_homepage') }}">&lt; <span class="hidden-xs">Back to </span>Website</a>
       <div class="logo" title=""><img class="margin--r" src="{{ asset('bundles/edblog/img/svg/edblog-white-logo.svg') }}" alt="EdBlog">Admin panel</div>
@@ -34,7 +32,6 @@
   </div>
 
   {% block footer %}
-    {{ parent() }}
   {% endblock footer %}
 
 {% endblock %} {# endblock body #}

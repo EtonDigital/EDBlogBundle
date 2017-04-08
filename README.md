@@ -287,12 +287,29 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser implements BlogUserInterface, ArticleCommenterInterface
 {
-    //...
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $firstName;
+
+    /**
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $lastName;
 
     /**
      * Required by BlogUserInterface
      *
-     * @ORM\Column(name="blog_display_name", type="string")
+     * @ORM\Column(name="blog_display_name", type="string", nullable=true)
      */
     protected $blogDisplayName;
 
@@ -300,17 +317,53 @@ class User extends BaseUser implements BlogUserInterface, ArticleCommenterInterf
     {
         return $this->blogDisplayName;
     }
-    
+
     public function setBlogDisplayName($blogDisplayName)
     {
         $this->blogDisplayName = $blogDisplayName;
-    
+
         return $this;
     }
-    
+
     public function getCommenterDisplayName()
     {
         return $this->blogDisplayName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param mixed $firstName
+     * @return User
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param mixed $lastName
+     * @return User
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+        return $this;
     }
 }
 ```
@@ -354,6 +407,21 @@ ed_blog:
         blog_settings_class: Acme\Bundle\DemoBundle\Entity\Settings
 ```
 
+Step 3.1: FosUser configuration
+=================================
+```
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+    registration:
+        form:
+            type: ED\BlogBundle\Forms\RegistrationFormType
+```
+
 Step 4: SonataMediaBundle installation and configuration
 ========================================================
 
@@ -386,13 +454,13 @@ sonata_media:
 
    filesystem:
        local:
-           directory:  %kernel.root_dir%/../web/uploads/media
+           directory:  '%kernel.root_dir%/../web/uploads/media'
            create:     false
 ```    
  
 To generate ApplicationSonataMediaBundle open terminal and run following code:
     
-    $ php app/console sonata:easy-extends:generate --dest=src SonataMediaBundle
+    $ php bin/console sonata:easy-extends:generate --dest=src SonataMediaBundle
     
 Now you can include ApplicationSonataMediaBundle in ``app/AppKernel.php`` by add/uncomment this line:
 
@@ -498,13 +566,13 @@ Step 8: Finish
 
 Now you are ready to finish your EDBlogBundle installation:
 
-    $ php app/console as:in --symlink
-    $ php app/console as:du --env=prod
-    $ php app/console doc:sc:update --force
+    $ php bin/console as:in --symlink
+    $ php bin/console as:du --env=prod
+    $ php bin/console doc:sc:update --force
     
 Before you can access Blog administration area you should promote a Blog Administartor. In order to do that you should assign two roles to your future blog administrator user ``ROLE_BLOG_USER`` and ``ROLE_BLOG_ADMIN``. You can do it easily by modifying your registration action or by running following code from the console:
  
-    $ php app/console fos:user:promote
+    $ php bin/console fos:user:promote
 
 **Note:** 
 

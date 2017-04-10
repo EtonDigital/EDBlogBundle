@@ -60,12 +60,12 @@ class BlogVoter extends Voter
     }
 
 
-    private function canComment($comment, User $user)
+    private function canComment($comment, $user)
     {
         return $this->blogSettings->commentsEnabled();
     }
 
-    private function canView($comment, User $user)
+    private function canView($comment, $user)
     {
         if (!$user instanceof User && !$this->blogSettings->commentsPubliclyVisible()) {
             // the user must be logged in; if not, deny access
@@ -75,7 +75,7 @@ class BlogVoter extends Voter
         return true;
     }
 
-    private function canCreate($comment, User $user)
+    private function canCreate($comment, $user)
     {
         if( !$user instanceof User && !$this->blogSettings->publicUserCanComment())
         {

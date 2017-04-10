@@ -1,35 +1,10 @@
-{% extends 'EDBlogBundle:Frontend/Layout:main.html.twig' %}
-
-{% block content %}
-    <div class="container margin--t">
-        <div class="row">
-            <div class="col-md-6 col-md-push-3">
-                {{ block('fos_user_content') }}
-            </div>
-        </div>
-    </div>
-{% endblock content %}
-
+{% extends '@EDBlog/layout.html.twig' %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block title %}{{ 'Register'|trans }} - {{ parent() }}{% endblock %}
 
 {% block fos_user_content %}
-    {% if app.request.xmlHttpRequest == false %}
-        <header role="banner" class="header--simple">
-            <a href="/" class="logo" title="EdBlog">
-                <img class="d--b" src="/bundles/edblog/img/svg/edblog-logo.svg" alt="EdBlog">
-            </a>
-        </header>
-
-        {{ block('wrapper_user_content') }}
-    {% else %}
-        {{ block('wrapper_user_content') }}
-    {% endif %}
-{% endblock %}
-
-{% block wrapper_user_content %}
-    {% include "FOSUserBundle::Registration/register_content.html.twig" %}
-{% endblock %}
+    {% include "@EDBlog/Registration/register_content.html.twig" %}
+{% endblock fos_user_content %}
 

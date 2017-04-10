@@ -1,0 +1,17 @@
+{% extends '@EDBlog/Frontend/Layout/main.html.twig' %}
+
+{% block content %}
+    <header role="banner" class="header--simple">
+        <a href="/" class="logo" title="EdBlog">
+            <img class="d--b" src="/bundles/edblog/img/svg/edblog-logo.svg" alt="EdBlog">
+        </a>
+    </header>
+
+    <div class="container margin--t">
+        <div class="row">
+            <div class="col-md-6 col-md-push-3">
+                {{ block('fos_user_content') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

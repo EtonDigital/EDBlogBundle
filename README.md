@@ -102,16 +102,16 @@ Create your Article entity similar to this example:
  
 ```php
 <?php     
-//src/Acme/DemoBundle/Entity/Article.php
+//src/AppBundle/Entity/Article.php
 
-namespace Acme\Bundle\DemoBundle\Entity; 
+namespace AppBundle\Entity; 
 
 use ED\BlogBundle\Interfaces\Model\ArticleInterface;
 use ED\BlogBundle\Model\Entity\Article as BaseArticle;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="acme_demo_article")
+ * @ORM\Table(name="app_demo_article")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="ED\BlogBundle\Model\Repository\ArticleRepository")
  */
@@ -126,16 +126,16 @@ Create your ArticleMeta entity similar to this example:
   
 ```php            
 <?php        
-//src/Acme/DemoBundle/Entity/ArticleMeta.php
+//src/AppBundle/Entity/ArticleMeta.php
 
-namespace Acme\Bundle\DemoBundle\Entity; 
+namespace AppBundle\Entity; 
 
 use ED\BlogBundle\Interfaces\Model\ArticleMetaInterface;
 use ED\BlogBundle\Model\Entity\ArticleMeta as BaseArticleMeta;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="acme_demo_article_meta")
+ * @ORM\Table(name="app_demo_article_meta")
  * @ORM\Entity()
  */
 class ArticleMeta extends BaseArticleMeta implements ArticleMetaInterface
@@ -149,16 +149,16 @@ Create your Comment entity similar to this example:
 
 ```php
 <?php
-//src/Acme/DemoBundle/Entity/Comment.php
+//src/AppBundle/Entity/Comment.php
 
-namespace Acme\Bundle\DemoBundle\Entity; 
+namespace AppBundle\Entity; 
 
 use ED\BlogBundle\Interfaces\Model\CommentInterface;
 use ED\BlogBundle\Model\Entity\Comment as BaseComment;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="acme_demo_comment")
+ * @ORM\Table(name="app_demo_comment")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="ED\BlogBundle\Model\Repository\CommentRepository")
  */
@@ -173,16 +173,16 @@ Create your Settings entity similar to this example:
 
 ```php
 <?php
-//src/Acme/DemoBundle/Entity/Settings.php
+//src/AppBundle/Entity/Settings.php
 
-namespace Acme\Bundle\DemoBundle\Entity; 
+namespace AppBundle\Entity; 
 
 use ED\BlogBundle\Interfaces\Model\BlogSettingsInterface;
 use ED\BlogBundle\Model\Entity\BlogSettings as BaseSettings;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="acme_demo_settings")
+ * @ORM\Table(name="app_demo_settings")
  * @ORM\Entity(repositoryClass="ED\BlogBundle\Model\Repository\BlogSettingsRepository")
  */
 class Settings extends BaseSettings implements BlogSettingsInterface
@@ -196,16 +196,16 @@ Create your Taxonomy entity similar to this example:
 
 ```php
 <?php
-//src/Acme/DemoBundle/Entity/Taxonomy.php
+//src/AppBundle/Entity/Taxonomy.php
 
-namespace Acme\Bundle\DemoBundle\Entity; 
+namespace AppBundle\Entity; 
 
 use ED\BlogBundle\Interfaces\Model\BlogTaxonomyInterface;
 use ED\BlogBundle\Model\Entity\Taxonomy as BaseTaxonomy;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="acme_demo_taxonomy")
+ * @ORM\Table(name="app_demo_taxonomy")
  * @ORM\Entity(repositoryClass="ED\BlogBundle\Model\Repository\TaxonomyRepository")
  */
 class Taxonomy extends BaseTaxonomy implements BlogTaxonomyInterface
@@ -219,16 +219,16 @@ Create your TaxonomyRelation entity similar to this example:
 
 ```php
 <?php
-//src/Acme/DemoBundle/Entity/TaxonomyRelation.php
+//src/AppBundle/Entity/TaxonomyRelation.php
 
-namespace Acme\Bundle\DemoBundle\Entity; 
+namespace AppBundle\Entity; 
 
 use ED\BlogBundle\Interfaces\Model\TaxonomyRelationInterface;
 use ED\BlogBundle\Model\Entity\TaxonomyRelation as BaseTaxonomyRelation;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="acme_demo_taxonomy_relation")
+ * @ORM\Table(name="app_demo_taxonomy_relation")
  * @ORM\Entity()
  */
 class TaxonomyRelation extends BaseTaxonomyRelation implements TaxonomyRelationInterface
@@ -242,9 +242,9 @@ Create your Term entity similar to this example:
 
 ```php
 <?php
-//src/Acme/DemoBundle/Entity/Term.php
+//src/AppBundle/Entity/Term.php
 
-namespace Acme\Bundle\DemoBundle\Entity; 
+namespace AppBundle\Entity; 
 
 use ED\BlogBundle\Interfaces\Model\BlogTermInterface;
 use ED\BlogBundle\Model\Entity\Term as BaseTerm;
@@ -252,7 +252,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="acme_demo_term")
+ * @ORM\Table(name="app_demo_term")
  * @ORM\Entity()
  * @UniqueEntity("slug")
  */
@@ -273,7 +273,7 @@ To be able to use EDBlogBundle your User entity should implement two interfaces:
 <?php
 //src/AppBundle/Entity/User
 
-namespace Acme\Bundle\DemoBundle\Entity; 
+namespace AppBundle\Entity; 
 
 use ED\BlogBundle\Interfaces\Model\BlogUserInterface;
 use ED\BlogBundle\Interfaces\Model\ArticleCommenterInterface;
@@ -381,7 +381,7 @@ namespace AppBundle\Repository;
 use ED\BlogBundle\Interfaces\Repository\BlogUserRepositoryInterface;
 use ED\BlogBundle\Model\Repository\UserRepository as BaseUserRepository;
 
-class AppUserRepository extends BaseUserRepository implements BlogUserRepositoryInterface
+class UserRepository extends BaseUserRepository implements BlogUserRepositoryInterface
 {
 }
 ```
@@ -398,13 +398,13 @@ Now when your entities are ready, you can configure EDBlogBundle in your ``app/c
 ed_blog:
     entities:
         user_model_class: AppBundle\Entity\User
-        article_class: Acme\Bundle\DemoBundle\Entity\Article
-        article_meta_class: Acme\Bundle\DemoBundle\Entity\ArticleMeta
-        blog_term_class: Acme\Bundle\DemoBundle\Entity\Term
-        blog_taxonomy_class: Acme\Bundle\DemoBundle\Entity\Taxonomy
-        blog_taxonomy_relation_class: Acme\Bundle\DemoBundle\Entity\TaxonomyRelation
-        blog_comment_class: Acme\Bundle\DemoBundle\Entity\Comment
-        blog_settings_class: Acme\Bundle\DemoBundle\Entity\Settings
+        article_class: AppBundle\Entity\Article
+        article_meta_class: AppBundle\Entity\ArticleMeta
+        blog_term_class: AppBundle\Entity\Term
+        blog_taxonomy_class: AppBundle\Entity\Taxonomy
+        blog_taxonomy_relation_class: AppBundle\Entity\TaxonomyRelation
+        blog_comment_class: AppBundle\Entity\Comment
+        blog_settings_class: AppBundle\Entity\Settings
 ```
 
 Step 3.1: FosUser configuration
@@ -420,6 +420,47 @@ fos_user:
     registration:
         form:
             type: ED\BlogBundle\Forms\RegistrationFormType
+```
+
+Step 3.2 FosUser security.yml configuration 
+=============================================
+```yml
+ # app/config/security.yml
+ 
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_BLOG_USER: ROLE_USER
+        ROLE_BLOG_CONTRIBUTOR: ROLE_BLOG_USER
+        ROLE_BLOG_AUTHOR: ROLE_BLOG_USER
+        ROLE_BLOG_EDITOR: ROLE_BLOG_USER
+        ROLE_BLOG_ADMIN:  [ROLE_BLOG_EDITOR, ROLE_BLOG_AUTHOR, ROLE_BLOG_CONTRIBUTOR, ROLE_BLOG_USER, ROLE_USER]
+
+        ROLE_SUPER_ADMIN: ROLE_BLOG_ADMIN
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                # if you are using Symfony < 2.8, use the following config instead:
+                # csrf_provider: form.csrf_provider
+
+            logout:       true
+            anonymous:    true
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }
 ```
 
 Step 4: SonataMediaBundle installation and configuration

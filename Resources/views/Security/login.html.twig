@@ -1,0 +1,46 @@
+{% extends '@EDBlog/layout.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}{{ 'layout.login'|trans }} {{ parent() }}{% endblock %}
+
+{% block fos_user_content %}
+
+<form class="login-form aleft margin--reset" action="{{ path('fos_user_security_check') }}" method="post">
+    {% if error %}
+        <div class="alert alert-danger center">
+            <i class="fa fa-stack fa-exclamation-triangle"></i> {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
+
+    <div class="form-group">
+        <label for="username">{{ 'security.login.username'|trans }}:</label>
+        <input type="text" id="username" name="_username" value="admin" required="required"
+               class="form-control form-control--lg margin--b" placeholder="Enter your username"/>
+    </div>
+    <div class="form-group">
+        <label for="password">{{ 'security.login.password'|trans }}:</label>
+        <input type="password" id="password" name="_password" required="required"
+               class="form-control form-control--lg margin--b" placeholder="Enter your password"/>
+    </div>
+    <div class="form-group">
+        <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+        <label for="remember_me" class="text--normal">{{ 'security.login.remember_me'|trans }}</label>
+        <a class="flright" href="{{ path('fos_user_resetting_request') }}">Forgot password?</a>
+    </div>
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+    <p class="margin--b">
+        <button id="_submit" name="_submit" type="submit" class="btn btn-primary btn-lg btn-block">
+            {{ 'security.login.submit'|trans }}
+        </button>
+    </p>
+    <p class="center">Wanna be a blogger?
+        <a href="{{ path('fos_user_registration_register') }}" class="text--dark margin--tripleb d--ib">
+            <strong>Join Now</strong>
+        </a>
+    </p>
+</form>
+
+{% endblock %}

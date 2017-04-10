@@ -1,0 +1,9 @@
+{% extends '@EDBlog/layout.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}{{ 'resetting.email.subject'|trans }} - {{ parent() }}{% endblock %}
+
+{% block fos_user_content %}
+    {% include "@EDBlog/Resetting/request_content.html.twig" %}
+{% endblock fos_user_content %}

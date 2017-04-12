@@ -15,7 +15,6 @@
 
   <div class="wrap wrap--app {% block wrapclass %}{% endblock wrapclass %}">
     {% block header %}
-      {{ parent() }}
       {% include 'EDBlogBundle:Frontend/Layout:header.html.twig' %}
     {% endblock header %}
 
@@ -24,7 +23,6 @@
   </div>
 
   {% block footer %}
-    {{ parent() }}
     {% include('EDBlogBundle:Frontend/Layout:_footer.html.twig') %}
   {% endblock footer %}
 

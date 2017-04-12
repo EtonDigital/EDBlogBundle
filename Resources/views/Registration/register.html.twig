@@ -1,0 +1,10 @@
+{% extends '@EDBlog/layout.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}{{ 'Register'|trans }} - {{ parent() }}{% endblock %}
+
+{% block fos_user_content %}
+    {% include "@EDBlog/Registration/register_content.html.twig" %}
+{% endblock fos_user_content %}
+

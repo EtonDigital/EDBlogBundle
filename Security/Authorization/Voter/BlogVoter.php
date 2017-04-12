@@ -8,94 +8,81 @@
 
 namespace ED\BlogBundle\Security\Authorization\Voter;
 
+use ED\BlogBundle\Model\Entity\BlogSettings;
+use ED\BlogBundle\Model\Entity\Comment;
+use FOS\UserBundle\Model\User;
 use ED\BlogBundle\Handler\SettingsHandler;
-use ED\BlogBundle\Security\ACL\PermissionMap;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class BlogVoter implements VoterInterface
+class BlogVoter extends Voter
 {
-    private $permissionMap;
+    const BLOG_COMMENTS_ENABLED = 'ACCESS_COMMENTS';
+    const BLOG_COMMENTS_LIST = 'ACCESS_COMMENTS_LIST';
+    const BLOG_CREATE_COMMENT = 'CREATE_COMMENT';
+
     private $blogSettings;
 
-    public function __construct(PermissionMap $permissionMap, SettingsHandler $settings)
+    public function __construct(SettingsHandler $settings)
     {
-        $this->permissionMap = $permissionMap;
         $this->blogSettings = $settings;
     }
 
-    /**
-     * Checks if the voter supports the given attribute.
-     *
-     * @param string $attribute An attribute
-     *
-     * @return bool true if this Voter supports the attribute, false otherwise
-     */
-    public function supportsAttribute($attribute)
+    protected function supports($attribute, $subject)
     {
-        return $this->permissionMap->supports($attribute);
+        // if the attribute isn't one we support, return false
+        if (!in_array($attribute, [self::BLOG_COMMENTS_ENABLED, self::BLOG_COMMENTS_LIST, self::BLOG_CREATE_COMMENT])) {
+            return false;
+        }
+
+        return true;
     }
 
-    public function supportsClass($object)
-    {
-        return (!$object || $object instanceof UserInterface ) ? true : false;
-    }
-
-
-    /**
-     * Returns the vote for the given parameters.
-     *
-     * This method must return one of the following constants:
-     * ACCESS_GRANTED, ACCESS_DENIED, or ACCESS_ABSTAIN.
-     *
-     * @param TokenInterface $token A TokenInterface instance
-     * @param object|null $object The object to secure
-     * @param array $attributes An array of attributes associated with the method being invoked
-     *
-     * @return int either ACCESS_GRANTED, ACCESS_ABSTAIN, or ACCESS_DENIED
-     */
-    public function vote(TokenInterface $token, $object, array $attributes)
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
         $user = $token->getUser();
 
-        if(in_array('ACCESS_COMMENTS', $attributes))
-        {
-            if($this->blogSettings->commentsEnabled())
-            {
-                return self::ACCESS_GRANTED;
-            }
-            else
-            {
-                return self::ACCESS_DENIED;
-            }
+        // you know $subject is a Post object, thanks to supports
+        /** @var Comment $comment */
+        $comment = $subject;
+
+        switch ($attribute) {
+            case self::BLOG_COMMENTS_ENABLED:
+                return $this->canComment($comment, $user);
+            case self::BLOG_COMMENTS_LIST:
+                return $this->canView($comment, $user);
+            case self::BLOG_CREATE_COMMENT:
+                return $this->canCreate($comment, $user);
         }
-        elseif(in_array('ACCESS_COMMENTS_LIST', $attributes))
-        {
-            if( $user === 'anon.' && !$this->blogSettings->commentsPubliclyVisible())
-            {
-                return self::ACCESS_DENIED;
-            }
-            else
-            {
-                return self::ACCESS_GRANTED;
-            }
+
+        throw new \LogicException('This code should not be reached!');
+    }
+
+
+    private function canComment($comment, $user)
+    {
+        return $this->blogSettings->commentsEnabled();
+    }
+
+    private function canView($comment, $user)
+    {
+        if (!$user instanceof User && !$this->blogSettings->commentsPubliclyVisible()) {
+            // the user must be logged in; if not, deny access
+            return false;
         }
-        elseif(in_array('CREATE_COMMENT', $attributes))
+
+        return true;
+    }
+
+    private function canCreate($comment, $user)
+    {
+        if( !$user instanceof User && !$this->blogSettings->publicUserCanComment())
         {
-            if( $user === 'anon.' && !$this->blogSettings->publicUserCanComment())
-            {
-                return self::ACCESS_DENIED;
-            }
-            else
-            {
-                return self::ACCESS_GRANTED;
-            }
+            return false;
         }
-        else
-        {
-            return self::ACCESS_ABSTAIN;
-        }
+
+        return true;
     }
 
 }

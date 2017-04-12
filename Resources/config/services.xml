@@ -36,24 +36,15 @@
             <argument>%article_meta_class%</argument>
         </service>
 
-        <!-- Permission maps-->
-        <service id="ed_blog.acl.permission_map" class="ED\BlogBundle\Security\ACL\PermissionMap">
-        </service>
-        <service id="ed_blog.acl.article_permission_map" class="ED\BlogBundle\Security\ACL\ArticlePermissionMap">
-        </service>
-
         <!-- Voters -->
         <service id="ed_blog.authorization_voter.admin_voter" class="ED\BlogBundle\Security\Authorization\Voter\AdminVoter">
-            <argument type="service" id="ed_blog.acl.permission_map" />
             <tag name="security.voter" />
         </service>
         <service id="ed_blog.authorization_voter.blog_voter" class="ED\BlogBundle\Security\Authorization\Voter\BlogVoter">
-            <argument type="service" id="ed_blog.acl.permission_map" />
             <argument type="service" id="blog_settings" />
             <tag name="security.voter" />
         </service>
         <service id="ed_blog.authorization_voter.article_voter" class="ED\BlogBundle\Security\Authorization\Voter\ArticleVoter">
-            <argument type="service" id="ed_blog.acl.article_permission_map" />
             <tag name="security.voter" />
         </service>
 
@@ -136,6 +127,14 @@
         <service id="blog_article_meta_type" class="ED\BlogBundle\Forms\ArticleMetaType">
             <argument>%article_meta_class%</argument>
             <tag name="form.type" alias="article_meta" />
+        </service>
+        <service id="blog_registration_form_type" class="ED\BlogBundle\Forms\RegistrationFormType">
+            <tag name="form.type" alias="app_user_registration" />
+        </service>
+
+        <service id="blog_checkbox_url_label_type" class="ED\BlogBundle\Forms\CheckboxUrlLabelType">
+            <argument type="service" id="router" />
+            <tag name="form.type" alias="checkbox_url_label" />
         </service>
 
         <!-- Event Listeners -->

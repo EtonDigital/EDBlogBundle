@@ -8,109 +8,54 @@
 
 namespace ED\BlogBundle\Security\Authorization\Voter;
 
-use ED\BlogBundle\Security\ACL\PermissionMap;
+use FOS\UserBundle\Model\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class AdminVoter implements VoterInterface
+class AdminVoter extends Voter
 {
-    private $permissionMap;
+    const BLOG_ADMIN = 'ADMINISTRATE_BLOG';
+    const BLOG_ADMIN_COMMENTS = 'ADMINISTRATE_COMMENTS';
+    const BLOG_SWITCH_AUTHOR = 'SWITCH_ARTICLE_AUTHOR';
 
-    public function __construct(PermissionMap $permissionMap)
+    protected function supports($attribute, $subject)
     {
-        $this->permissionMap = $permissionMap;
-    }
-
-    /**
-     * Checks if the voter supports the given attribute.
-     *
-     * @param string $attribute An attribute
-     *
-     * @return bool true if this Voter supports the attribute, false otherwise
-     */
-    public function supportsAttribute($attribute)
-    {
-        return $this->permissionMap->supports($attribute);
-    }
-
-    /**
-     * Checks if the voter supports the given class.
-     *
-     * @param string $class A class name
-     *
-     * @return bool true if this Voter can process the class
-     */
-    public function supportsClass($class)
-    {
-        if($class)
-        {
-            $classNameArray = explode('\\', $class);
-            $className = $classNameArray[ count($classNameArray)-1 ];
-
-            if( in_array($className, array('User', 'AdminVoter')) )
-            {
-                return true;
-            }
+        // if the attribute isn't one we support, return false
+        if (!in_array($attribute, [self::BLOG_ADMIN, self::BLOG_ADMIN_COMMENTS, self::BLOG_SWITCH_AUTHOR])) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 
-    /**
-     * Returns the vote for the given parameters.
-     *
-     * This method must return one of the following constants:
-     * ACCESS_GRANTED, ACCESS_DENIED, or ACCESS_ABSTAIN.
-     *
-     * @param TokenInterface $token A TokenInterface instance
-     * @param object|null $object The object to secure
-     * @param array $attributes An array of attributes associated with the method being invoked
-     *
-     * @return int either ACCESS_GRANTED, ACCESS_ABSTAIN, or ACCESS_DENIED
-     */
-    public function vote(TokenInterface $token, $object, array $attributes)
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
-        $class = get_class($object);
-
-        if (!$this->supportsClass($class))
-        {
-            return self::ACCESS_ABSTAIN;
-        }
-
         $user = $token->getUser();
-        if($user === 'anon.')
-        {
-            return self::ACCESS_ABSTAIN;
-        }
-        else
-        {
-            if(in_array('ADMINISTRATE_BLOG', $attributes) || in_array('SWITCH_ARTICLE_AUTHOR', $attributes))
-            {
-                if($user->hasRole('ROLE_BLOG_ADMIN'))
-                {
-                    return self::ACCESS_GRANTED;
-                }
-                else
-                {
-                    return self::ACCESS_DENIED;
-                }
-            }
-            elseif( in_array('ADMINISTRATE_COMMENTS', $attributes) )
-            {
-                if($user->hasRole('ROLE_BLOG_ADMIN') || $user->hasRole('ROLE_BLOG_EDITOR'))
-                {
-                    return self::ACCESS_GRANTED;
-                }
-                else
-                {
-                    return self::ACCESS_DENIED;
-                }
-            }
 
-            return self::ACCESS_ABSTAIN;
-
+        if (!$user instanceof User) {
+            // the user must be logged in; if not, deny access
+            return false;
         }
 
+        switch ($attribute) {
+            case self::BLOG_ADMIN:
+                return $this->canAdminister($user);
+            case self::BLOG_ADMIN_COMMENTS:
+                return $this->canAdminComments($user);
+            case self::BLOG_SWITCH_AUTHOR:
+                return $this->canAdminister($user);
+        }
+
+        throw new \LogicException('This code should not be reached!');
     }
 
+    private function canAdminister($user)
+    {
+        return $user->hasRole('ROLE_BLOG_ADMIN');
+    }
+
+    private function canAdminComments($user)
+    {
+        return ($user->hasRole('ROLE_BLOG_ADMIN') || $user->hasRole('ROLE_BLOG_EDITOR'));
+    }
 }

@@ -1,0 +1,46 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="register-holder">
+    {{ form_start(form, {'action': path('fos_user_registration_register'), 'name': 'registration', 'attr': {'class' : 'form-register ajax', 'data-snippet' : '.register-holder'}}) }}
+    <div class="form-group">
+        {{ form_label(form.username, 'Username', { 'label_attr': {'class': 'srt control-label'} }) }}
+        {{ form_widget(form.username, { 'attr': {'class': 'form-control form-control--lg margin--b', 'placeholder': 'Enter your username'} }) }}
+        <div class="error">{{ form_errors(form.username) }}</div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.firstName, null, { 'label_attr': {'class': 'srt control-label'} }) }}
+        {{ form_widget(form.firstName, { 'attr': {'class': 'form-control form-control--lg margin--b', 'placeholder': 'Enter your first name'} }) }}
+        <div class="error">{{ form_errors(form.firstName) }}</div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.lastName, null, { 'label_attr': {'class': 'srt control-label'} }) }}
+        {{ form_widget(form.lastName, { 'attr': {'class': 'form-control form-control--lg margin--b', 'placeholder': 'Enter your last name'} }) }}
+        <div class="error">{{ form_errors(form.lastName) }}</div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.email, 'Email address', { 'label_attr': {'class': 'srt control-label'} }) }}
+        {{ form_widget(form.email, { 'attr': {'class': 'form-control form-control--lg margin--b', 'placeholder': 'Enter your email address'} }) }}
+        <div class="error">{{ form_errors(form.email) }}</div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.plainPassword.first, 'Password', { 'label_attr': {'class': 'srt control-label'} }) }}
+        {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control form-control--lg margin--b', 'placeholder': 'Choose your password'} }) }}
+        <div class="error">{{ form_errors(form.plainPassword.first) }}</div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.plainPassword.second, 'Repeat Password', { 'label_attr': {'class': 'srt control-label'} }) }}
+        {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control form-control--lg margin--b', 'placeholder': 'Repeat your password'} }) }}
+        <div class="error">{{ form_errors(form.plainPassword.second) }}</div>
+    </div>
+
+    <div class="form-group">
+        {{ form_widget(form.termsAccepted) }} {{ form_label(form.termsAccepted) }}
+        <div class="error">{{ form_errors(form.termsAccepted) }}</div>
+    </div>
+
+    <button type="submit" name="_submit" class="btn btn-primary btn-lg">{{ 'Register'|trans }}</button>
+
+    {{ form_widget(form) }}
+
+    {{ form_end(form) }}
+</div>

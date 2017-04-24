@@ -34,22 +34,13 @@ class ArticleVoter implements VoterInterface
     {
         try
         {
-            $testObject = new $class();
-
-            if ($testObject instanceof ArticleInterface)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            $rc1 = new \ReflectionClass($class);
+            return in_array(ArticleInterface::class, $rc1->getInterfaceNames(), true);
         }
         catch(\Exception $e)
         {
             return false;
         }
-
     }
 
     public function vote(TokenInterface $token, $object, array $attributes)

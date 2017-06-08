@@ -121,7 +121,12 @@ class ArticleVoter extends Voter
     private function canEditPublish(Article $article, User $user)
     {
         $testObject = $article->getParent() ? $article->getParent() : $article;
-
+        
+        // if they can edit, they can view
+        if ($this->canEdit($article, $user)) {
+            return true;
+        }
+        
         if($user->hasRole('ROLE_BLOG_CONTRIBUTOR'))
         {
             return true;

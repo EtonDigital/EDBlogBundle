@@ -553,7 +553,7 @@ class Article implements ArticleInterface, RoutedItemInterface
      */
     public function getMetaData()
     {
-        return $this->metaData;
+        return is_null($this->metaData) ? array() : $this->metaData;
     }
 
     /**

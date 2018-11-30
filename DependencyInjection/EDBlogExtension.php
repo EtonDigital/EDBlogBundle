@@ -114,7 +114,7 @@ class EDBlogExtension extends Extension implements PrependExtensionInterface
 
     public function getConfiguration(array $config, ContainerBuilder $container)
     {
-        return new Configuration($container->getParameter('ed_blog'));
+        return new Configuration();
     }
 
 

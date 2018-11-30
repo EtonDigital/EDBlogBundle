@@ -70,9 +70,7 @@ class AdminVoter implements VoterInterface
      */
     public function vote(TokenInterface $token, $object, array $attributes)
     {
-        $class = get_class($object);
-
-        if (!$this->supportsClass($class))
+        if ($object === null || !$this->supportsClass(get_class($class)))
         {
             return self::ACCESS_ABSTAIN;
         }

@@ -105,7 +105,7 @@
                   {% endif %}
 
               {% else %}
-                  {% if not app.user.hasRole('ROLE_BLOG_CONTRIBUTOR') %}
+                  {% if form.publish is defined and not app.user.hasRole('ROLE_BLOG_CONTRIBUTOR') %}
                       {{ form_widget(form.publish) }}
                   {% endif %}
                   {{ form_widget(form.save_draft) }}
